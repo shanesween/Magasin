@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const product = require('./product')
 
-const OrderItem = db.define('cartItem', {
+const OrderItem = db.define('orderItem', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -10,13 +10,13 @@ const OrderItem = db.define('cartItem', {
   price: {
     type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0.0
-  },
-  hooks: {
-    afterUpdate: orderItem => {
-      const singleProduct = product.findByPk(orderItem.productId)
-      OrderItem.price = this.quantity * singleProduct.price
-    }
   }
+  // hooks: {
+  //   afterUpdate: orderItem => {
+  //     const singleProduct = product.findByPk(orderItem.productId)
+  //     OrderItem.price = this.quantity * singleProduct.price
+  //   }
+  // }
 })
 
 module.exports = OrderItem
