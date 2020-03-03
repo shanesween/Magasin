@@ -10,14 +10,14 @@ const Order = db.define('order', {
   total: {
     type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0.0
-  },
-  hooks: {
-    afterUpdate: order => {
-      order.total = 0
-      const items = orderItem.findAll(order.id)
-      order.total += items.forEach(item => item.price)
-    }
   }
+  // hooks: {
+  //   afterUpdate: order => {
+  //     order.total = 0
+  //     const items = orderItem.findAll(order.id)
+  //     order.total += items.forEach(item => item.price)
+  //   }
+  // }
 })
 
 module.exports = Order
