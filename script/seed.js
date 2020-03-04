@@ -12,8 +12,8 @@ const faker = require('faker/index');
 
 //create products
 
-const catagories = ['coffee', 'tea', 'other'],
-  randomCatagory = () => catagories[Math.floor(Math.random() * 3)];
+const categories = ['coffee', 'tea', 'other'],
+  randomCategory = () => categories[Math.floor(Math.random() * 3)];
 
 let prodCount = 333;
 const products = [];
@@ -24,7 +24,7 @@ while (prodCount) {
     price: faker.fake('{{commerce.price}}'),
     stock: faker.fake('{{random.number}}'),
     // imageUrl: undefined,
-    category: randomCatagory(),
+    category: randomCategory(),
     origin: faker.fake('{{address.country}}')
   });
   --prodCount;
@@ -111,9 +111,7 @@ async function seed() {
   console.log(`seeded ${products.length} products`);
 
   // seed orders
-  await Promise.all(
-    orders.map(order => Order.create(order))
-  );
+  await Promise.all(orders.map(order => Order.create(order)));
   console.log(`seeded ${orders.length} orders`);
 
   // seed orderItems
