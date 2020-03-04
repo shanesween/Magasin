@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {fetchProduct} from '../store/singleProduct'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProduct } from "../store/singleProduct";
+import AddToCartButton from "./AddToCartButton";
 
 const SingleProduct = props => {
-  const product = useSelector(state => state.product)
+  const product = useSelector(state => state.product);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProduct(props.match.params.productId))
-  }, [])
+    dispatch(fetchProduct(props.match.params.productId));
+  }, []);
 
   return (
     <div>
@@ -19,10 +20,11 @@ const SingleProduct = props => {
       <div>
         <img src={product.imageUrl} />
       </div>
+      <AddToCartButton />
       <h3>Origin: {product.origin} </h3>
       <p>{product.description}</p>
     </div>
-  )
-}
+  );
+};
 
-export default SingleProduct
+export default SingleProduct;
