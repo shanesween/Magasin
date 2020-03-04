@@ -11,7 +11,7 @@ router.get("/:userId", async (req, res, next) => {
     if (userCart) {
       res.json(userCart);
     } else {
-      res.json([]);
+      res.json({});
     }
   } catch (err) {
     next(err);
