@@ -36,13 +36,14 @@ export const fetchCart = userId => {
   };
 };
 
-export const addProduct = (userId, productParams) => {
+export const addProduct = (userId, productId, quantity = 1) => {
+  let obj = {
+    productId,
+    quantity
+  };
   return async dispatch => {
     try {
-      const { data } = await axios.put(
-        `/api/cart/addItem/${userId}`,
-        productParams
-      );
+      const { data } = await axios.put(`/api/cart/addItem/${userId}`, obj);
       dispatch(addedProduct(data));
     } catch (err) {
       console.error("Error in addProduct thunk", err);
