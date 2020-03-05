@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { addProduct } from "../store/cart";
 import { useDispatch, useSelector } from "react-redux";
-import ProductAddedModal from "./ProductAddedModal";
+// import ProductAddedModal from "./ProductAddedModal";
 import { Link } from "react-router-dom";
 
 const AddToCartButton = props => {
@@ -18,23 +18,25 @@ const AddToCartButton = props => {
   return props.stock ? (
     <div>
       <button
-        id="toggleCart"
         type="button"
         className="btn btn-info"
+        data-toggle="modal"
+        data-target="#cartModal"
         onClick={onClick}
       >
-        <em> add to cart</em>
+        add to cart
       </button>
       <div
         className="modal fade bd-example-modal-sm"
-        id="CartModal"
+        id="cartModal"
         data-backdrop="false"
         tabIndex="-1"
-        role="dialog"
-        aria-labelledby="mySmallModalLabel"
-        aria-hidden="true"
+        role="document"
       >
-        <div className="modal-dialog modal-dialog-centered" role="document">
+        <div
+          className="modal-dialog modal-dialog-centered style={{zIndex:'1'}} "
+          role="document"
+        >
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="cartModalCenterTitle">
