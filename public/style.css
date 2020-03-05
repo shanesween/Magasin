@@ -1,3 +1,14 @@
+/* branding font */
+@font-face {
+  font-family: 'covfefeBrand';
+  src: url('fonts/cofefeBrand-bold.otf') format('opentype'),
+    /* Safari, Android, iOS */ url('fonts/covfefeBrand-bold-webfont.woff2')
+      format('woff2'),
+    /* Super Modern Browsers */ url('fonts/covfefeBrand-bold-webfont.woff')
+      format('woff');
+  /* Modern Browsers */
+}
+
 body {
   font-family: sans-serif;
 }
@@ -19,3 +30,36 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+nav {
+  box-shadow: 0px 0px 3px 0px #00000033;
+}
+
+img {
+  object-fit: cover;
+}
+
+.navbar-brand {
+  font-family: 'covfefeBrand';
+  color: #040a00;
+  font-size: xx-large;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+}
+
+.bg-brand-dark {
+  background-color: #040a00 !important;
+}
+.col-xs-1 {
+  width: 15%;
+  float: left;
+}
+.col-xs-2 {
+  width: 27%;
+  float: left;
+  border: none;
+}
+
+

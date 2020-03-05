@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { addProduct } from "../store/cart";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import { addProduct } from '../store/cart';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddToCartButton = props => {
   const user = useSelector(state => state.user);
@@ -15,12 +15,12 @@ const AddToCartButton = props => {
 
   return (
     <button
-      id="toggleCart"
-      type="button"
-      className="btn btn-outline-success"
+      id='toggleCart'
+      type='button'
+      className='btn btn-info'
       onClick={onClick}
     >
-      <em> Add to your cart</em>
+      <em> add to cart</em>
     </button>
   );
 };
