@@ -68,7 +68,7 @@ while (populateOrders) {
   while (orderItemCount) {
     singleOrderItems.push({
       productId: orderItems.length + 1,
-      quantity: faker.fake('{{random.number}}'),
+      quantity: Math.ceil(Math.random() * 9),
       price: faker.fake('{{commerce.price}}')
     });
 
@@ -86,7 +86,7 @@ while (populateOrders) {
 }
 
 // create reviews
-let reviewCount = 22;
+let reviewCount = 111;
 const reviews = [];
 while (reviewCount) {
   reviews.push({

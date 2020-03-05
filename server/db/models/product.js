@@ -21,7 +21,7 @@ const Product = db.define('product', {
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue:
-      'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg',
+      'https://image.freepik.com/free-vector/coffee-bag-mockup-white-foil-package-3d-pouch_83194-912.jpg',
     validate: {
       isUrl: true
     }
