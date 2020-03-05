@@ -7,7 +7,7 @@ import Review from './Review';
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
-
+  console.log(product);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +24,11 @@ const SingleProduct = props => {
       </div>
       <div className="col text-right">
         <h4>${product.price}</h4>
-        <AddToCartButton key={product.id} product={product} />
+        <AddToCartButton
+          key={product.id}
+          product={product}
+          stock={product.stock}
+        />
       </div>
       <hr />
       <div>

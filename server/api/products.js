@@ -5,7 +5,9 @@ module.exports = router;
 //route for all products
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      order: [['id', 'ASC']],
+    });
     // const test = [{title: "cheese", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 33}, {title:"bob", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 55}]
     res.json(products);
   } catch (err) {
@@ -20,18 +22,6 @@ router.get('/:productId', async (req, res, next) => {
       include: [{ model: Review }],
     });
     res.json(product);
-  } catch (err) {
-    next(err);
-  }
-});
-
-//review router.
-router.get('/review/:productId', async (req, res, next) => {
-  try {
-    const review = await Review.findAll({
-      where: { productId: req.params.productId },
-    });
-    res.json(review);
   } catch (err) {
     next(err);
   }
