@@ -60,11 +60,14 @@ router.put("/addItem/:userId", async (req, res, next) => {
 
 router.put("/removeItem/:orderId", async (req, res, next) => {
   try {
+    console.log("in Route")
     const orderItem = await OrderItem.findOne({
       where: { orderId: req.params.orderId, productId: req.body.productId }
     });
     orderItem.destroy();
-    res.sendStatus(204);
+    let updatedCart = await Order.findByPk(req.params.orderId)
+
+    res.json(updatedCart);
   } catch (err) {
     next(err);
   }

@@ -1,0 +1,28 @@
+import React from "react";
+import { removeProduct } from "../store/cart";
+import { useDispatch, useSelector } from "react-redux";
+
+const RemoveButton = props => {
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+
+  const onClick = (ev) => {
+
+    dispatch(removeProduct( cart.id, props.product.id));
+  };
+
+  console.log(props);
+
+  return (
+    <button
+      id="toggleCart"
+      type="button"
+
+      onClick={onClick}
+    >
+      <em>Remove</em>
+    </button>
+  );
+};
+
+export default RemoveButton;
