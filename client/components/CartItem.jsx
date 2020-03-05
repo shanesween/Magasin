@@ -1,4 +1,5 @@
 import React from 'react';
+import RemoveButton from './RemoveButton';
 
 const CartItem = ({ cartItem }) => {
   return (
@@ -67,16 +68,14 @@ const CartItem = ({ cartItem }) => {
             </div>
           </div>
         </div>
-        {/* footer div with Remove option*/}
-        <div className='float-right'>
-          <ul className='list-group list-group-horizontal-sm'>
-            <li className='list-group-item'>
-              <a href='#' className='remove_cartItem'>
-                Remove
-              </a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      {/* footer div with Remove option*/}
+      <div className='float-right'>
+        <ul className='list-group list-group-horizontal-lg'>
+          <li className='list-group-item'>
+            <RemoveButton product={cartItem} />
+          </li>
+        </ul>
       </div>
     </div>
   );

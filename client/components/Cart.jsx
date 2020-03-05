@@ -12,6 +12,7 @@ const Cart = () => {
   useEffect(() => {
     user.id && dispatch(fetchCart(user.id));
   }, [user]);
+  console.log(cart)
   return cart.products ? (
     <div className='justify-content-center m-2'style={{ width: '100%' }}>
       <Fade cascade>
@@ -29,7 +30,7 @@ const Cart = () => {
             })}
           </div>
         </div>
-        {cart.products && <CheckOut />}
+        {cart.products && <CheckOut product={cart}/>}
       </Fade>
     </div>
   ) : (
