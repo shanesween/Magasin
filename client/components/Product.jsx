@@ -2,6 +2,10 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
+<<<<<<< HEAD
+=======
+import SingleProductModal from "./SingleProductModal";
+>>>>>>> 1beb02a1ab9548779e825dbeefb1faaf114d7e0f
 
 const Product = props => {
   return (
@@ -18,12 +22,10 @@ const Product = props => {
           </div>
         </Link>
         <div className="card-body">
-          <h2 className="badge badge-pill badge-dark">
-            ${props.product.price}
-          </h2>
+          <h2 className="badge badge-pill badge-dark">{props.product.price}</h2>
         </div>
         <div className="card-footer w-100 text-muted">
-          <AddToCartButton key={props.product.id} product={props.product} />
+          <AddToCartButton key={props.product.id} product={props.product} stock={props.product.stock} />
         </div>
       </div>
     </Fade>
@@ -32,8 +34,8 @@ const Product = props => {
 
 export default Product;
 
-{
-  /* <button
+// {
+/* <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
@@ -57,4 +59,4 @@ export default Product;
           </div>
         </div>
       </div> */
-}
+// }
