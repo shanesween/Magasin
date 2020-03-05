@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { addProduct } from "../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 
 const AddToCartButton = props => {
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const onClick = () => {
-    addProduct(props.product.id);
+    dispatch(addProduct(user.id, props.product.id));
   };
-  console.log(props);
+
+  // console.log(props.product);
+  // console.log(user);
 
   return (
     <button

@@ -30,7 +30,12 @@ router.put("/addItem/:userId", async (req, res, next) => {
         orderId: userCart.id,
         quantity: req.body.quantity
       });
-      res.json(product);
+      let updatedCart = await Order.findByPk(userCart.id, {
+        include: {
+          model: Product
+        }
+      });
+      res.json(updatedCart);
     } else {
       let newCart = await Order.create();
       let user = await User.findByPk(req.params.userId);
@@ -41,7 +46,12 @@ router.put("/addItem/:userId", async (req, res, next) => {
         orderId: newCart.id,
         quantity: req.body.quantity
       });
-      res.json(product);
+      let updatedCart = await Order.findByPk(newCart.id, {
+        include: {
+          model: Product
+        }
+      });
+      res.json(updatedCart);
     }
   } catch (err) {
     next(err);

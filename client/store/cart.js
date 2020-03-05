@@ -36,14 +36,14 @@ export const fetchCart = userId => {
   };
 };
 
-export const addProduct = (userId, productParams) => {
+export const addProduct = (userId, productId, quantity = 1) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(
-        `/api/cart/addItem/${userId}`,
-        productParams
-      );
-      dispatch(addedProduct(data));
+      const { data } = await axios.put(`/api/cart/addItem/${userId}`, {
+        productId,
+        quantity
+      });
+      dispatch(setCart(data));
     } catch (err) {
       console.error("Error in addProduct thunk", err);
     }
@@ -62,6 +62,9 @@ export const removeProduct = (orderId, productParams) => {
 };
 
 export default function(cart = {}, action) {
+  console.log("action", action);
+  console.log("cart", cart);
+
   switch (action.type) {
     case SET_CART:
       return action.cart;
