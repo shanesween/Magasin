@@ -3,15 +3,14 @@ import { removeProduct } from "../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 
 const RemoveButton = props => {
-  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  useEffect(() => {
-    user.iddispatch(fetchCart(user.id));
-  }, [user]);
+  const dispatch = useDispatch();
 
-  const onClick = () => {
-    console.log("clicked")
+  const onClick = (ev) => {
+
+    dispatch(removeProduct( cart.id, props.product.id));
   };
+
   console.log(props);
 
   return (

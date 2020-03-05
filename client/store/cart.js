@@ -11,19 +11,19 @@ const setCart = cart => {
   };
 };
 
-const addedProduct = product => {
-  return {
-    type: ADD_PRODUCT,
-    product
-  };
-};
+// const addedProduct = product => {
+//   return {
+//     type: ADD_PRODUCT,
+//     product
+//   };
+// };
 
-const removedProduct = productId => {
-  return {
-    type: REMOVE_PRODUCT,
-    productId
-  };
-};
+// const removedProduct = productId => {
+//   return {
+//     type: REMOVE_PRODUCT,
+//     productId
+//   };
+// };
 
 export const fetchCart = userId => {
   return async dispatch => {
@@ -36,25 +36,26 @@ export const fetchCart = userId => {
   };
 };
 
-export const addProduct = (userId, productParams) => {
+export const addProduct = (userId, productId, quantity = 1) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(
-        `/api/cart/addItem/${userId}`,
-        productParams
-      );
-      dispatch(addedProduct(data));
+      const { data } = await axios.put(`/api/cart/addItem/${userId}`, {
+        productId,
+        quantity
+      });
+      dispatch(setCart(data));
     } catch (err) {
       console.error("Error in addProduct thunk", err);
     }
   };
 };
 
-export const removeProduct = (orderId, productParams) => {
+export const removeProduct = (orderId, productId) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/cart/removeItem/${orderId}`, productParams);
-      dispatch(removedProduct(productParams.id));
+      let {data} = await axios.put(`/api/cart/removeItem/${orderId}`, {productId});
+      dispatch(setCart(data))
+
     } catch (err) {
       console.error("Error in removeProduct thunk", err);
     }
@@ -62,21 +63,24 @@ export const removeProduct = (orderId, productParams) => {
 };
 
 export default function(cart = {}, action) {
+  console.log("action", action);
+  console.log("cart", cart);
+
   switch (action.type) {
     case SET_CART:
       return action.cart;
 
-    case ADD_PRODUCT:
-      let newArray = [...cart.products, action.product];
-      cart.products = newArray;
-      return cart;
+    // case ADD_PRODUCT:
+    //   let newArray = [...cart.products, action.product];
+    //   cart.products = newArray;
+    //   return cart;
 
-    case REMOVE_PRODUCT:
-      let newArr = cart.products.filter(
-        product => product.id !== action.productId
-      );
-      cart.products = newArr;
-      return cart;
+    // case REMOVE_PRODUCT:
+    //   let newArr = cart.products.filter(
+    //     product => product.id !== action.productId
+    //   );
+    //   cart.products = newArr;
+    //   return cart;
 
     default:
       return cart;

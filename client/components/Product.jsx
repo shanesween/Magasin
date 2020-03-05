@@ -7,7 +7,14 @@ const Product = props => {
       <img src={props.product.imageUrl} />
       <h1>{props.product.title}</h1>
       <h2>{props.product.price}</h2>
-      <button
+    </div>
+  );
+};
+
+export default Product;
+
+{
+  /* <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
@@ -30,9 +37,5 @@ const Product = props => {
             />
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-export default Product;
+      </div> */
+}
