@@ -6,7 +6,7 @@ router.get("/:userId", async (req, res, next) => {
   try {
     const userCart = await Order.findOne({
       where: { userId: req.params.userId, status: "pending" },
-      include: { model: Product }
+      include: { model: Product, order: [["id", "ASC"]] }
     });
     if (userCart) {
       res.json(userCart);
@@ -40,7 +40,8 @@ router.put("/addItem/:userId", async (req, res, next) => {
       }
       let updatedCart = await Order.findByPk(userCart.id, {
         include: {
-          model: Product
+          model: Product,
+          order: [["id", "ASC"]]
         }
       });
       res.json(updatedCart);
@@ -56,7 +57,8 @@ router.put("/addItem/:userId", async (req, res, next) => {
       });
       let updatedCart = await Order.findByPk(newCart.id, {
         include: {
-          model: Product
+          model: Product,
+          order: [["id", "ASC"]]
         }
       });
       res.json(updatedCart);
@@ -74,7 +76,7 @@ router.put("/removeItem/:orderId", async (req, res, next) => {
     });
     orderItem.destroy();
     let updatedCart = await Order.findByPk(req.params.orderId, {
-      include: { model: Product }
+      include: { model: Product, order: [["id", "ASC"]] }
     });
 
     res.json(updatedCart);

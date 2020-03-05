@@ -20,7 +20,11 @@ const SingleProduct = props => {
       </div>
       <div className="col text-right">
         <h4>${product.price}</h4>
-        <AddToCartButton key={product.id} product={product} />
+        <AddToCartButton
+          key={product.id}
+          product={product}
+          stock={product.stock}
+        />
       </div>
       <hr />
       <div>

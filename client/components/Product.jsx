@@ -22,7 +22,7 @@ const Product = props => {
           <h2 className="badge badge-pill badge-dark">{props.product.price}</h2>
         </div>
         <div className="card-footer w-100 text-muted">
-          <AddToCartButton />
+          <AddToCartButton stock={props.product.stock} />
         </div>
       </div>
     </Fade>
