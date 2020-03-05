@@ -8,7 +8,8 @@ import {
   UserHome,
   SingleProduct,
   AllProducts,
-  Cart
+  Cart,
+  NotFound
 } from './components';
 import { me } from './store';
 
@@ -38,6 +39,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
+        <Route component={NotFound} />
       </Switch>
     );
   }
