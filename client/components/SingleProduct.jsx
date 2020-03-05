@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
-import AddToCartButton from "./AddToCartButton";
-import CheckOut from "./CheckOutButton";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProduct } from '../store/singleProduct';
+import AddToCartButton from './AddToCartButton';
+import CheckOut from './CheckOutButton';
+import Review from './Review';
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
@@ -30,7 +31,7 @@ const SingleProduct = props => {
         <h5>Origin: {product.origin} </h5>
         <p>{product.description}</p>
       </div>
-      <p>{product.reviews}</p>
+      <Review />
     </div>
   );
 };
