@@ -61,16 +61,22 @@ export const removeProduct = (orderId, productParams) => {
   };
 };
 
-export default function(cart = [], action) {
+export default function(cart = {}, action) {
   switch (action.type) {
     case SET_CART:
       return action.cart;
 
     case ADD_PRODUCT:
-      return [...cart, action.product];
+      let newArray = [...cart.products, action.product];
+      cart.products = newArray;
+      return cart;
 
     case REMOVE_PRODUCT:
-      return cart.filter(product => product.id !== action.productId);
+      let newArr = cart.products.filter(
+        product => product.id !== action.productId
+      );
+      cart.products = newArr;
+      return cart;
 
     default:
       return cart;
