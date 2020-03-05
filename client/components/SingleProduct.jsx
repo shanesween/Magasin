@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
 import AddToCartButton from "./AddToCartButton";
-import CheckOut from "./CheckOutButton"
+import CheckOut from "./CheckOutButton";
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
@@ -15,20 +15,22 @@ const SingleProduct = props => {
 
   return (
     <div>
-      <h2>{product.title}</h2>
-      <h4>${product.price}</h4>
+      <div className="col">
+        <h2>{product.title}</h2>
+      </div>
+      <div className="col text-right">
+        <h4>${product.price}</h4>
+        <AddToCartButton key={product.id} product={product} />
+      </div>
       <hr />
       <div>
-        <img src={product.imageUrl} />
+        <img src={product.imageUrl} className="img-fluid" />
       </div>
-      <AddToCartButton />
-
-
-      <h3>Origin: {product.origin} </h3>
-      <p>{product.description}</p>
-      <CheckOut product={product}/>
-
-
+      <div className="col ">
+        <h5>Origin: {product.origin} </h5>
+        <p>{product.description}</p>
+      </div>
+      <p>{product.reviews}</p>
     </div>
   );
 };

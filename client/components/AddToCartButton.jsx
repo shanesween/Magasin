@@ -1,9 +1,23 @@
 import React from "react";
+import { addProduct } from "../store/cart";
+import { useDispatch, useSelector } from "react-redux";
 
-const AddToCartButton = () => {
+const AddToCartButton = props => {
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    addProduct(props.product.id);
+  };
+  console.log(props);
+
   return (
-    <button type="button" className="btn btn-outline-success">
-      Add to your cart
+    <button
+      id="toggleCart"
+      type="button"
+      className="btn btn-outline-success"
+      onClick={onClick}
+    >
+      <em> Add to your cart</em>
     </button>
   );
 };
