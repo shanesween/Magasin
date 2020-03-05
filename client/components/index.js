@@ -8,4 +8,5 @@ export { default as SingleProduct } from './SingleProduct';
 export { default as UserHome } from './user-home';
 export { Login, Signup } from './auth-form';
 export { default as AllProducts } from './AllProducts';
+export { default as CheckOut} from './CheckOutButton'
 export { default as Cart } from './Cart';

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../store/cart';
 import CartItem from './CartItem';
+import CheckOut from './CheckOutButton';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,10 @@ const Cart = () => {
             return <CartItem key={cartItem.id} cartItem={cartItem} />;
           })}
         </div>
+
       </div>
+      {cart.products&&<CheckOut />}
+
     </div>
   ) : (
     <div className='container-fluid text-center mb-mt-2'>

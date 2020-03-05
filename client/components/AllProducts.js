@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 import Product from "./product";
+import CheckOut from "./CheckOutButton";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const AllProducts = () => {
         return <Product key={product.id} product={product} />;
       })}
       {}
+
     </div>
   );
 };
