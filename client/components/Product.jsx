@@ -2,7 +2,7 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
-import SingleProductModal from "./SingleProductModal";
+// import SingleProductModal from "./SingleProductModal";
 
 const Product = props => {
   return (
@@ -22,7 +22,11 @@ const Product = props => {
           <h2 className="badge badge-pill badge-dark">{props.product.price}</h2>
         </div>
         <div className="card-footer w-100 text-muted">
-          <AddToCartButton stock={props.product.stock} />
+          <AddToCartButton
+            key={props.product.id}
+            product={props.product}
+            stock={props.product.stock}
+          />
         </div>
       </div>
     </Fade>
