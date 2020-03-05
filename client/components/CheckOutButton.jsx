@@ -16,10 +16,11 @@ const CheckOut=(props)=> {
     }, [user]);
   function handleToken(token, addresses){
     console.log( token, addresses)
+    console.log(props.cart)
 
 
   }
-  console.log(cart)
+
 
   return (
 
@@ -27,7 +28,7 @@ const CheckOut=(props)=> {
     <StripeCheckout
     stripeKey="pk_test_teWRja4PyjtX2iWI4KrEqw6x"
     token={handleToken}
-    amount={100}
+    amount={props.product.total * 100}
     name="CofVeve"
     billingAddress
     shippingAddress
