@@ -17,7 +17,6 @@ const AllProducts = () => {
         return <Product key={product.id} product={product} />;
       })}
       {}
-
     </div>
   );
 };

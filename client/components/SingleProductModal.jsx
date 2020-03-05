@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import AddToCartButton from "./AddToCartButton";
 import { Link } from "react-router-dom";
 
-const SingleProduct = props => {
+const SingleProductModal = props => {
   // const product = useSelector(state => state.product);
 
   // const dispatch = useDispatch();
@@ -41,4 +41,4 @@ const SingleProduct = props => {
   );
 };
 
-export default SingleProduct;
+export default SingleProductModal;
