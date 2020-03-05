@@ -14,6 +14,9 @@ const SingleProduct = props => {
     dispatch(fetchProduct(props.match.params.productId));
   }, []);
 
+  const reviewArr = product.reviews;
+  console.log(reviewArr);
+
   return (
     <div>
       <div className="col">
@@ -31,7 +34,7 @@ const SingleProduct = props => {
         <h5>Origin: {product.origin} </h5>
         <p>{product.description}</p>
       </div>
-      <Review />
+      <Review product={product} />
     </div>
   );
 };

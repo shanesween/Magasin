@@ -1,31 +1,44 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProduct } from '../store/singleProduct';
+import { fetchReviews } from '../store/review';
 import AddToCartButton from './AddToCartButton';
+import SingleReview from './SingleReviews';
+import { fetchProduct } from '../store/singleProduct';
 
 const Review = props => {
-  const product = useSelector(state => state.product);
+  const reviews = props.product.reviews;
 
-  const dispatch = useDispatch();
+  if (reviews) {
+    let count = 0;
+    for (let i = 0; i < reviews.length; i++) {
+      let element = reviews[i];
+      let score = element.rating;
+      count += score;
+    }
 
-  // useEffect(() => {
-  //   dispatch(fetchProduct(props.match.params.productId));
-  // }, []);
+    console.log('reviews for product', reviews);
+    return (
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">
+            {reviews.length
+              ? `OverAll Rating: ${count / reviews.length} `
+              : 'No Reviews'}
+          </h5>
+          <div>
+            <p>description</p>
+          </div>
 
-  return (
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Product Review</h5>
-        <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
-        </p>
-
-        <a href="#" class="btn btn-primary">
-          Leave A Review
-        </a>
+          <a href="#" className="btn btn-primary">
+            Leave A Review
+          </a>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    console.log(reviews);
+    return <h4> Loading</h4>;
+  }
 };
 
 export default Review;
