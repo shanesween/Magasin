@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
 import AddToCartButton from "./AddToCartButton";
+import CheckOut from "./CheckOutButton"
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
@@ -21,8 +22,13 @@ const SingleProduct = props => {
         <img src={product.imageUrl} />
       </div>
       <AddToCartButton />
+
+
       <h3>Origin: {product.origin} </h3>
       <p>{product.description}</p>
+      <CheckOut product={product}/>
+
+
     </div>
   );
 };
