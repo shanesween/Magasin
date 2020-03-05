@@ -25,11 +25,19 @@ router.put("/addItem/:userId", async (req, res, next) => {
     });
     if (userCart) {
       const product = await Product.findByPk(req.body.productId);
-      await OrderItem.create({
-        productId: product.id,
-        orderId: userCart.id,
-        quantity: req.body.quantity
+      const orderItem = await OrderItem.findOne({
+        where: { productId: product.id, orderId: userCart.id }
       });
+      if (orderItem) {
+        orderItem.quantity++;
+        await orderItem.save();
+      } else {
+        await OrderItem.create({
+          productId: product.id,
+          orderId: userCart.id,
+          quantity: req.body.quantity
+        });
+      }
       let updatedCart = await Order.findByPk(userCart.id, {
         include: {
           model: Product
@@ -60,12 +68,14 @@ router.put("/addItem/:userId", async (req, res, next) => {
 
 router.put("/removeItem/:orderId", async (req, res, next) => {
   try {
-    console.log("in Route")
+    console.log("in Route");
     const orderItem = await OrderItem.findOne({
       where: { orderId: req.params.orderId, productId: req.body.productId }
     });
     orderItem.destroy();
-    let updatedCart = await Order.findByPk(req.params.orderId)
+    let updatedCart = await Order.findByPk(req.params.orderId, {
+      include: { model: Product }
+    });
 
     res.json(updatedCart);
   } catch (err) {

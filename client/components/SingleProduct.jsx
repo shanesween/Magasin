@@ -6,7 +6,7 @@ import CheckOut from "./CheckOutButton";
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
-
+  console.log(product);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const SingleProduct = props => {
         <h5>Origin: {product.origin} </h5>
         <p>{product.description}</p>
       </div>
-      <p>{product.reviews}</p>
+      {/* <p>{product.reviews[0]}</p> */}
     </div>
   );
 };
