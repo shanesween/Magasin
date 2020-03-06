@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Product, Review } = require('../db/models');
+const checkAdmin = require('./middleware');
 module.exports = router;
 
 //route for all products
@@ -17,6 +18,17 @@ router.get('/', async (req, res, next) => {
 
 //route for single product
 router.get('/:productId', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId, {
+      include: [{ model: Review }],
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:productId', checkAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
       include: [{ model: Review }],

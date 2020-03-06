@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCart } from "../store/cart";
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCart } from '../store/cart';
 
 const CheckOut = props => {
   let cartObj = {
     cartId: props.cartId,
-    total: props.total
+    total: props.total,
   };
   async function handleToken(token) {
     // token.
-    let { data } = await axios.post("/api/checkout", { token });
+    let { data } = await axios.post('/api/checkout', { token });
     //returns {status: success}
 
     // console.log(token, addresses);
