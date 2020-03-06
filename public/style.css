@@ -42,11 +42,18 @@ img {
 .navbar-brand {
   font-family: 'covfefeBrand';
   color: #040a00;
-  font-size: xx-large;
+  font-size: 39px;
+  margin: 0px 16px 12px 32px;
+  padding: 0PX;
 }
 
 .card {
   box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+}
+
+.card-title {
+  font-size: 20px !important;
+  margin: 0px;
 }
 
 .bg-brand-dark {

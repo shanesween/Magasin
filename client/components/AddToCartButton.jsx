@@ -17,7 +17,7 @@ const AddToCartButton = props => {
     <button
       id='toggleCart'
       type='button'
-      className='btn btn-info'
+      className='btn btn-light'
       onClick={onClick}
     >
       <em> add to cart</em>

@@ -12,25 +12,54 @@ const Cart = () => {
   useEffect(() => {
     user.id && dispatch(fetchCart(user.id));
   }, [user]);
-  console.log(cart)
+  console.log(cart);
   return cart.products ? (
-    <div className='justify-content-center m-2'style={{ width: '100%' }}>
+    <div className='container-fluid' style={{ width: '100%' }}>
       <Fade cascade>
-        <div className='d-flex justify-content-between mt-2 ml-4 mr-4'>
+        <div className='d-flex justify-content-between mt-2 mb-2 ml-4 mr-4'>
           <cite>
             <h3 className='mt-3'>Shopping Cart</h3>
           </cite>
         </div>
       </Fade>
       <Fade cascade>
-        <div className='d-inline-block'>
-          <div className='align-content-around flex-wrap row m-2'>
+        <div className='row'>
+          <div className='col align-content-center m-2 mr-2'>
             {cart.products.map(cartItem => {
               return <CartItem key={cartItem.id} cartItem={cartItem} />;
             })}
           </div>
         </div>
-        {cart.products && <CheckOut product={cart}/>}
+        <div className='container-fluid checkout-pod border-top'>
+          <div className='row'>
+            <div className='col-sm'></div>
+            <div className='col-sm'></div>
+            <div className='col-sm'>
+              <div className='summary-totals m-4'>
+                <div className='border-top border-bottom'>
+                  <div className='row cartTotals'>
+                    <div className='col-8 font-weight-bold'>Subtotal</div>
+                    <div className='col-4 font-weight-bold text-right'>$0.00</div>
+                    <div className='col-8'>Shipping</div>
+                    <div className='col-4 text-right'>FREE</div>
+                    <div className='col-8'>Sales Tax</div>
+                    <div className='col-4 text-right'>$0.00</div>
+                  </div>
+                </div>
+                <div className='row total mt-2 mb-2'>
+                  <div className='col-8'>
+                    <h3 className='font-weight-bold'>Total</h3>
+                  </div>
+                  <div className='col-4'>
+                    <h3 className='font-weight-bold text-right'>$000.00</h3>
+                  </div>
+                </div>
+                {cart.products && <CheckOut product={cart} />}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='mb-4'></div>
       </Fade>
     </div>
   ) : (
