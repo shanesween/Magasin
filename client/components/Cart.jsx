@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart } from '../store/cart';
-import CartItem from './CartItem';
-import CheckOut from './CheckOutButton';
+import React, { useEffect } from "react";
+import Fade from "react-reveal/Fade";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "../store/cart";
+import CartItem from "./CartItem";
+import CheckOut from "./CheckOutButton";
 
 const Cart = () => {
   const dispatch = useDispatch();

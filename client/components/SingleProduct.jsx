@@ -3,15 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
 import CheckOut from './CheckOutButton';
+import Review from './Review';
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
-
+  console.log(product);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchProduct(props.match.params.productId));
   }, []);
+
+  const reviewArr = product.reviews;
+  console.log(reviewArr);
 
   return (
     <div className='container-fluid mt-4'>
@@ -47,7 +51,7 @@ const SingleProduct = props => {
         </div>
       </div>
 
-      <p>{product.reviews}</p>
+      {/* <p>{product.reviews}</p> */}
     </div>
   );
 };

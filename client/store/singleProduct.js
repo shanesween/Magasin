@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPES
 
-const SET_PRODUCT = "SET_PRODUCT";
+const SET_PRODUCT = 'SET_PRODUCT';
 
 // ACTION CREATORS
 
