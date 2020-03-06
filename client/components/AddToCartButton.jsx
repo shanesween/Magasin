@@ -19,7 +19,7 @@ const AddToCartButton = props => {
     <div>
       <button
         type="button"
-        className="btn btn-info"
+        className="btn btn-secondary"
         data-toggle="modal"
         data-target="#cartModal"
         onClick={onClick}

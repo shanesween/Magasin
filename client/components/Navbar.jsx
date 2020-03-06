@@ -29,14 +29,19 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </button>
 
       <div
-        className='collapse navbar-collapse justify-content-right'
+        className='collapse navbar-collapse'
         id='navbarToggler'
       >
         {isLoggedIn ? (
-          <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
+          <ul className='navbar-nav ml-auto'>
             <li className='nav-item'>
               <Link className='nav-link' to='/home'>
                 home
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/cart'>
+                cart
               </Link>
             </li>
             <li className='nav-item'>
@@ -46,12 +51,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </li>
           </ul>
         ) : (
-          <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
+          <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
-              <Link to='/login'>login</Link>
+              <Link className='nav-link' to='/login'>login</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/signup'>sign up</Link>
+              <Link className='nav-link' to='/signup'>sign up</Link>
             </li>
           </ul>
         )}
