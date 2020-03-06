@@ -23,6 +23,7 @@ const Review = props => {
 
     let badProgress = (bad / reviews.length) * 100;
     let badBar = 0;
+    function barStatus() {}
 
     if (badProgress < 50 && badProgress > 0) {
       badBar += 25;
@@ -34,7 +35,17 @@ const Review = props => {
       badBar += 100;
     }
 
-    let goodPro;
+    let goodProgress = good / reviews.length;
+    let goodBar = 0;
+    if (goodProgress < 50 && goodProgress > 0) {
+      badBar += 25;
+    } else if (goodProgress >= 50 && goodProgress < 75) {
+      badBar += 50;
+    } else if (goodProgress >= 75 && goodProgress < 100) {
+      badBar += 75;
+    } else if (badProgress === 100) {
+      badBar += 100;
+    }
 
     console.log('reviews for product', reviews);
     return (
