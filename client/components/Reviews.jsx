@@ -4,6 +4,18 @@ import SingleReview from './SingleReview';
 const Review = props => {
   const reviews = props.product.reviews;
 
+  function barStatus(progress, bar = 0) {
+    if (progress < 50 && progress > 0) {
+      bar += 25;
+    } else if (progress >= 50 && progress < 75) {
+      bar += 50;
+    } else if (progress >= 75 && progress < 100) {
+      bar += 75;
+    } else if (progress === 100) {
+      bar += 100;
+    }
+    return bar;
+  }
   if (reviews) {
     let count = 0;
     let bad = 0;
@@ -23,17 +35,6 @@ const Review = props => {
 
     let badProgress = (bad / reviews.length) * 100;
     let badBar = 0;
-    function barStatus() {}
-
-    if (badProgress < 50 && badProgress > 0) {
-      badBar += 25;
-    } else if (badProgress >= 50 && badProgress < 75) {
-      badBar += 50;
-    } else if (badProgress >= 75 && badProgress < 100) {
-      badBar += 75;
-    } else if (badProgress === 100) {
-      badBar += 100;
-    }
 
     let goodProgress = good / reviews.length;
     let goodBar = 0;
