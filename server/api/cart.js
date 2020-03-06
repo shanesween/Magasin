@@ -77,14 +77,17 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
   }
 });
 
-router.put("/removeItem/:orderId", userCheck, async (req, res, next) => {
+router.put("/removeItem/:userId", async (req, res, next) => {
   try {
     console.log("in Route");
+    let userCart = await Order.findOne({
+      where: { userId: req.params.userId, status: "pending" }
+    });
     const orderItem = await OrderItem.findOne({
-      where: { orderId: req.params.orderId, productId: req.body.productId }
+      where: { orderId: userCart.id, productId: req.body.productId }
     });
     await orderItem.destroy();
-    let updatedCart = await Order.findByPk(req.params.orderId, {
+    let updatedCart = await Order.findByPk(userCart.id, {
       include: { model: Product, order: [["id", "ASC"]] }
     });
 
