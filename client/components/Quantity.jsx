@@ -1,13 +1,20 @@
 import React from 'react';
 
-const Quantity = ({ cartItem }) => (
+const Quantity = ({ handleSubmit, quantity, setQuantity }) => (
   <div>
-    <input
-      className='cartItem__qtyInput form-input-field'
-      maxLength='4'
-      value={cartItem.orderItem.quantity}
-      style={{ width: '3rem' }}
-    />
+    <form onSubmit={handleSubmit}>
+      <input
+        name='Quantity'
+        type='number'
+        min='1'
+        max='25'
+        className='form-control'
+        maxLength='4'
+        onChange={e => setQuantity(+e.target.value)}
+        value={quantity}
+        style={{ width: '4rem' }}
+      />
+    </form>
   </div>
 );
 

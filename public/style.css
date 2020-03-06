@@ -11,6 +11,12 @@
 
 body {
   font-family: sans-serif;
+  background: linear-gradient(#ffffff, #040a0021);
+  background-attachment: fixed;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
 }
 
 a {
