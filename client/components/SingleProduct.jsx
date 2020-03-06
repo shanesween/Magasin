@@ -46,12 +46,15 @@ const SingleProduct = props => {
             </div>
           </div>
           <div className='row'>
-            <AddToCartButton key={product.id} product={product} />
+            <AddToCartButton key={product.id} product={product} stock={product.stock} />
           </div>
         </div>
       </div>
-
-      {/* <p>{product.reviews}</p> */}
+      <div className='row'>
+        <div className='row'>
+          <Review product={product} />
+        </div>
+      </div>
     </div>
   );
 };
