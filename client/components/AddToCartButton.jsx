@@ -3,6 +3,7 @@ import { addProduct } from "../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 // import ProductAddedModal from "./ProductAddedModal";
 import { Link } from "react-router-dom";
+import ProductAddedModal from "./ProductAddedModal";
 
 const AddToCartButton = props => {
   const user = useSelector(state => state.user);
@@ -11,9 +12,6 @@ const AddToCartButton = props => {
   const onClick = () => {
     dispatch(addProduct(user.id, props.product.id, props.quantity));
   };
-
-  // console.log(props.product);
-  // console.log(user);
 
   return props.stock ? (
     <div>
@@ -26,51 +24,16 @@ const AddToCartButton = props => {
       >
         add to cart
       </button>
-      <div
-        className="modal fade bd-example-modal-sm"
-        id="cartModal"
-        data-backdrop="false"
-        tabIndex="-1"
-        role="document"
-      >
+      <div>
         <div
-          className="modal-dialog modal-dialog-centered style={{zIndex:'1'}} "
-          role="document"
+          className="modal fade zindex-modal"
+          id="cartModal"
+          tabIndex="-1"
+          data-backdrop="false"
+          data-background="false"
+          style={{ zIndexModal: 100 }}
         >
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="cartModalCenterTitle">
-                Woohoo!!
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body text-center">
-              {props.product.title} was added to your cart.
-            </div>
-            <div className="modal-footer">
-              <Link to="/home">
-                <button
-                  type="button"
-                  className="btn btn-info"
-                  data-dismiss="modal"
-                >
-                  Continue Shopping
-                </button>
-              </Link>
-              <div className="col">
-                <Link to="/cart">
-                  <button type="button" className="btn btn-info">
-                    Go to cart
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
+          <ProductAddedModal />
         </div>
       </div>
     </div>

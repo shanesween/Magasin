@@ -5,43 +5,30 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../store/cart";
 
+const CheckOut = props => {
+  let cartObj = {
+    cartId: props.cartId,
+    total: props.total
+  };
+  async function handleToken(token) {
+    // token.
+    let { data } = await axios.post("/api/checkout", { token });
+    //returns {status: success}
 
-const CheckOut=(props)=> {
-  const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
-  const user = useSelector(state => state.user);
-  console.log(user);
-    useEffect(() => {
-      dispatch(fetchCart(user.id));
-    }, [user]);
-  function handleToken(token, addresses){
-    console.log( token, addresses)
-    console.log(props.cart)
-
-
+    // console.log(token, addresses);
+    // console.log(props.cart);
   }
 
-
   return (
-
-
     <StripeCheckout
-    stripeKey="pk_test_teWRja4PyjtX2iWI4KrEqw6x"
-    token={handleToken}
-    amount={props.product.total * 100}
-    name="CofVeve"
-    billingAddress
-    shippingAddress
-  />
-
-
-
-
-
-
-
-
-  )
-}
+      stripeKey="pk_test_teWRja4PyjtX2iWI4KrEqw6x"
+      token={handleToken}
+      amount={props.total * 100}
+      name="CofVeve"
+      billingAddress
+      shippingAddress
+    />
+  );
+};
 
 export default CheckOut;

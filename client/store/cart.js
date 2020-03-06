@@ -48,10 +48,10 @@ export const updateProduct = (userId, productId, quantity) => {
   };
 };
 
-export const removeProduct = (orderId, productId) => {
+export const removeProduct = (userId, productId) => {
   return async dispatch => {
     try {
-      let { data } = await axios.put(`/api/cart/removeItem/${orderId}`, {
+      let { data } = await axios.put(`/api/cart/removeItem/${userId}`, {
         productId
       });
       dispatch(setCart(data));
