@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Product, Review } = require('../db/models');
+const checkAdmin = require('./middleware');
 module.exports = router;
 
 //route for all products
@@ -26,3 +27,5 @@ router.get('/:productId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.put('/:productId');
