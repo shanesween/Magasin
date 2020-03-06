@@ -1,5 +1,6 @@
 import React from 'react';
 import RemoveButton from './RemoveButton';
+import Quantity from './Quantity';
 
 const CartItem = ({ cartItem }) => {
   return (
@@ -29,18 +30,10 @@ const CartItem = ({ cartItem }) => {
           </div>
           {/* orderItem qty column */}
           <div className='col-xs-1'>
-            {/* this will become qty component*/}
             <div className='card-body'>
               <div>
                 <label className='cartItem__qtyLabel'>Qty</label>
-                <div>
-                  <input
-                    className='cartItem__qtyInput form-input-field'
-                    maxLength='4'
-                    value={cartItem.orderItem.quantity}
-                    style={{ width: '3rem' }}
-                  />
-                </div>
+                <Quantity key={cartItem.id} cartItem={cartItem} />
               </div>
             </div>
           </div>
@@ -60,22 +53,11 @@ const CartItem = ({ cartItem }) => {
               </div>
             </div>
           </div>
-          <div className='col-xs-1'>
-            <div className='card-body'>
-              <div className='remove_cartItem_button'>
-                {/* remove item button */}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      {/* footer div with Remove option*/}
-      <div className='float-right'>
-        <ul className='list-group list-group-horizontal-lg'>
-          <li className='list-group-item'>
-            <RemoveButton product={cartItem} />
-          </li>
-        </ul>
+        {/* footer div with Remove option*/}
+        <div className='text-right'>
+          <RemoveButton product={cartItem} />
+        </div>
       </div>
     </div>
   );

@@ -18,27 +18,43 @@ const SingleProduct = props => {
   console.log(reviewArr);
 
   return (
-    <div>
-      <div className="col">
-        <h2>{product.title}</h2>
+    <div className='container-fluid mt-4'>
+      <div className='row' style={{ height: '30rem' }}>
+        <div className='col-sm'>
+          <img
+            src={product.imageUrl}
+            className='img-fluid float-right'
+            style={{ height: '30rem' }}
+          />
+        </div>
+        <div className='col-sm'>
+          <div className='row' style={{ height: '12rem' }}></div>
+          <div className='row'>
+            <div className='container ml-2'>
+              <div className='row'>
+                <h2>{product.title}</h2>
+              </div>
+              <div className='row'>
+                <h5>{product.origin} </h5>
+              </div>
+              <div className='row'>
+                <p>{product.description}</p>
+              </div>
+              <div className='row'>
+                <h4>${product.price}</h4>
+              </div>
+            </div>
+          </div>
+          <div className='row'>
+            <AddToCartButton key={product.id} product={product} stock={product.stock} />
+          </div>
+        </div>
       </div>
-      <div className="col text-right">
-        <h4>${product.price}</h4>
-        <AddToCartButton
-          key={product.id}
-          product={product}
-          stock={product.stock}
-        />
+      <div className='row'>
+        <div className='row'>
+          <Review product={product} />
+        </div>
       </div>
-      <hr />
-      <div>
-        <img src={product.imageUrl} className="img-fluid" />
-      </div>
-      <div className="col ">
-        <h5>Origin: {product.origin} </h5>
-        <p>{product.description}</p>
-      </div>
-      <Review product={product} />
     </div>
   );
 };

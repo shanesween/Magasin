@@ -1,11 +1,11 @@
 /* branding font */
 @font-face {
-  font-family: 'covfefeBrand';
-  src: url('fonts/cofefeBrand-bold.otf') format('opentype'),
-    /* Safari, Android, iOS */ url('fonts/covfefeBrand-bold-webfont.woff2')
-      format('woff2'),
-    /* Super Modern Browsers */ url('fonts/covfefeBrand-bold-webfont.woff')
-      format('woff');
+  font-family: "covfefeBrand";
+  src: url("fonts/cofefeBrand-bold.otf") format("opentype"),
+    /* Safari, Android, iOS */ url("fonts/covfefeBrand-bold-webfont.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */ url("fonts/covfefeBrand-bold-webfont.woff")
+      format("woff");
   /* Modern Browsers */
 }
 
@@ -40,13 +40,20 @@ img {
 }
 
 .navbar-brand {
-  font-family: 'covfefeBrand';
+  font-family: "covfefeBrand";
   color: #040a00;
-  font-size: xx-large;
+  font-size: 39px;
+  margin: 0px 16px 12px 32px;
+  padding: 0PX;
 }
 
 .card {
   box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+}
+
+.card-title {
+  font-size: 20px !important;
+  margin: 0px;
 }
 
 .bg-brand-dark {
@@ -61,5 +68,7 @@ img {
   float: left;
   border: none;
 }
-
-
+.modal {
+  z-index: 1000000 !important;
+  background: rgba(0, 0, 0, 0.5);
+}
