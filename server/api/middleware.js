@@ -13,4 +13,13 @@ const checkAdmin = async (req, res, next) => {
   }
 };
 
+const userCheck = function(req, res, next) {
+  if (Number(req.user.id) === Number(req.params.userId)) {
+    next();
+  } else {
+    res.sendStatus(403);
+  }
+};
+
 module.exports = checkAdmin;
+module.exports = userCheck;
