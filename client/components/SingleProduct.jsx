@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
 import CheckOut from './CheckOutButton';
 import Review from './Review';
+import Quantity from './Quantity';
 
 const SingleProduct = props => {
+  const [quantity, setQuantity] = useState(1);
   const product = useSelector(state => state.product);
-  console.log(product);
+  console.log('PRODUCT==>', product);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,12 +43,23 @@ const SingleProduct = props => {
                 <p>{product.description}</p>
               </div>
               <div className='row'>
+                <Quantity
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
+              </div>
+              <div className='row'>
                 <h4>${product.price}</h4>
               </div>
             </div>
           </div>
           <div className='row'>
-            <AddToCartButton key={product.id} product={product} stock={product.stock} />
+            <AddToCartButton
+              key={product.id}
+              product={product}
+              stock={product.stock}
+              quantity={quantity}
+            />
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const AddToCartButton = props => {
   const dispatch = useDispatch();
 
   const onClick = () => {
-    dispatch(addProduct(user.id, props.product.id));
+    dispatch(addProduct(user.id, props.product.id, props.quantity));
   };
 
   // console.log(props.product);
