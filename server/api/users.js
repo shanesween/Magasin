@@ -16,3 +16,35 @@ router.get("/", checkAdmin, async (req, res, next) => {
     next(err);
   }
 });
+
+router.get("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findbyPk(req.params.userId);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findbyPk(req.params.userId);
+    const updatedUser = await user.update(req.body);
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.userId
+      }
+    });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
