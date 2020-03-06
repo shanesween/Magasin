@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
 import CheckOut from './CheckOutButton';
-import Review from './Review';
+import Review from './Reviews';
 
 const SingleProduct = props => {
   const product = useSelector(state => state.product);
