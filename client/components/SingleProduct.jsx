@@ -20,40 +20,37 @@ const SingleProduct = props => {
   console.log(reviewArr);
 
   return (
-    <div className='container-fluid mt-4'>
-      <div className='row' style={{ height: '30rem' }}>
-        <div className='col-sm'>
+    <div className="container-fluid mt-4">
+      <div className="row" style={{ height: '30rem' }}>
+        <div className="col-sm">
           <img
             src={product.imageUrl}
-            className='img-fluid float-right'
+            className="img-fluid float-right"
             style={{ height: '30rem' }}
           />
         </div>
-        <div className='col-sm'>
-          <div className='row' style={{ height: '12rem' }}></div>
-          <div className='row'>
-            <div className='container ml-2'>
-              <div className='row'>
+        <div className="col-sm">
+          <div className="row" style={{ height: '12rem' }}></div>
+          <div className="row">
+            <div className="container ml-2">
+              <div className="row">
                 <h2>{product.title}</h2>
               </div>
-              <div className='row'>
+              <div className="row">
                 <h5>{product.origin} </h5>
               </div>
-              <div className='row'>
+              <div className="row">
                 <p>{product.description}</p>
               </div>
-              <div className='row'>
-                <Quantity
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                />
+              <div className="row">
+                <Quantity quantity={quantity} setQuantity={setQuantity} />
               </div>
-              <div className='row'>
+              <div className="row">
                 <h4>${product.price}</h4>
               </div>
             </div>
           </div>
-          <div className='row'>
+          <div className="row">
             <AddToCartButton
               key={product.id}
               product={product}
@@ -63,8 +60,8 @@ const SingleProduct = props => {
           </div>
         </div>
       </div>
-      <div className='row'>
-        <div className='row'>
+      <div className="row">
+        <div className="row">
           <Review product={product} />
         </div>
       </div>
