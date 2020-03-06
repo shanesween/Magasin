@@ -6,12 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../store/cart";
 
 const CheckOut = props => {
-  let cartObj = {
-    cartId: props.cartId,
-    total: props.total
-  };
+  let cartId = props.cartId;
+  let total = props.total;
   async function handleToken(token) {
-    // token.
+    token.cartId = cartId;
+    token.total = 1;
     let { data } = await axios.post("/api/checkout", { token });
     //returns {status: success}
 

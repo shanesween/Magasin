@@ -7,12 +7,12 @@ const cors = require("cors");
 router.use(cors());
 module.exports = router;
 
-router.post("/", async (req, res) => {
-  console.log("Request:", req.body);
+router.post("/", async (req, res, next) => {
+  //   console.log("Request:", req.body.token.total);
   let error;
   let status;
   try {
-    const { cartObj, token } = req.body;
+    const { token } = req.body;
     const customer = await stripe.customers.create({
       email: token.email,
       source: token.id
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     const idempotencyKey = uuid();
     const charge = await stripe.charges.create(
       {
-        amount: 100 * 100,
+        amount: token.total * 100,
         currency: "usd",
         customer: customer.id,
         receipt_email: token.email,
@@ -40,14 +40,19 @@ router.post("/", async (req, res) => {
         idempotencyKey
       }
     );
-    console.log("Charge:", { charge });
+    // console.log("Charge:", { charge });
     status = "success";
+    req.hi = "hi";
+    console.log("end of checkout route");
+    next();
   } catch (error) {
     console.error("Error:", error);
     status = "failure";
   }
-  next();
   res.json({ error, status });
 });
 
-router.post("/", async (req, res, next) => {});
+router.post("/", async (req, res, next) => {
+  console.log("beginning of new checkout route");
+  console.log(req.hi);
+});
