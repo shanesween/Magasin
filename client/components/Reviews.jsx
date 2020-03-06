@@ -6,11 +6,35 @@ const Review = props => {
 
   if (reviews) {
     let count = 0;
+    let bad = 0;
+
+    let good = 0;
+    // count the number of bad reviews and good reviews
     for (let i = 0; i < reviews.length; i++) {
       let element = reviews[i];
       let score = element.rating;
       count += score;
+      if (element.rating <= 2) {
+        bad++;
+      } else {
+        good++;
+      }
     }
+
+    let badProgress = (bad / reviews.length) * 100;
+    let badBar = 0;
+
+    if (badProgress < 50 && badProgress > 0) {
+      badBar += 25;
+    } else if (badProgress >= 50 && badProgress < 75) {
+      badBar += 50;
+    } else if (badProgress >= 75 && badProgress < 100) {
+      badBar += 75;
+    } else if (badProgress === 100) {
+      badBar += 100;
+    }
+
+    let goodPro;
 
     console.log('reviews for product', reviews);
     return (
@@ -29,18 +53,18 @@ const Review = props => {
       //     </div>
       //   </div>
       // </div>
-      <div class="container">
-        <div class="card shadow-sm my-4">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card-body">
-                <h2 class="card-title font-weight-light mb-3">Reviews</h2>
-                <span class="mt-4 display-4">1,219</span>
+      <div className="container">
+        <div className="card shadow-sm my-4">
+          <div className="row">
+            <div className="col-md-4">
+              <div className="card-body">
+                <h2 className="card-title font-weight-light mb-3">Reviews</h2>
+                <span className="mt-4 display-4">{reviews.length}</span>
 
-                <div class="clearfix"></div>
+                <div className="clearfix"></div>
                 <button
                   type="button"
-                  class="btn btn-primary btn-lg mt-3"
+                  className="btn btn-primary btn-lg mt-3"
                   data-toggle="collapse"
                   data-target="#reviews"
                 >
@@ -48,64 +72,46 @@ const Review = props => {
                 </button>
               </div>
             </div>
-            <div class="col col-md-auto p-0 mx-3 mx-lg-0 border-bottom border-right border-light"></div>
-            <div class="col-md">
-              <ul class="list-unstyled pr-3">
-                <li class="p-3">
-                  <div class="d-flex p-2">
-                    <span class="text-secondary display-4 mr-3">
-                      <i class="fa fa-smile"></i>
+            <div className="col col-md-auto p-0 mx-3 mx-lg-0 border-bottom border-right border-light"></div>
+            <div className="col-md">
+              <ul className="list-unstyled pr-3">
+                <li className="p-3">
+                  <div className="d-flex p-2">
+                    <span className="text-secondary display-4 mr-3">
+                      <i className="fa fa-smile"></i>
                     </span>
-                    <div class="ml-2">
-                      <h3 class="card-title font-weight-light">Positive</h3>
-                      <h6 class="font-weight-light">197 Reviews</h6>
+                    <div className="ml-2">
+                      <h3 className="card-title font-weight-light">Positive</h3>
+                      <h6 className="font-weight-light">{good}</h6>
                     </div>
                   </div>
-                  <div class="progress">
+                  <div className="progress">
                     <div
-                      class="progress-bar bg-success w-75"
+                      className="progress-bar bg-success w-75"
                       role="progressbar"
-                      aria-valuenow="75"
+                      aria-valuenow={(good / reviews.length) * 100}
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
                   </div>
                 </li>
-                <li class="p-3">
-                  <div class="d-flex p-2">
-                    <span class="text-muted display-4 mr-3">
-                      <i class="fa fa-frown"></i>
+                <li className="p-3">
+                  <div className="d-flex p-2">
+                    <span className="text-muted display-4 mr-3">
+                      <i className="fa fa-frown"></i>
                     </span>
-                    <div class="ml-2">
-                      <h3 class="card-title font-weight-light">Negative</h3>
-                      <h6 class="font-weight-light">14 Reviews</h6>
+                    <div className="ml-2">
+                      <h3 className="card-title font-weight-light">Negative</h3>
+                      <h6 className="font-weight-light">{bad}</h6>
                     </div>
                   </div>
-                  <div class="progress">
+                  <div className="progress">
                     <div
-                      class="progress-bar progress-bar-striped progress-bar-animated bg-danger w-25"
+                      className={`progress-bar progress-bar-striped progress-bar-animated bg-danger w-${badBar}`}
                       role="progressbar"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </li>
-                <li class="p-3">
-                  <div class="d-flex p-2">
-                    <span class="text-secondary display-4 mr-3">
-                      <i class="fa fa-meh"></i>
-                    </span>
-                    <div class="ml-2">
-                      <h3 class="card-title font-weight-light">Neutral</h3>
-                      <h6 class="font-weight-light">89 Reviews</h6>
-                    </div>
-                  </div>
-                  <div class="progress">
-                    <div
-                      class="progress-bar bg-primary w-50"
-                      role="progressbar"
-                      aria-valuenow="50"
+                      aria-valuenow={
+                        reviews.length > 0 ? (bad / reviews.length) * 100 : 0
+                      }
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
