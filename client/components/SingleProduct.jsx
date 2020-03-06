@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
 import CheckOut from './CheckOutButton';
-import Review from './Reviews';
+import Review from './Review';
+import Quantity from './Quantity';
 
 const SingleProduct = props => {
+  const [quantity, setQuantity] = useState(1);
   const product = useSelector(state => state.product);
-  console.log(product);
+  console.log('PRODUCT==>', product);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,40 +20,48 @@ const SingleProduct = props => {
   console.log(reviewArr);
 
   return (
-    <div className='container-fluid mt-4'>
-      <div className='row' style={{ height: '30rem' }}>
-        <div className='col-sm'>
+    <div className="container-fluid mt-4">
+      <div className="row" style={{ height: '30rem' }}>
+        <div className="col-sm">
           <img
             src={product.imageUrl}
-            className='img-fluid float-right'
+            className="img-fluid float-right"
             style={{ height: '30rem' }}
           />
         </div>
-        <div className='col-sm'>
-          <div className='row' style={{ height: '12rem' }}></div>
-          <div className='row'>
-            <div className='container ml-2'>
-              <div className='row'>
+        <div className="col-sm">
+          <div className="row" style={{ height: '12rem' }}></div>
+          <div className="row">
+            <div className="container ml-2">
+              <div className="row">
                 <h2>{product.title}</h2>
               </div>
-              <div className='row'>
+              <div className="row">
                 <h5>{product.origin} </h5>
               </div>
-              <div className='row'>
+              <div className="row">
                 <p>{product.description}</p>
               </div>
-              <div className='row'>
+              <div className="row">
+                <Quantity quantity={quantity} setQuantity={setQuantity} />
+              </div>
+              <div className="row">
                 <h4>${product.price}</h4>
               </div>
             </div>
           </div>
-          <div className='row'>
-            <AddToCartButton key={product.id} product={product} stock={product.stock} />
+          <div className="row">
+            <AddToCartButton
+              key={product.id}
+              product={product}
+              stock={product.stock}
+              quantity={quantity}
+            />
           </div>
         </div>
       </div>
-      <div className='row'>
-        <div className='row'>
+      <div className="row">
+        <div className="row">
           <Review product={product} />
         </div>
       </div>

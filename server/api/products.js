@@ -28,4 +28,13 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
-router.put('/:productId');
+router.put('/:productId', checkAdmin, async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId, {
+      include: [{ model: Review }],
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});

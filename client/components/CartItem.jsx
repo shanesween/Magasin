@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RemoveButton from './RemoveButton';
 import Quantity from './Quantity';
 
 const CartItem = ({ cartItem }) => {
+  const [quantity, setQuantity] = useState(cartItem.orderItem.quantity);
+
   return (
     <div style={{ minWidth: '96%' }}>
       <div className='card mb-3' style={{ minWidth: '90%' }}>
@@ -33,7 +35,12 @@ const CartItem = ({ cartItem }) => {
             <div className='card-body'>
               <div>
                 <label className='cartItem__qtyLabel'>Qty</label>
-                <Quantity key={cartItem.id} cartItem={cartItem} />
+                <Quantity
+                  key={cartItem.id}
+                  cartItem={cartItem}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
               </div>
             </div>
           </div>
@@ -49,7 +56,7 @@ const CartItem = ({ cartItem }) => {
             <div className='card-body'>
               <label className='cartItem_priceLabel'>Item Total</label>
               <div className='cartItem_price'>
-                ${cartItem.price * cartItem.orderItem.quantity}
+                ${cartItem.price * quantity}
               </div>
             </div>
           </div>
