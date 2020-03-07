@@ -11,24 +11,20 @@ const ProductAddedModal = () => {
           </h5>
         </div>
         <div className="modal-body text-center">Item added to your cart.</div>
-        <div className="modal-footer ">
-          <Link to="/home">
-            <button
-              id="buttonToShopping"
-              type="button"
-              className="btn btn-info"
-              data-dismiss="modal"
-            >
-              Continue Shopping
+        <div className="modal-footer model-footer-centered">
+          <button
+            id="buttonToShopping"
+            type="button"
+            className="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            Continue Shopping
+          </button>
+          <Link to="/cart">
+            <button id="buttonToCart" type="button" className="btn btn-info">
+              Go to cart
             </button>
           </Link>
-          <div className="col">
-            <Link to="/cart">
-              <button id="buttonToCart" type="button" className="btn btn-info">
-                Go to cart
-              </button>
-            </Link>
-          </div>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   Login,
   Signup,
   UserHome,
+  AdminHome,
   SingleProduct,
   AllProducts,
   Cart,
@@ -33,9 +34,13 @@ class Routes extends Component {
         <Route path="/home" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/" component={AllProducts} />
+
         <Route component={NotFound} />
         {isLoggedIn && (
           <Switch>
+            <Route path="/admin" component={AdminHome} />
+
             {/* Routes placed here are only available after logging in */}
           </Switch>
         )}

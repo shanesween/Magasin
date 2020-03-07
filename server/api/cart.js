@@ -1,7 +1,15 @@
 const router = require("express").Router();
 const { Product, Order, User, OrderItem } = require("../db/models");
-const userCheck = require("../api/middleware");
+// const userCheck = require("../api/middleware");
 module.exports = router;
+
+const userCheck = (req, res, next) => {
+  if (Number(req.user.id) === Number(req.params.userId)) {
+    next();
+  } else {
+    res.sendStatus(403);
+  }
+};
 
 router.get("/:userId", userCheck, async (req, res, next) => {
   console.log("req.user", req.user.id);
