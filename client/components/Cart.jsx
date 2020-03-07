@@ -65,7 +65,9 @@ const Cart = () => {
                     <div className='col-8'>Shipping</div>
                     <div className='col-4 text-right'>FREE</div>
                     <div className='col-8'>Sales Tax</div>
-                    <div className='col-4 text-right'>${taxAmount}</div>
+                    <div className='col-4 text-right'>
+                      ${taxAmount.toFixed(2)}
+                    </div>
                   </div>
                 </div>
                 <div className='row total mt-2 mb-2'>
@@ -74,13 +76,13 @@ const Cart = () => {
                   </div>
                   <div className='col-4'>
                     <h3 className='font-weight-bold text-right'>
-                      ${cartTotal}
+                      ${cartTotal.toFixed(2)}
                     </h3>
                   </div>
                 </div>
                 {/* checkout needs to be passed in total and cartId */}
                 {cart.products && (
-                  <CheckOut cartId={cart.id} total={cartTotal} />
+                  <CheckOut cartId={cart.id} total={cartTotal.toFixed(2)} />
                 )}
               </div>
             </div>
