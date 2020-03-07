@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { addProduct } from "../store/cart";
 import { useDispatch, useSelector } from "react-redux";
-// import ProductAddedModal from "./ProductAddedModal";
 import { Link } from "react-router-dom";
 import ProductAddedModal from "./ProductAddedModal";
 
@@ -31,7 +30,6 @@ const AddToCartButton = props => {
           tabIndex="-1"
           data-backdrop="false"
           data-background="false"
-          style={{ zIndexModal: 100 }}
         >
           <ProductAddedModal />
         </div>
