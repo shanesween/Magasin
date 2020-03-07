@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
 import CheckOut from './CheckOutButton';
-import Review from './Review';
+import Reviews from './Reviews';
 import Quantity from './Quantity';
 
 const SingleProduct = props => {
@@ -62,7 +62,7 @@ const SingleProduct = props => {
       </div>
       <div className="row">
         <div className="row">
-          <Review product={product} />
+          <Reviews product={product} />
         </div>
       </div>
     </div>
