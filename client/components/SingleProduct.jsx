@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
@@ -6,15 +5,6 @@ import AddToCartButton from "./AddToCartButton";
 import CheckOut from "./CheckOutButton";
 import Reviews from "./Reviews";
 import Quantity from "./Quantity";
-=======
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProduct } from '../store/singleProduct';
-import AddToCartButton from './AddToCartButton';
-import CheckOut from './CheckOutButton';
-import Reviews from './Reviews';
-import Quantity from './Quantity';
->>>>>>> 6f93ac9a67b53d4f69cf903e100029901dbb808f
 
 const SingleProduct = props => {
   const [quantity, setQuantity] = useState(1);

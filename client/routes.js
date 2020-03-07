@@ -35,8 +35,6 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={AllProducts} />
-
-        <Route component={NotFound} />
         {isLoggedIn && (
           <Switch>
             <Route path="/admin" component={AdminHome} />
@@ -44,6 +42,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
           </Switch>
         )}
+        <Route component={NotFound} />
       </Switch>
     );
   }
