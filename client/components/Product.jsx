@@ -2,7 +2,6 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
-// import SingleProductModal from "./SingleProductModal";
 
 const Product = props => {
   return (
