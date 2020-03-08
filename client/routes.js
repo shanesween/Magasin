@@ -38,7 +38,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/admin" component={AdminHome} />
-
+            <Route component={NotFound} />
             {/* Routes placed here are only available after logging in */}
           </Switch>
         )}

@@ -1,13 +1,13 @@
-const router = require('express').Router();
-const { Product, Review } = require('../db/models');
-const checkAdmin = require('./middleware');
+const router = require("express").Router();
+const { Product, Review } = require("../db/models");
+const { checkAdmin } = require("./middleware");
 module.exports = router;
 
 //route for all products
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      order: [['id', 'ASC']],
+      order: [["id", "ASC"]]
     });
     // const test = [{title: "cheese", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 33}, {title:"bob", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 55}]
     res.json(products);
@@ -17,10 +17,10 @@ router.get('/', async (req, res, next) => {
 });
 
 //route for single product
-router.get('/:productId', async (req, res, next) => {
+router.get("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
-      include: [{ model: Review }],
+      include: [{ model: Review }]
     });
     res.json(product);
   } catch (err) {
@@ -28,10 +28,10 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
-router.put('/:productId', checkAdmin, async (req, res, next) => {
+router.put("/:productId", checkAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
-      include: [{ model: Review }],
+      include: [{ model: Review }]
     });
     res.json(product);
   } catch (err) {

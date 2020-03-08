@@ -13,7 +13,7 @@ const AdminUsers = props => {
   // }, []);
 
   const user = props.user;
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="justify-content-center m-2">

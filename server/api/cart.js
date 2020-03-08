@@ -1,18 +1,10 @@
 const router = require("express").Router();
 const { Product, Order, User, OrderItem } = require("../db/models");
-// const userCheck = require("../api/middleware");
+const { userCheck } = require("../api/middleware");
 module.exports = router;
 
-const userCheck = (req, res, next) => {
-  if (Number(req.user.id) === Number(req.params.userId)) {
-    next();
-  } else {
-    res.sendStatus(403);
-  }
-};
-
 router.get("/:userId", userCheck, async (req, res, next) => {
-  console.log("req.user", req.user.id);
+  // console.log("req.user", req.user.id);
   try {
     const userCart = await Order.findOne({
       where: { userId: req.params.userId, status: "pending" },
@@ -80,7 +72,7 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
 
 router.put("/removeItem/:userId", async (req, res, next) => {
   try {
-    console.log("in Route");
+    // console.log("in Route");
     let userCart = await Order.findOne({
       where: { userId: req.params.userId, status: "pending" }
     });

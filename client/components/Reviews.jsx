@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import SingleReview from './SingleReview';
+import React, { useEffect } from "react";
+import SingleReview from "./SingleReview";
 
 const Review = props => {
   const reviews = props.product.reviews;
@@ -43,7 +43,7 @@ const Review = props => {
     let badBar = barStatus(badProgress, negativeBar);
     let goodBar = barStatus(goodProgress, positiveBar);
 
-    console.log('reviews for product', reviews);
+    // console.log('reviews for product', reviews);
     return (
       // <div className="card">
       //   <div className="card-body">
@@ -189,7 +189,7 @@ const Review = props => {
       </div>
     );
   } else {
-    console.log(reviews);
+    // console.log(reviews);
     return <h4> Loading</h4>;
   }
 };

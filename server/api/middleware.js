@@ -21,5 +21,4 @@ const userCheck = (req, res, next) => {
   }
 };
 
-// module.exports = { checkAdmin, userCheck };
-module.exports = checkAdmin;
+module.exports = { checkAdmin, userCheck };

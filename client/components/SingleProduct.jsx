@@ -9,15 +9,15 @@ import Quantity from "./Quantity";
 const SingleProduct = props => {
   const [quantity, setQuantity] = useState(1);
   const product = useSelector(state => state.product);
-  console.log("PRODUCT==>", product);
+  // console.log("PRODUCT==>", product);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchProduct(props.match.params.productId));
   }, []);
 
-  const reviewArr = product.reviews;
-  console.log(reviewArr);
+  // const reviewArr = product.reviews;
+  // console.log(reviewArr);
 
   return (
     <div className="container-fluid mt-4">
