@@ -1,4 +1,4 @@
-const User = require("../db/models/user");
+const { User } = require("../db/models");
 
 const checkAdmin = async (req, res, next) => {
   if (!req.session.passport) {
@@ -13,7 +13,7 @@ const checkAdmin = async (req, res, next) => {
   }
 };
 
-const userCheck = function(req, res, next) {
+const userCheck = (req, res, next) => {
   if (Number(req.user.id) === Number(req.params.userId)) {
     next();
   } else {
@@ -21,5 +21,5 @@ const userCheck = function(req, res, next) {
   }
 };
 
+// module.exports = { checkAdmin, userCheck };
 module.exports = checkAdmin;
-module.exports = userCheck;

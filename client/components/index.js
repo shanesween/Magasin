@@ -11,3 +11,4 @@ export { default as AllProducts } from "./AllProducts";
 export { default as CheckOut } from "./CheckOutButton";
 export { default as Cart } from "./Cart";
 export { default as NotFound } from "./NotFound";
+export { default as AdminHome } from "./AdminHome";
