@@ -10,7 +10,7 @@ const Cart = () => {
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   useEffect(() => {
-    dispatch(fetchCart(user.id));
+    dispatch(fetchCart());
   }, [user]);
 
   // console.log('CART==>', cart);
@@ -82,7 +82,7 @@ const Cart = () => {
                 </div>
                 {/* checkout needs to be passed in total and cartId */}
                 {cart.products && (
-                  <CheckOut cartId={cart.id} total={cartTotal.toFixed(2)} />
+                  <CheckOut cartId={cart} total={cartTotal.toFixed(2)} />
                 )}
               </div>
             </div>

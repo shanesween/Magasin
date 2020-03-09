@@ -9,9 +9,8 @@ const CheckOut = props => {
   const history = useHistory();
   let cartId = props.cartId;
   let total = props.total;
-  // console.log(props.history);
+  console.log(cartId);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
   async function handleToken(token) {
     token.cartId = cartId;
     token.total = total;
@@ -19,7 +18,7 @@ const CheckOut = props => {
     //returns {status: success}
     console.log("DATA", data);
     if (data.status === "success") {
-      dispatch(fetchCart(user.id));
+      dispatch(fetchCart());
       history.push("/home");
     }
   }

@@ -18,9 +18,9 @@ router.get("/", checkAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:singleUserId", async (req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.singleUserId);
+    const singleUser = await User.findByPk(req.params.userId);
     res.json(singleUser);
   } catch (err) {
     next(err);

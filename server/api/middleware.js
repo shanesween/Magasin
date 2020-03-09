@@ -13,16 +13,16 @@ const checkAdmin = async (req, res, next) => {
   }
 };
 
-const userCheck = (req, res, next) => {
-  // if(!req.user){
+// const userCheck = (req, res, next) => {
+//   // if(!req.user){
 
-  // }
-  if (Number(req.user.id) === Number(req.params.userId)) {
-    next();
-  } else {
-    res.sendStatus(403);
-  }
-};
+//   // }
+//   if (Number(req.user.id) === Number(req.params.userId)) {
+//     next();
+//   } else {
+//     res.sendStatus(403);
+//   }
+// };
 
 // const stockCheck = async (req, res, next) => {
 //   const { token } = req.body;
@@ -45,4 +45,4 @@ const userCheck = (req, res, next) => {
 //   }
 // };
 
-module.exports = { checkAdmin, userCheck };
+module.exports = { checkAdmin };

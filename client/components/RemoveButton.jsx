@@ -1,14 +1,13 @@
-import React from 'react';
-import { removeProduct } from '../store/cart';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { removeProduct } from "../store/cart";
+import { useDispatch, useSelector } from "react-redux";
 
 const RemoveButton = props => {
   // const cart = useSelector(state => state.cart);
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const onClick = ev => {
-    dispatch(removeProduct(user.id, props.product.id));
+    dispatch(removeProduct(props.product.id));
   };
 
   // console.log(props);

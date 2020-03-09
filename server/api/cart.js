@@ -3,11 +3,11 @@ const { Product, Order, User, OrderItem } = require("../db/models");
 const { userCheck } = require("../api/middleware");
 module.exports = router;
 
-router.get("/:userId", userCheck, async (req, res, next) => {
-  console.log("req.session", req.session);
+router.get("/", async (req, res, next) => {
+  console.log("req.session", req.user);
   try {
     const userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" },
+      where: { userId: req.user.id, status: "pending" },
       include: { model: Product, order: [["id", "ASC"]] }
     });
     if (userCart) {
@@ -20,10 +20,10 @@ router.get("/:userId", userCheck, async (req, res, next) => {
   }
 });
 
-router.put("/addItem/:userId", userCheck, async (req, res, next) => {
+router.put("/addItem", async (req, res, next) => {
   try {
     let userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" }
+      where: { userId: req.user.id, status: "pending" }
     });
     if (userCart) {
       const product = await Product.findByPk(req.body.productId);
@@ -51,7 +51,7 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
       res.json(updatedCart);
     } else {
       let newCart = await Order.create();
-      let user = await User.findByPk(req.params.userId);
+      let user = await User.findByPk(req.user.id);
       await user.addOrder(newCart);
       const product = await Product.findByPk(req.body.productId);
       await OrderItem.create({
@@ -72,11 +72,11 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
   }
 });
 
-router.put("/removeItem/:userId", async (req, res, next) => {
+router.put("/removeItem", async (req, res, next) => {
   try {
     // console.log("in Route");
     let userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" }
+      where: { userId: req.user.id, status: "pending" }
     });
     const orderItem = await OrderItem.findOne({
       where: { orderId: userCart.id, productId: req.body.productId }
