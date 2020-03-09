@@ -1,30 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 import Product from "./product";
 import Fade from "react-reveal/Fade";
 import { fetchUsers } from "../store/users";
+import { editedUser } from "../store/user";
+import { Link } from "react-router-dom";
 
 const AdminUsers = props => {
-  // const dispatch = useDispatch();
-  // const users = useSelector(state => state.users);
-  // useEffect(() => {
-  //   dispatch(fetchUsers());
-  // }, []);
-
   const user = props.user;
-  // console.log(user);
 
   return (
-    <div className="justify-content-center m-2">
-      <div className="d-inline-block">
+    <div>
+      <li className="list-group-item">
         <Fade>
-          <div className="align-content-around flex-wrap row m-2">
-            <h1>{user.email}</h1>
-            <h5>Admin status: {user.isAdmin ? "admin" : "not admin"}</h5>
-          </div>
+          <Link to={`/users/${user.id}`}>
+            <h5>{user.email}</h5>
+          </Link>
+          <h5>Admin status: {user.isAdmin ? "admin" : "not admin"}</h5>
         </Fade>
-      </div>
+      </li>
     </div>
   );
 };

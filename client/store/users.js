@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const SHOW_USERS = "SHOW_USERS";
+const DELETE_USER = "DELETE_USER";
 
 const showUsers = users => ({ type: SHOW_USERS, users });
+const deleteUser = id => ({ type: DELETE_USER, id });
 
 export const fetchUsers = () => async dispatch => {
   try {
@@ -13,10 +15,23 @@ export const fetchUsers = () => async dispatch => {
   }
 };
 
+export const deletedUser = id => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/users/${id}`);
+      dispatch(deleteUser(id));
+    } catch (err) {
+      console.error("Error in deleteUser thunk", err);
+    }
+  };
+};
+
 export default function(users = [], action) {
   switch (action.type) {
     case SHOW_USERS:
       return action.users;
+    case DELETE_USER:
+      return users.filter(user => user.id !== action.id);
     default:
       return users;
   }
