@@ -24,26 +24,87 @@ const AdminHome = () => {
 
   return (
     <div>
-      <div className="justify-content-center m-2">
-        <div className="d-inline-block"></div>
-        <Fade>
-          <div className="align-content-around flex-wrap row m-2">
-            <h1>HELLO ADMIN</h1>
-            <div className="row">
-              <button type="button" onClick={handleUsersClick}>
-                Users
-              </button>
-              <button type="button" onClick={handleProductsClick}>
-                Products
-              </button>
-            </div>
+      <Fade>
+        <div className="justify-content-center m-2">
+          <ul className="nav nav-tabs" id="list-tab" role="tablist">
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+              >
+                Home
+              </a>
+            </li>
 
-            {first25.map(user => {
-              return <AdminUsers key={user.id} user={user} />;
-            })}
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                id="home-tab"
+                data-toggle="tab"
+                href="#users"
+                role="tab"
+                aria-controls="users"
+                aria-selected="true"
+                onClick={handleUsersClick}
+              >
+                Users
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                id="home-tab"
+                data-toggle="tab"
+                href="#products"
+                role="tab"
+                aria-controls="products"
+                aria-selected="true"
+                onClick={handleProductsClick}
+              >
+                Products
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="tab-content" id="tab-content">
+          <div
+            className="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <h1>ADMIN HOMEPAGE DOGG</h1>
           </div>
-        </Fade>
-      </div>
+          <div
+            className="tab-pane fade show"
+            id="users"
+            role="tabpanel"
+            aria-labelledby="user-tab"
+          >
+            <div className="card">
+              <ul className="list-group list-group-flush">
+                {first25.map(user => {
+                  return <AdminUsers key={user.id} user={user} />;
+                })}
+              </ul>
+            </div>
+          </div>
+          <div
+            className="tab-pane fade show "
+            id="products"
+            role="tabpanel"
+            aria-labelledby="products-tab"
+          >
+            <h1>THIS A PRODUCTPAGE DOGG</h1>
+          </div>
+        </div>
+      </Fade>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 import Product from "./product";
@@ -12,19 +12,26 @@ const AdminUsers = props => {
   //   dispatch(fetchUsers());
   // }, []);
 
+  const [showEdit, setShowEdit] = useState(false);
+
   const user = props.user;
   console.log(user);
 
+  const onEditClick = () => {
+    setShowEdit(!showEdit);
+  };
+
   return (
-    <div className="justify-content-center m-2">
-      <div className="d-inline-block">
+    <div>
+      <li className="list-group-item">
         <Fade>
-          <div className="align-content-around flex-wrap row m-2">
-            <h1>{user.email}</h1>
-            <h5>Admin status: {user.isAdmin ? "admin" : "not admin"}</h5>
-          </div>
+          <h5>{user.email}</h5>
+          <h5>Admin status: {user.isAdmin ? "admin" : "not admin"}</h5>
+          <button type="submit" onClick={onEditClick}>
+            Edit User
+          </button>
         </Fade>
-      </div>
+      </li>
     </div>
   );
 };
