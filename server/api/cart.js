@@ -4,7 +4,7 @@ const { userCheck } = require("../api/middleware");
 module.exports = router;
 
 router.get("/:userId", userCheck, async (req, res, next) => {
-  console.log("req.user", req.user.id);
+  console.log("req.session", req.session);
   try {
     const userCart = await Order.findOne({
       where: { userId: req.params.userId, status: "pending" },
