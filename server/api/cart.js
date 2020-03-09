@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const { Product, Order, User, OrderItem } = require("../db/models");
-const { userCheck } = require("../api/middleware");
+const { loggedIn } = require("../api/middleware");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
-  console.log("req.session", req.user);
+  // console.log(req.session.user);
   try {
     const userCart = await Order.findOne({
-      where: { userId: req.user.id, status: "pending" },
+      where: { userId: req.session.user.id, status: "pending" },
       include: { model: Product, order: [["id", "ASC"]] }
     });
     if (userCart) {
@@ -20,10 +20,10 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.put("/addItem", async (req, res, next) => {
+router.put("/addItem", loggedIn, async (req, res, next) => {
   try {
     let userCart = await Order.findOne({
-      where: { userId: req.user.id, status: "pending" }
+      where: { userId: req.session.user.id, status: "pending" }
     });
     if (userCart) {
       const product = await Product.findByPk(req.body.productId);
@@ -51,7 +51,8 @@ router.put("/addItem", async (req, res, next) => {
       res.json(updatedCart);
     } else {
       let newCart = await Order.create();
-      let user = await User.findByPk(req.user.id);
+      let user = await User.findByPk(req.session.user.id);
+      console.log(user);
       await user.addOrder(newCart);
       const product = await Product.findByPk(req.body.productId);
       await OrderItem.create({
@@ -76,7 +77,7 @@ router.put("/removeItem", async (req, res, next) => {
   try {
     // console.log("in Route");
     let userCart = await Order.findOne({
-      where: { userId: req.user.id, status: "pending" }
+      where: { userId: req.session.user.id, status: "pending" }
     });
     const orderItem = await OrderItem.findOne({
       where: { orderId: userCart.id, productId: req.body.productId }

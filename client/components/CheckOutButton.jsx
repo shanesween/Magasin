@@ -9,7 +9,7 @@ const CheckOut = props => {
   const history = useHistory();
   let cartId = props.cartId;
   let total = props.total;
-  console.log(cartId);
+  // console.log(cartId);
   const dispatch = useDispatch();
   async function handleToken(token) {
     token.cartId = cartId;

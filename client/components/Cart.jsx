@@ -82,7 +82,7 @@ const Cart = () => {
                 </div>
                 {/* checkout needs to be passed in total and cartId */}
                 {cart.products && (
-                  <CheckOut cartId={cart} total={cartTotal.toFixed(2)} />
+                  <CheckOut cartId={cart.id} total={cartTotal.toFixed(2)} />
                 )}
               </div>
             </div>
