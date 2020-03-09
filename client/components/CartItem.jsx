@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProduct } from '../store/cart';
 import RemoveButton from './RemoveButton';
 import Quantity from './Quantity';
 
 const CartItem = ({ cartItem }) => {
   const [quantity, setQuantity] = useState(cartItem.orderItem.quantity);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    dispatch(updateProduct(user.id, cartItem.id, quantity));
+  };
+
+  useEffect(() => handleSubmit(), [quantity]);
 
   return (
     <div style={{ minWidth: '96%' }}>
@@ -40,6 +50,7 @@ const CartItem = ({ cartItem }) => {
                   cartItem={cartItem}
                   quantity={quantity}
                   setQuantity={setQuantity}
+                  handleSubmit={handleSubmit}
                 />
               </div>
             </div>
@@ -55,9 +66,7 @@ const CartItem = ({ cartItem }) => {
           <div className='col-xs-1'>
             <div className='card-body'>
               <label className='cartItem_priceLabel'>Item Total</label>
-              <div className='cartItem_price'>
-                ${cartItem.price * quantity}
-              </div>
+              <div className='cartItem_price'>${cartItem.price * quantity}</div>
             </div>
           </div>
         </div>
