@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 //ACTION TYPES
 
-const SET_PRODUCT = 'SET_PRODUCT';
-const UPDATE_PRODUCT = 'UPATE_PRODUCT';
+const SET_PRODUCT = "SET_PRODUCT";
+const UPDATE_PRODUCT = "UPATE_PRODUCT";
 
 // ACTION CREATORS
 
@@ -27,11 +27,11 @@ export const editedProduct = (id, productParams) => {
   return async dispatch => {
     try {
       const { data } = await axios.put(`/api/products/${id}`, {
-        productParams,
+        productParams
       });
       dispatch(setProduct(data));
     } catch (err) {
-      console.error('Error in editUser thunk', err);
+      console.error("Error in editProduct thunk", err);
     }
   };
 };

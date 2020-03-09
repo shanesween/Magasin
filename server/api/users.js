@@ -9,6 +9,7 @@ router.get("/", checkAdmin, async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
+      order: [["id", "ASC"]],
       attributes: ["id", "email", "isAdmin"]
     });
     res.json(users);
@@ -17,10 +18,10 @@ router.get("/", checkAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:singleUserId", async (req, res, next) => {
   try {
-    const user = await User.findbyPk(req.params.userId);
-    res.json(user);
+    const singleUser = await User.findByPk(req.params.singleUserId);
+    res.json(singleUser);
   } catch (err) {
     next(err);
   }
@@ -28,7 +29,7 @@ router.get("/:userId", async (req, res, next) => {
 
 router.put("/:userId", async (req, res, next) => {
   try {
-    const user = await User.findbyPk(req.params.userId);
+    const user = await User.findByPk(req.params.userId);
     const updatedUser = await user.update(req.body);
     res.json(updatedUser);
   } catch (err) {
