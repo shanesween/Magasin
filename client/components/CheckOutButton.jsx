@@ -23,7 +23,7 @@ const CheckOut = props => {
     <StripeCheckout
       stripeKey="pk_test_teWRja4PyjtX2iWI4KrEqw6x"
       token={handleToken}
-      amount={props.total * 100000}
+      amount={props.total * 100}
       name="CofVeve"
       billingAddress
       shippingAddress

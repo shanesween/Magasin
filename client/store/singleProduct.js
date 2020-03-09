@@ -35,6 +35,15 @@ export const editedProduct = (id, productParams) => {
     }
   };
 };
+export const createReview = review => {
+  return async dispatch => {
+    try {
+      let { data } = await axios.put(`/api/reviews/`, { review });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 // REDUCER
 

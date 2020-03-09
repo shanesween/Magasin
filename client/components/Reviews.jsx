@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import SingleReview from './SingleReview';
+import ReviewsForm from './ReviewForm';
 
 const Review = props => {
   const reviews = props.product.reviews;
@@ -16,9 +17,10 @@ const Review = props => {
     }
     return bar;
   };
-  if (reviews) {
+  if (reviews && reviews.length !== 0) {
     let count = 0;
     let bad = 0;
+    console.log('reviews', reviews.length);
 
     let good = 0;
     // count the number of bad reviews and good reviews
@@ -43,23 +45,15 @@ const Review = props => {
     let badBar = barStatus(badProgress, negativeBar);
     let goodBar = barStatus(goodProgress, positiveBar);
 
-    console.log('reviews for product', reviews);
+    let averageRating = Math.floor(count / reviews.length);
+    // eslint-disable-next-line no-unused-vars
+    let stars = '';
+    while (averageRating !== 0) {
+      stars += '⭐️';
+      averageRating--;
+    }
+
     return (
-      // <div className="card">
-      //   <div className="card-body">
-      //     <h5 className="card-title">
-      //       {reviews.length
-      //         ? `OverAll Rating: ${count / reviews.length} `
-      //         : 'No Reviews'}
-      //     </h5>
-      //     <div id="stars-existing" className="starrr" data-rating="4"></div>
-      //     <div>
-      //       {reviews.map(review => (
-      //         <SingleReview review={review} key={review.id} />
-      //       ))}
-      //     </div>
-      //   </div>
-      // </div>
       <div className="container">
         <div className="card shadow-sm my-4">
           <div className="row">
@@ -67,6 +61,10 @@ const Review = props => {
               <div className="card-body">
                 <h2 className="card-title font-weight-light mb-3">Reviews</h2>
                 <span className="mt-4 display-4">{reviews.length}</span>
+                <h2 className="card-title font-weight-light mb-3">
+                  Overall Rating:
+                </h2>
+                <span className="mt-4 display-5">{stars}</span>
 
                 <div className="clearfix"></div>
                 <button
@@ -79,7 +77,7 @@ const Review = props => {
                 </button>
               </div>
             </div>
-            <div className="col col-md-auto p-0 mx-3 mx-lg-0 border-bottom border-right border-light"></div>
+            <div className="col col-md-auto p-0 mx-3 mx-lg-0 border-bottom border-right border-light  "></div>
             <div className="col-md">
               <ul className="list-unstyled pr-3">
                 <li className="p-3">
@@ -88,13 +86,15 @@ const Review = props => {
                       <i className="fa fa-smile"></i>
                     </span>
                     <div className="ml-2">
-                      <h3 className="card-title font-weight-light">Positive</h3>
+                      <h3 className="card-title font-weight-light">
+                        Positive 😃👍✅
+                      </h3>
                       <h6 className="font-weight-light">{good}</h6>
                     </div>
                   </div>
                   <div className="progress">
                     <div
-                      className={`progress-bar bg-success w-${goodBar}`}
+                      className={`progress-bar progress-bar-striped progress-bar-animated bg-success   w-${goodBar}`}
                       role="progressbar"
                       aria-valuenow={(good / reviews.length) * 100}
                       aria-valuemin="0"
@@ -108,7 +108,9 @@ const Review = props => {
                       <i className="fa fa-frown"></i>
                     </span>
                     <div className="ml-2">
-                      <h3 className="card-title font-weight-light">Negative</h3>
+                      <h3 className="card-title font-weight-light">
+                        Negative 🙁👎❌
+                      </h3>
                       <h6 className="font-weight-light">{bad}</h6>
                     </div>
                   </div>
@@ -128,69 +130,26 @@ const Review = props => {
             </div>
             <div className="col-12">
               <div className="p-3 collapse" id="reviews">
-                <div className="review">
-                  <h6>
-                    Mike, <em>Boston</em> 5
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                  </h6>
-                  <p>
-                    I really like how this fits and looks. I have purchased
-                    other similar products, but this is the best!
-                  </p>
-                </div>
-                <div className="review">
-                  <h6>
-                    James, <em>Portsmouth</em> 5
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                  </h6>
-                  <p>
-                    After buying another cheap knock-off that broke, I realized
-                    I should have purchased this one first. I would recommend.
-                  </p>
-                </div>
-                <div className="review">
-                  <h6>
-                    Judy, <em>Turntown</em> 4.5
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star-half text-warning"></i>
-                  </h6>
-                  <p>
-                    Overall I was please with my purchase. I would have given it
-                    a 5, but found the color to be inaccurate.
-                  </p>
-                </div>
-                <div className="review">
-                  <h6>
-                    Mark, <em>Smithtown</em>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                    <i className="fa fa-star text-warning"></i>
-                  </h6>
-                  <p>
-                    Unfortunately this did not work, and wasn't what I expected
-                    in terms of quality and fit. I would not buy this again.
-                  </p>
-                </div>
+                {reviews.map((review, idx) => (
+                  <SingleReview review={review} key={idx} />
+                ))}
+                <ReviewsForm product={props.product} />
               </div>
             </div>
           </div>
         </div>
       </div>
     );
-  } else {
+  } else if (reviews === undefined) {
     console.log(reviews);
     return <h4> Loading</h4>;
+  } else {
+    return (
+      <div className="container">
+        <h1> Be the First to Leave a Review!</h1>
+        <ReviewsForm product={props.product} />;
+      </div>
+    );
   }
 };
 

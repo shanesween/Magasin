@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct, editedProduct } from '../store/singleProduct';
+import axios from 'axios';
 
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
@@ -24,13 +25,13 @@ const AdminEditProduct = props => {
       dispatch(fetchProduct(props.match.params.productId));
     }
   };
+
   const handleInputChange = event => {
     event.persist();
     setInputs(input => ({
       ...input,
       [event.target.name]: event.target.value,
     }));
-    console.log('input', inputs);
   };
 
   // const handleSubmit = () => {
@@ -125,6 +126,10 @@ const AdminEditProduct = props => {
         <button type="submit" className="btn btn-primary">
           Submit Changes
         </button>
+        <span> </span>
+        <a className="btn btn-secondary" href="/test" role="button">
+          Back
+        </a>
       </form>
     </>
   );
