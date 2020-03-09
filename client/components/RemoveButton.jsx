@@ -11,7 +11,7 @@ const RemoveButton = props => {
     dispatch(removeProduct(user.id, props.product.id));
   };
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <button

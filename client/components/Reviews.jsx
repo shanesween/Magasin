@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import SingleReview from './SingleReview';
-import ReviewsForm from './ReviewForm';
+import React, { useEffect } from "react";
+import SingleReview from "./SingleReview";
+import ReviewsForm from "./ReviewForm";
 
 const Review = props => {
   const reviews = props.product.reviews;
@@ -20,7 +20,7 @@ const Review = props => {
   if (reviews && reviews.length !== 0) {
     let count = 0;
     let bad = 0;
-    console.log('reviews', reviews.length);
+    console.log("reviews", reviews.length);
 
     let good = 0;
     // count the number of bad reviews and good reviews
@@ -47,9 +47,9 @@ const Review = props => {
 
     let averageRating = Math.floor(count / reviews.length);
     // eslint-disable-next-line no-unused-vars
-    let stars = '';
+    let stars = "";
     while (averageRating !== 0) {
-      stars += '⭐️';
+      stars += "⭐️";
       averageRating--;
     }
 

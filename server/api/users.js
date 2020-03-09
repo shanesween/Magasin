@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../db/models");
-const checkAdmin = require("./middleware");
+const { checkAdmin } = require("./middleware");
 module.exports = router;
 
 router.get("/", checkAdmin, async (req, res, next) => {
