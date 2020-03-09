@@ -43,7 +43,7 @@ export const updateProduct = (userId, productId, quantity) => {
       });
       dispatch(setCart(data));
     } catch (err) {
-      console.error('Error in addProduct thunk', err);
+      console.error('Error in updateProduct thunk', err);
     }
   };
 };
