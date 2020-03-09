@@ -16,7 +16,7 @@ const AddToCartButton = props => {
     <div>
       <button
         type="button"
-        className="btn btn-secondary"
+        className="btn btn-secondary btn-block"
         data-toggle="modal"
         data-target="#cartModal"
         onClick={onClick}
@@ -49,7 +49,7 @@ const AddToCartButton = props => {
         <button
           id="toggleCart"
           type="button"
-          className="btn btn-info"
+          className="btn btn-info btn-block"
           onClick={onClick}
           disabled
           style={{ pointerEvents: "none" }}

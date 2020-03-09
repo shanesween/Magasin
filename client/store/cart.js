@@ -20,7 +20,7 @@ export const fetchCart = userId => {
   };
 };
 
-export const addProduct = (userId, productId, quantity = 1) => {
+export const addProduct = (userId, productId, quantity) => {
   return async dispatch => {
     try {
       const { data } = await axios.put(`/api/cart/addItem/${userId}`, {
