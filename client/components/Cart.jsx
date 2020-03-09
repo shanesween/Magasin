@@ -27,13 +27,13 @@ const Cart = () => {
       .reduce((acc, prod) => acc + +prod.price * prod.orderItem.quantity, 0)
       .toFixed(2);
 
-  const taxRate = 0.1025;
+  let taxRate = 0.1025;
 
   const taxAmount = subTotal * taxRate;
 
   const cartTotal = +subTotal + +taxAmount;
 
-  return cart.products ? (
+  return cart.products && cart.products.length ? (
     <div className="container-fluid" style={{ width: "100%" }}>
       <Fade cascade>
         <div className="d-flex justify-content-between mt-2 mb-2 ml-4 mr-4">
@@ -98,7 +98,6 @@ const Cart = () => {
       </Fade>
     </div>
   );
-  // return <div>Henlo</div>;
 };
 
 export default Cart;

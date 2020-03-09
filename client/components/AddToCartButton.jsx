@@ -7,7 +7,7 @@ import ProductAddedModal from "./ProductAddedModal";
 const AddToCartButton = props => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-
+  // console.log("quantity", props.quantity);
   const onClick = () => {
     dispatch(addProduct(user.id, props.product.id, props.quantity));
   };

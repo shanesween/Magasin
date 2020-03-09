@@ -24,6 +24,7 @@ const Product = props => {
           key={props.product.id}
           product={props.product}
           stock={props.product.stock}
+          // quantity={1}
         />
       </div>
     </div>

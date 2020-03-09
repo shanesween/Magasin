@@ -4,7 +4,7 @@ const { userCheck } = require("../api/middleware");
 module.exports = router;
 
 router.get("/:userId", userCheck, async (req, res, next) => {
-  // console.log("req.user", req.user.id);
+  console.log("req.user", req.user.id);
   try {
     const userCart = await Order.findOne({
       where: { userId: req.params.userId, status: "pending" },
@@ -31,7 +31,7 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
         where: { productId: product.id, orderId: userCart.id }
       });
       if (orderItem) {
-        orderItem.quantity++;
+        orderItem.quantity = await req.body.quantity;
         await orderItem.save();
       } else {
         await OrderItem.create({

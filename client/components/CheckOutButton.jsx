@@ -1,21 +1,27 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import { useHistory } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../store/cart";
 
 const CheckOut = props => {
+  const history = useHistory();
   let cartId = props.cartId;
   let total = props.total;
+  // console.log(props.history);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   async function handleToken(token) {
     token.cartId = cartId;
-    token.total = 1;
+    token.total = total;
     let { data } = await axios.post("/api/checkout", { token });
     //returns {status: success}
-
-    // console.log(token, addresses);
-    // console.log(props.cart);
+    console.log("DATA", data);
+    if (data.status === "success") {
+      dispatch(fetchCart(user.id));
+      history.push("/home");
+    }
   }
 
   return (

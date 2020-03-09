@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const SET_CART = 'SET_CART';
+const SET_CART = "SET_CART";
 
 const setCart = cart => {
   return {
@@ -15,7 +15,7 @@ export const fetchCart = userId => {
       const { data } = await axios.get(`/api/cart/${userId}`);
       dispatch(setCart(data));
     } catch (err) {
-      console.error('Error in fetchCart thunk', err);
+      console.error("Error in fetchCart thunk", err);
     }
   };
 };
@@ -29,7 +29,7 @@ export const addProduct = (userId, productId, quantity = 1) => {
       });
       dispatch(setCart(data));
     } catch (err) {
-      console.error('Error in addProduct thunk', err);
+      console.error("Error in addProduct thunk", err);
     }
   };
 };
@@ -43,7 +43,7 @@ export const updateProduct = (userId, productId, quantity) => {
       });
       dispatch(setCart(data));
     } catch (err) {
-      console.error('Error in addProduct thunk', err);
+      console.error("Error in updateProduct thunk", err);
     }
   };
 };
@@ -56,7 +56,7 @@ export const removeProduct = (userId, productId) => {
       });
       dispatch(setCart(data));
     } catch (err) {
-      console.error('Error in removeProduct thunk', err);
+      console.error("Error in removeProduct thunk", err);
     }
   };
 };
