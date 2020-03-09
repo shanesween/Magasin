@@ -17,7 +17,7 @@ const CartItem = ({ cartItem }) => {
   useEffect(() => handleSubmit(), [quantity]);
 
   return (
-    <div style={{ minWidth: '96%' }}>
+    <div style={{ minWidth: '96%', opacity: '0.95' }}>
       <div className='card mb-3' style={{ minWidth: '90%' }}>
         <div className='row no-gutters' style={{ height: '12rem' }}>
           {/* product image column */}

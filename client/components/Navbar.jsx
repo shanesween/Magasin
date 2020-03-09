@@ -7,7 +7,7 @@ import CheckOut from "./CheckOutButton";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-brand-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
       <Link
         className="navbar-brand"
         style={{ color: "#eeeeee", textDecoration: "inherit" }}
