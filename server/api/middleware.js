@@ -1,4 +1,4 @@
-const { User, OrderItem, Product, Session } = require("../db/models");
+const { User, Order, OrderItem, Product, Session } = require("../db/models");
 
 const checkAdmin = async (req, res, next) => {
   if (!req.session.passport) {
@@ -13,22 +13,20 @@ const checkAdmin = async (req, res, next) => {
   }
 };
 
-const loggedIn = async (req, res, next) => {
-  if (!req.session.user) {
-    console.log("req.session.id", req.session.id);
-    let user = await User.create({
-      googleId: req.session.id
-    });
-    console.log("user", user);
-    req.session.user = user;
-    next();
-  } else {
-    // let user = await User.findByPk(req.user.id)
-    // user.googleId = req.session.id
-    // await user.save()
-    next();
-  }
-};
+// const loggedIn = async (req, res, next) => {
+//   if (!req.user) {
+//     if (!req.session.cart) {
+//       let order = await Order.create();
+//       req.session.cartId = order.id;
+//     }
+//     next();
+//   } else {
+//     // let user = await User.findByPk(req.user.id)
+//     // user.googleId = req.session.id
+//     // await user.save()
+//     next();
+//   }
+// };
 
 // const stockCheck = async (req, res, next) => {
 //   const { token } = req.body;
@@ -51,4 +49,4 @@ const loggedIn = async (req, res, next) => {
 //   }
 // };
 
-module.exports = { checkAdmin, loggedIn };
+module.exports = { checkAdmin };

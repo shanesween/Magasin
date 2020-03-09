@@ -9,11 +9,12 @@ const CartItem = ({ cartItem }) => {
   const [quantity, setQuantity] = useState(cartItem.orderItem.quantity);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleChange = quantity => {
+    setQuantity(quantity);
     dispatch(updateProduct(cartItem.id, quantity));
   };
 
-  useEffect(() => handleSubmit(), [quantity]);
+  // useEffect(() => handleSubmit(), [quantity]);
 
   return (
     <div style={{ minWidth: "96%" }}>
@@ -54,7 +55,7 @@ const CartItem = ({ cartItem }) => {
                   cartItem={cartItem}
                   quantity={quantity}
                   setQuantity={setQuantity}
-                  handleSubmit={handleSubmit}
+                  handleChange={handleChange}
                 />
               </div>
             </div>
