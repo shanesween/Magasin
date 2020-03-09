@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
-// import Product from "./product";
 import Fade from "react-reveal/Fade";
 import { fetchUsers } from "../store/users";
 import AdminUsers from "./AdminUsers";
-import { fetchProduct } from "../store/singleProduct";
 
 const AdminHome = () => {
   const dispatch = useDispatch();
@@ -13,7 +11,7 @@ const AdminHome = () => {
   const products = useSelector(state => state.products);
 
   const handleProductsClick = () => {
-    dispatch(fetchProduct(products));
+    dispatch(fetchProducts(products));
   };
 
   const handleUsersClick = () => {
@@ -79,7 +77,7 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <h1>ADMIN HOMEPAGE DOGG</h1>
+            <h1>ADMIN HOMEPAGE</h1>
           </div>
           <div
             className="tab-pane fade show"
@@ -101,7 +99,7 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="products-tab"
           >
-            <h1>THIS A PRODUCTPAGE DOGG</h1>
+            <h1>THIS A PRODUCTPAGE</h1>
           </div>
         </div>
       </Fade>
