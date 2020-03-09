@@ -12,4 +12,4 @@ export { default as CheckOut } from "./CheckOutButton";
 export { default as Cart } from "./Cart";
 export { default as NotFound } from "./NotFound";
 export { default as AdminHome } from "./AdminHome";
-export { default as AdminSingleUser } from "./AdminSingleUser";
+export { default as AdminEditUser } from "./AdminEditUser";

@@ -19,7 +19,7 @@ router.get("/", checkAdmin, async (req, res, next) => {
 
 router.get("/:singleUserId", async (req, res, next) => {
   try {
-    const singleUser = await User.findbyId(req.params.singleUserId);
+    const singleUser = await User.findByPk(req.params.singleUserId);
     res.json(singleUser);
   } catch (err) {
     next(err);

@@ -5,13 +5,16 @@ import { fetchSingleUser } from "../store/singleUser";
 const AdminSingleUser = props => {
   const singleUser = useSelector(state => state.singleUser);
   const dispatch = useDispatch();
-  console.log(singleUser);
-  console.log(props.match.params.userId);
 
   useEffect(() => {
     dispatch(fetchSingleUser(props.match.params.userId));
-    console.log("singleUser", singleUser);
   }, []);
+
+  const [inputs, setInputs] = useState({});
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
 
   return <h1>{singleUser.email}</h1>;
 };
