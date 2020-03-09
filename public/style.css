@@ -18,6 +18,10 @@ body {
   margin: 0;
   width: 100vw;
   overflow: visible;
+  /* background: url('https://cdn11.bigcommerce.com/s-67d81/images/stencil/2048x2048/products/2902/6881/106413__74328.1561361573.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 a {

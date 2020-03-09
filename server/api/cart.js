@@ -1,14 +1,14 @@
-const router = require("express").Router();
-const { Product, Order, User, OrderItem } = require("../db/models");
-const { userCheck } = require("../api/middleware");
+const router = require('express').Router();
+const { Product, Order, User, OrderItem } = require('../db/models');
+const { userCheck } = require('../api/middleware');
 module.exports = router;
 
-router.get("/:userId", userCheck, async (req, res, next) => {
-  console.log("req.session", req.session);
+router.get('/:userId', userCheck, async (req, res, next) => {
+  console.log('req.session', req.session);
   try {
     const userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" },
-      include: { model: Product, order: [["id", "ASC"]] }
+      where: { userId: req.params.userId, status: 'pending' },
+      include: { model: Product, order: [['id', 'ASC']] }
     });
     if (userCart) {
       res.json(userCart);
@@ -20,10 +20,10 @@ router.get("/:userId", userCheck, async (req, res, next) => {
   }
 });
 
-router.put("/addItem/:userId", userCheck, async (req, res, next) => {
+router.put('/addItem/:userId', userCheck, async (req, res, next) => {
   try {
     let userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" }
+      where: { userId: req.params.userId, status: 'pending' }
     });
     if (userCart) {
       const product = await Product.findByPk(req.body.productId);
@@ -39,13 +39,13 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
         await OrderItem.create({
           productId: product.id,
           orderId: userCart.id,
-          quantity: req.body.quantity
+          quantity: req.body.quantity ? req.body.quantity : 1
         });
       }
       let updatedCart = await Order.findByPk(userCart.id, {
         include: {
           model: Product,
-          order: [["id", "ASC"]]
+          order: [['id', 'ASC']]
         }
       });
       res.json(updatedCart);
@@ -62,7 +62,7 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
       let updatedCart = await Order.findByPk(newCart.id, {
         include: {
           model: Product,
-          order: [["id", "ASC"]]
+          order: [['id', 'ASC']]
         }
       });
       res.json(updatedCart);
@@ -72,18 +72,18 @@ router.put("/addItem/:userId", userCheck, async (req, res, next) => {
   }
 });
 
-router.put("/removeItem/:userId", async (req, res, next) => {
+router.put('/removeItem/:userId', async (req, res, next) => {
   try {
     // console.log("in Route");
     let userCart = await Order.findOne({
-      where: { userId: req.params.userId, status: "pending" }
+      where: { userId: req.params.userId, status: 'pending' }
     });
     const orderItem = await OrderItem.findOne({
       where: { orderId: userCart.id, productId: req.body.productId }
     });
     await orderItem.destroy();
     let updatedCart = await Order.findByPk(userCart.id, {
-      include: { model: Product, order: [["id", "ASC"]] }
+      include: { model: Product, order: [['id', 'ASC']] }
     });
 
     res.json(updatedCart);
