@@ -1,6 +1,6 @@
-import React from "react";
-import { removeProduct } from "../store/cart";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { removeProduct } from '../store/cart';
+import { useDispatch, useSelector } from 'react-redux';
 
 const RemoveButton = props => {
   // const cart = useSelector(state => state.cart);

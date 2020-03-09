@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
+// import Product from "./product";
 import Fade from "react-reveal/Fade";
 import { fetchUsers } from "../store/users";
 import AdminUsers from "./AdminUsers";
+import AdminProducts from "./AdminProducts";
 
 const AdminHome = () => {
   const dispatch = useDispatch();
@@ -11,7 +13,7 @@ const AdminHome = () => {
   const products = useSelector(state => state.products);
 
   const handleProductsClick = () => {
-    dispatch(fetchProducts(products));
+    dispatch(fetchProducts());
   };
 
   const handleUsersClick = () => {
@@ -19,6 +21,8 @@ const AdminHome = () => {
   };
 
   let first25 = users.slice(0, 25);
+  let products25 = products.slice(0, 25);
+  console.log("products", products);
 
   return (
     <div>
@@ -92,14 +96,15 @@ const AdminHome = () => {
                 })}
               </ul>
             </div>
+
+            {/* {first25.map(user => {
+              return <AdminUsers key={user.id} user={user} />;
+            })} */}
           </div>
-          <div
-            className="tab-pane fade show "
-            id="products"
-            role="tabpanel"
-            aria-labelledby="products-tab"
-          >
-            <h1>THIS A PRODUCTPAGE</h1>
+          <div>
+            {products25.map(product => (
+              <AdminProducts key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </Fade>
