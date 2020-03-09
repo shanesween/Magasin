@@ -1,18 +1,17 @@
 import axios from "axios";
 
 //ACTION TYPES
-
 const SET_PRODUCT = "SET_PRODUCT";
 const UPDATE_PRODUCT = "UPATE_PRODUCT";
 
 // ACTION CREATORS
-
 const setProduct = product => {
   return { type: SET_PRODUCT, product };
 };
-const updateProduct = product => ({ type: UPDATE_PRODUCT, product });
-// THUNK CREATORS
 
+const updateProduct = product => ({ type: UPDATE_PRODUCT, product });
+
+// THUNK CREATORS
 export const fetchProduct = id => {
   return async dispatch => {
     try {
@@ -23,18 +22,20 @@ export const fetchProduct = id => {
     }
   };
 };
+
 export const editedProduct = (id, productParams) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(`/api/products/${id}`, {
+      const { data } = await axios.put(`/api/products/admin/${id}`, {
         productParams
       });
-      dispatch(setProduct(data));
+      dispatch(updateProduct(data));
     } catch (err) {
       console.error("Error in editProduct thunk", err);
     }
   };
 };
+
 export const createReview = review => {
   return async dispatch => {
     try {
@@ -47,12 +48,16 @@ export const createReview = review => {
 
 // REDUCER
 
-export default function(state = {}, action) {
+export default function(product = {}, action) {
   switch (action.type) {
     case SET_PRODUCT:
       return action.product;
 
+    case UPDATE_PRODUCT:
+      if (product && product.id === action.product.id) {
+        return action.product;
+      }
     default:
-      return state;
+      return product;
   }
 }

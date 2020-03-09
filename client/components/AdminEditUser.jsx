@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser, editedUser } from "../store/singleUser";
 
-const AdminSingleUser = props => {
+const AdminEditUser = props => {
   const singleUser = useSelector(state => state.singleUser);
   const dispatch = useDispatch();
 
@@ -28,24 +28,20 @@ const AdminSingleUser = props => {
     }));
   };
 
+  console.log(singleUser.reviews);
+  const reviews = singleUser.reviews;
+
   return (
-    <>
-      <h4>Edit User</h4>
-      <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              className="form-control"
-              name="email"
-              id="email"
-              placeholder={singleUser.email}
-            />
-          </div>
+    <div className="card">
+      <div className="card-header">{singleUser.email}</div>
+      <div className="card-body">
+        <form onSubmit={handleSubmit}>
+          <h5 className="card-title">
+            {singleUser.isAdmin ? "Admin" : "Not Admin"}
+          </h5>
           <div className="form-group col-md-6">
             <label htmlFor="isAdmin" name="isAdmin">
-              Admin Status
+              Update Admin Status
             </label>
             <select
               className="custom-select mr-sm-2"
@@ -58,19 +54,63 @@ const AdminSingleUser = props => {
               <option value="False">Not Admin</option>
             </select>
           </div>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit Changes
-        </button>
-        <a className="btn btn-secondary" href="/admin" role="button">
-          Back
+          <button type="submit" className="btn btn-primary">
+            Submit Changes
+          </button>
+          <a className="btn btn-secondary" href="/admin" role="button">
+            Back
+          </a>
+        </form>
+      </div>
+      <p>
+        <a
+          className="btn btn-primary"
+          data-toggle="collapse"
+          href="#orderCollapse"
+          role="button"
+          aria-expanded="false"
+          aria-controls="orderCollapse"
+        >
+          Show Orders
         </a>
-      </form>
-    </>
+        <button
+          className="btn btn-primary"
+          type="button"
+          data-toggle="collapse"
+          data-target="#reviewCollapse"
+          aria-expanded="false"
+          aria-controls="reviewCollapse"
+        >
+          Show Reviews
+        </button>
+      </p>
+      <div className="row">
+        <div className="col">
+          <div className="collapse multi-collapse" id="orderCollapse">
+            <div className="card card-body">
+              <ul>Order 1</ul>
+              <ul>Order 2</ul>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="collapse multi-collapse" id="reviewCollapse">
+            <div className="card card-body">
+              <ul>Review 1</ul>
+              <ul>Review 2</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default AdminSingleUser;
+export default AdminEditUser;
+
+// {reviews.map(review => ({
+//   review
+// }))}
 
 // const dispatch = useDispatch();
 // const users = useSelector(state => state.user);
