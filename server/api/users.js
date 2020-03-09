@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../db/models");
+const { User, Review, Order } = require("../db/models");
 const { checkAdmin } = require("./middleware");
 module.exports = router;
 
@@ -10,7 +10,7 @@ router.get("/", checkAdmin, async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       order: [["id", "ASC"]],
-      attributes: ["id", "email", "isAdmin"]
+      attributes: ["id", "email", "isAdmin", "address"]
     });
     res.json(users);
   } catch (err) {
@@ -18,16 +18,18 @@ router.get("/", checkAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:singleUserId", async (req, res, next) => {
+router.get("/admin/:userId", checkAdmin, async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.singleUserId);
+    const singleUser = await User.findByPk(req.params.userId, {
+      include: [{ model: Review }, { model: Order }]
+    });
     res.json(singleUser);
   } catch (err) {
     next(err);
   }
 });
 
-router.put("/:userId", async (req, res, next) => {
+router.put("/admin/:userId", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     const updatedUser = await user.update(req.body);
@@ -37,7 +39,7 @@ router.put("/:userId", async (req, res, next) => {
   }
 });
 
-router.delete("/:userId", async (req, res, next) => {
+router.delete("/admin/:userId", async (req, res, next) => {
   try {
     await User.destroy({
       where: {

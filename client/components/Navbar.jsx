@@ -1,62 +1,70 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../store';
-import CheckOut from './CheckOutButton';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import CheckOut from "./CheckOutButton";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <nav className='navbar sticky-top navbar-expand-md navbar-dark bg-brand-dark'>
+    <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-brand-dark">
       <Link
-        className='navbar-brand'
-        style={{ color: '#eeeeee', textDecoration: 'inherit' }}
-        to='/home'
+        className="navbar-brand"
+        style={{ color: "#eeeeee", textDecoration: "inherit" }}
+        to="/home"
       >
         covfefe
       </Link>
       <button
-        style={{ outline: 'none' }}
-        className='navbar-toggler'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarToggler'
-        aria-controls='navbarToggler'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
+        style={{ outline: "none" }}
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarToggler"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <span className='navbar-toggler-icon' />
+        <span className="navbar-toggler-icon" />
       </button>
 
-      <div
-        className='collapse navbar-collapse'
-        id='navbarToggler'
-      >
+      <div className="collapse navbar-collapse" id="navbarToggler">
         {isLoggedIn ? (
-          <ul className='navbar-nav ml-auto'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/home'>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home">
                 home
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/cart'>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
                 cart
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='#' onClick={handleClick}>
+            <li className="nav-item">
+              <Link className="nav-link" to="#" onClick={handleClick}>
                 logout
               </Link>
             </li>
+            {isAdmin ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  admin
+                </Link>
+              </li>
+            ) : null}
           </ul>
         ) : (
-          <ul className='navbar-nav mr-auto'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/login'>login</Link>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">
+                login
+              </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/signup'>sign up</Link>
+            <li className="nav-item">
+              <Link className="nav-link" to="/signup">
+                sign up
+              </Link>
             </li>
           </ul>
         )}
@@ -70,7 +78,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin
   };
 };
 
@@ -89,5 +98,6 @@ export default connect(mapState, mapDispatch)(Navbar);
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired
 };
