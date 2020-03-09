@@ -4,9 +4,10 @@ import AddToCartButton from "./AddToCartButton";
 
 const Product = props => {
   return (
-    <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-      <div className="card mb-3" style={{ maxWidth: "18rem", height: "97%" }}>
-        <Link className="badge-dark" to={`/products/${props.product.id}`}>
+    <div className='col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3'>
+      <div className='card mb-3' style={{ maxWidth: '18rem', height: '97%' , opacity: '0.95' }}>
+        <Link className='badge-dark' to={`/products/${props.product.id}`}>
+
           <img
             src={props.product.imageUrl}
             className="card-img-top img-fluid"
