@@ -126,56 +126,56 @@ const Review = props => {
                 </li>
               </ul>
             </div>
-            <div class="col-12">
-              <div class="p-3 collapse" id="reviews">
-                <div class="review">
+            <div className="col-12">
+              <div className="p-3 collapse" id="reviews">
+                <div className="review">
                   <h6>
                     Mike, <em>Boston</em> 5
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
                   </h6>
                   <p>
                     I really like how this fits and looks. I have purchased
                     other similar products, but this is the best!
                   </p>
                 </div>
-                <div class="review">
+                <div className="review">
                   <h6>
                     James, <em>Portsmouth</em> 5
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
                   </h6>
                   <p>
                     After buying another cheap knock-off that broke, I realized
                     I should have purchased this one first. I would recommend.
                   </p>
                 </div>
-                <div class="review">
+                <div className="review">
                   <h6>
                     Judy, <em>Turntown</em> 4.5
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star-half text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star-half text-warning"></i>
                   </h6>
                   <p>
                     Overall I was please with my purchase. I would have given it
                     a 5, but found the color to be inaccurate.
                   </p>
                 </div>
-                <div class="review">
+                <div className="review">
                   <h6>
                     Mark, <em>Smithtown</em>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
-                    <i class="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
+                    <i className="fa fa-star text-warning"></i>
                   </h6>
                   <p>
                     Unfortunately this did not work, and wasn't what I expected

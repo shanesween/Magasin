@@ -28,13 +28,26 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
-router.put('/:productId', checkAdmin, async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.productId, {
-      include: [{ model: Review }],
-    });
-    res.json(product);
-  } catch (err) {
-    next(err);
-  }
+router.put('/:productId', function(req, res, next) {
+  console.log(req.body);
+  let newProduct = req.body.productParams;
+  Product.update(newProduct, {
+    where: { id: req.params.productId },
+    returning: true, // needed for affectedRows to be populated
+    plain: true, // makes sure that the returned instances are just plain objects
+  })
+    .then(function(rowsUpdated) {
+      res.json(rowsUpdated);
+    })
+    .catch(next);
+});
+
+router.delete('/:productId', checkAdmin, async (req, res, next) => {
+  Product.destroy({
+    where: {
+      id: req.params.userId,
+    },
+  })
+    .then(() => res.sendStatus(204))
+    .catch(err => next(err));
 });
