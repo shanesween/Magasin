@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleUser } from "../store/singleUser";
+import { fetchSingleUser, editedUser } from "../store/singleUser";
 
 const AdminSingleUser = props => {
   const singleUser = useSelector(state => state.singleUser);
@@ -14,9 +14,60 @@ const AdminSingleUser = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (e) {
+      dispatch(editedUser(singleUser.id, inputs));
+      dispatch(fetchSingleUser(props.match.params.userId));
+    }
   };
 
-  return <h1>{singleUser.email}</h1>;
+  const handleInputChange = e => {
+    e.persist();
+    setInputs(input => ({
+      ...input,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return (
+    <>
+      <h4>Edit User</h4>
+      <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              className="form-control"
+              name="email"
+              id="email"
+              placeholder={singleUser.email}
+            />
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="isAdmin" name="isAdmin">
+              Admin Status
+            </label>
+            <select
+              className="custom-select mr-sm-2"
+              onChange={handleInputChange}
+              name="isAdmin"
+              defaultValue={singleUser.isAdmin}
+            >
+              <option>Choose...</option>
+              <option value="True">Admin</option>
+              <option value="False">Not Admin</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit Changes
+        </button>
+        <a className="btn btn-secondary" href="/admin" role="button">
+          Back
+        </a>
+      </form>
+    </>
+  );
 };
 
 export default AdminSingleUser;

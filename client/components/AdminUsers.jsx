@@ -25,6 +25,3 @@ const AdminUsers = props => {
 };
 
 export default AdminUsers;
-
-{
-}

@@ -13,7 +13,7 @@ const AdminHome = () => {
   const products = useSelector(state => state.products);
 
   const handleProductsClick = () => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(products));
   };
 
   const handleUsersClick = () => {
@@ -22,7 +22,6 @@ const AdminHome = () => {
 
   let first25 = users.slice(0, 25);
   let products25 = products.slice(0, 25);
-  console.log("products", products);
 
   return (
     <div>
@@ -46,7 +45,7 @@ const AdminHome = () => {
             <li className="nav-item">
               <a
                 className="nav-link"
-                id="home-tab"
+                id="user-tab"
                 data-toggle="tab"
                 href="#users"
                 role="tab"
@@ -61,7 +60,7 @@ const AdminHome = () => {
             <li className="nav-item">
               <a
                 className="nav-link"
-                id="home-tab"
+                id="product-tab"
                 data-toggle="tab"
                 href="#products"
                 role="tab"
@@ -91,20 +90,25 @@ const AdminHome = () => {
           >
             <div className="card">
               <ul className="list-group list-group-flush">
-                {first25.map(user => {
-                  return <AdminUsers key={user.id} user={user} />;
-                })}
+                {first25.map(user => (
+                  <AdminUsers key={user.id} user={user} />
+                ))}
               </ul>
             </div>
-
-            {/* {first25.map(user => {
-              return <AdminUsers key={user.id} user={user} />;
-            })} */}
           </div>
-          <div>
-            {products25.map(product => (
-              <AdminProducts key={product.id} product={product} />
-            ))}
+          <div
+            className="tab-pane fade show"
+            id="products"
+            role="tabpanel"
+            aria-labelledby="product-tab"
+          >
+            <div className="card">
+              <ul className="list-group list-group-flush">
+                {products25.map(product => (
+                  <AdminProducts key={product.id} product={product} />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </Fade>
@@ -113,7 +117,3 @@ const AdminHome = () => {
 };
 
 export default AdminHome;
-
-// {first25.map(product => {
-//   return <ProductAdmin key={product.id} product={product} />;
-// })}

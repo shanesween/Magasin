@@ -9,6 +9,7 @@ router.get("/", checkAdmin, async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
+      order: [["id", "ASC"]],
       attributes: ["id", "email", "isAdmin"]
     });
     res.json(users);
