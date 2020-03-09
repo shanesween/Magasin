@@ -14,6 +14,7 @@ import {
   CheckOut
 } from "./components";
 import { me } from "./store";
+import AdminEditProduct from "./components/AdminEditProduct";
 
 /**
  * COMPONENT
@@ -35,10 +36,13 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={AllProducts} />
+        <Route exact path="/test" component={AdminHome} />
+        <Route exact path="/testForm/:productId" component={AdminEditProduct} />
+
         {isLoggedIn && (
           <Switch>
-            <Route path="/admin" component={AdminHome} />
-            <Route component={NotFound} />
+            {/* <Route path="/admin" component={AdminHome} /> */}
+
             {/* Routes placed here are only available after logging in */}
           </Switch>
         )}
