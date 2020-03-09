@@ -14,6 +14,9 @@ const checkAdmin = async (req, res, next) => {
 };
 
 const userCheck = (req, res, next) => {
+  // if(!req.user){
+
+  // }
   if (Number(req.user.id) === Number(req.params.userId)) {
     next();
   } else {

@@ -10,7 +10,7 @@ const Cart = () => {
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   useEffect(() => {
-    user.id && dispatch(fetchCart(user.id));
+    dispatch(fetchCart(user.id));
   }, [user]);
 
   // console.log('CART==>', cart);

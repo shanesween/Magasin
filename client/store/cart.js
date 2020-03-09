@@ -9,7 +9,7 @@ const setCart = cart => {
   };
 };
 
-export const fetchCart = userId => {
+export const fetchCart = (userId = "notLoggedIn") => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/cart/${userId}`);
