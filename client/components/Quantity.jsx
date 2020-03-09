@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Quantity = ({ handleSubmit, quantity, setQuantity }) => (
+const Quantity = ({ quantity, setQuantity }) => (
   <div>
     <form>
       <input

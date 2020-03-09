@@ -28,20 +28,6 @@ const Product = props => {
             stock={props.product.stock}
           />
         </div>
-<<<<<<< HEAD
-      </Link>
-      <div className="card-body text-center">
-        <h2 className="badge badge-pill badge-dark">$ {props.product.price}</h2>
-      </div>
-      <div className="card-footer w-100 text-muted text-right">
-        <AddToCartButton
-          key={props.product.id}
-          product={props.product}
-          stock={props.product.stock}
-          // quantity={1}
-        />
-=======
->>>>>>> 9089ef7d4e38f552bcc58cdd1ab31a79c3c3d341
       </div>
     </div>
   );
