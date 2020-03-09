@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../store/products";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../store/products';
 // import Product from "./product";
-import Fade from "react-reveal/Fade";
-import { fetchUsers } from "../store/users";
-import AdminUsers from "./AdminUsers";
-import { fetchProduct } from "../store/singleProduct";
+import Fade from 'react-reveal/Fade';
+import { fetchUsers } from '../store/users';
+import AdminUsers from './AdminUsers';
+import AdminProducts from './AdminProducts';
 
 const AdminHome = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const AdminHome = () => {
   const products = useSelector(state => state.products);
 
   const handleProductsClick = () => {
-    dispatch(fetchProduct(products));
+    dispatch(fetchProducts());
   };
 
   const handleUsersClick = () => {
@@ -21,6 +21,8 @@ const AdminHome = () => {
   };
 
   let first25 = users.slice(0, 25);
+  let products25 = products.slice(0, 25);
+  console.log('products', products);
 
   return (
     <div>
@@ -38,11 +40,16 @@ const AdminHome = () => {
               </button>
             </div>
 
-            {first25.map(user => {
+            {/* {first25.map(user => {
               return <AdminUsers key={user.id} user={user} />;
-            })}
+            })} */}
           </div>
         </Fade>
+        <div>
+          {products25.map(product => (
+            <AdminProducts key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
