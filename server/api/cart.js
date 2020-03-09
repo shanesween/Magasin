@@ -39,7 +39,7 @@ router.put('/addItem/:userId', userCheck, async (req, res, next) => {
         where: { productId: product.id, orderId: userCart.id }
       });
       if (orderItem) {
-        (req.body.quantity)
+        req.body.quantity
           ? (orderItem.quantity = req.body.quantity)
           : orderItem.quantity++;
         await orderItem.save();
