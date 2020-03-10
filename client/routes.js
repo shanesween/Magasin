@@ -16,9 +16,12 @@ import {
   AdminEditUser,
   AdminEditProduct,
   SplashPage,
+  UserSingleOrder,
+  ReviewsForm,
 } from './components';
 import { me } from './store';
 import AdminAddProduct from './components/AdminAddProduct';
+import UserProfile from './components/UserProfile';
 
 /**
  * COMPONENT
