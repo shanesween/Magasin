@@ -65,8 +65,13 @@ router.put("/addItem", async (req, res, next) => {
         where: { userId: req.user.id }
       });
       cartId = cart.id;
-    } else {
+    } else if (req.session.cartId) {
       cartId = req.session.cartId;
+    } else {
+      let userCart = await Order.create();
+      cartId = userCart.id;
+      req.session.cartId = userCart.id;
+      await req.session.save();
     }
     // let cartId = req.cartId;
     const product = await Product.findByPk(req.body.productId);
