@@ -28,6 +28,24 @@ export const fetchProducts = () => {
   };
 };
 
+export const filterProducts = value => {
+  return async dispatch => {
+    try {
+      let filteredProducts;
+      if (value === "all") {
+        let { data } = await axios.get("/api/products");
+        filteredProducts = data;
+      } else {
+        let { data } = await axios.get(`/api/products/filter/${value}`);
+        filteredProducts = data;
+      }
+      dispatch(getProducts(filteredProducts));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const addNewProduct = productParams => async dispatch => {
   const { data } = await axios.post("/api/products", productParams);
   dispatch(addedNewProduct(data));
