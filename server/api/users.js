@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, OrderItem, Order, Product } = require('../db/models');
+const { User, OrderItem, Order, Product, Review } = require('../db/models');
 const { checkAdmin } = require('./middleware');
 module.exports = router;
 // checkAdmin,
@@ -10,18 +10,41 @@ router.get('/', checkAdmin, async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       order: [['id', 'ASC']],
-      attributes: ['id', 'email', 'isAdmin'],
+      attributes: ['id', 'email', 'isAdmin', 'address'],
     });
     res.json(users);
   } catch (err) {
     next(err);
   }
 });
-
-router.get('/singleUser', async (req, res, next) => {
+router.get('/admin/:userId', checkAdmin, async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.user.id);
+    const singleUser = await User.findByPk(req.params.userId, {
+      include: [{ model: Review }, { model: Order }],
+    });
     res.json(singleUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/admin/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    const updatedUser = await user.update(req.body);
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+});
+router.delete('/admin/:userId', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.userId,
+      },
+    });
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
@@ -30,7 +53,7 @@ router.get('/singleUser', async (req, res, next) => {
 router.get('/orders', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
-      where: { userId: req.user.id },
+      where: { userId: req.user.id, status: 'completed' },
       include: [{ model: Product }],
     });
     res.json(orders);
@@ -50,24 +73,22 @@ router.get('/orders/:orderId', async (req, res, next) => {
   }
 });
 
-router.put('/:userId', async (req, res, next) => {
+router.put('/profile', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    const updatedUser = await user.update(req.body);
+    const user = await User.findByPk(req.user.id);
+    const updatedUser = await user.update(req.body.singleUserParams);
     res.json(updatedUser);
   } catch (err) {
     next(err);
   }
 });
 
-router.delete('/:userId', async (req, res, next) => {
+router.get('/profile', async (req, res, next) => {
   try {
-    await User.destroy({
-      where: {
-        id: req.params.userId,
-      },
+    const singleUser = await User.findByPk(req.user.id, {
+      include: [{ model: Review }, { model: Order }],
     });
-    res.sendStatus(204);
+    res.json(singleUser);
   } catch (err) {
     next(err);
   }

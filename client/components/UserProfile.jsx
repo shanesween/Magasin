@@ -4,7 +4,7 @@ import { fetchProducts } from '../store/products';
 // import Product from "./product";
 import Fade from 'react-reveal/Fade';
 import { fetchOrders } from '../store/order';
-import { fetchSingleUser } from '../store/singleUser';
+import { fetchUser } from '../store/singleUser';
 import UserOrders from './UserOrders';
 import UserSettingsForm from './UserSettingsForm';
 
@@ -13,15 +13,15 @@ const UserProfile = () => {
   const user = useSelector(state => state.singleUser);
   const orders = useSelector(state => state.orders);
   useEffect(() => {
-    dispatch(fetchSingleUser());
+    dispatch(fetchUser());
   }, []);
 
   const handleProductsClick = () => {
-    dispatch(fetchOrders(orders));
+    dispatch(fetchOrders());
   };
 
   const handleUsersClick = () => {
-    dispatch(fetchSingleUser());
+    dispatch(fetchUser());
   };
   console.log('user', user);
   console.log('orders', orders);
@@ -83,7 +83,7 @@ const UserProfile = () => {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <h1>{`Welcome, ${user.email}`}</h1>
+              <h1 style={{ color: 'white' }}>{`Welcome, ${user.email}`}</h1>
             </div>
             <div
               className="tab-pane fade show"
@@ -106,11 +106,13 @@ const UserProfile = () => {
             >
               {/* <div className="card"> */}
               <ul className="list-group list-group-flush">
-                {orders !== undefined
-                  ? orders.map(order => (
-                      <UserOrders key={order.id} order={order} />
-                    ))
-                  : 'No Orders'}
+                {orders !== undefined && orders.length > 0 ? (
+                  orders.map(order => (
+                    <UserOrders key={order.id} order={order} />
+                  ))
+                ) : (
+                  <h1 style={{ color: 'white' }}> No Orders</h1>
+                )}
               </ul>
               {/* </div> */}
             </div>

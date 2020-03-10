@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
-import AddToCartButton from "./AddToCartButton";
-import CheckOut from "./CheckOutButton";
-import Reviews from "./Reviews";
-import Quantity from "./Quantity";
-import { updateProduct } from "../store/cart";
-import ProductAddedModal from "./ProductAddedModal";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProduct } from '../store/singleProduct';
+import AddToCartButton from './AddToCartButton';
+import CheckOut from './CheckOutButton';
+import Reviews from './Reviews';
+import Quantity from './Quantity';
+import { updateProduct } from '../store/cart';
+import ProductAddedModal from './ProductAddedModal';
 
 const SingleProduct = props => {
   const [quantity, setQuantity] = useState(1);
@@ -34,7 +34,7 @@ const SingleProduct = props => {
                 <img
                   src={product.imageUrl}
                   className="img-fluid rounded opacity-95"
-                  style={{ maxHeight: "29rem" }}
+                  style={{ maxHeight: '29rem' }}
                 />
               </div>
             </div>

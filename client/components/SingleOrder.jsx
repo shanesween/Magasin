@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrderItem } from '../store/orderItem';
 import { fetchProduct } from '../store/singleProduct';
-
+import ReviewsForm from './ReviewForm';
 const SingleItem = props => {
   const item = props.item;
   const product = useSelector(state => state.product);
@@ -46,9 +46,15 @@ const SingleItem = props => {
               </div>
             </div>
           </div>
+          <Link to={`/review/${product.id}`}>
+            <button type="button">Review!</button>
+          </Link>
         </div>
+        <div></div>
         <Link to={`/settings`}>
-          <button type="button">BACK</button>
+          <button className="btn btn-secondary" type="button">
+            BACK
+          </button>
         </Link>
       </Fade>
     );

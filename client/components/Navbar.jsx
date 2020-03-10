@@ -29,38 +29,52 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
       </button>
 
       <div className="collapse navbar-collapse" id="navbarToggler">
-        {isLoggedIn ? (
+        {isLoggedIn === true ? (
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">
-                home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                cart
-              </Link>
-            </li>
+            <a href="/home">
+              <div className="nav-link">
+                <i className="fa fa-home  fa-2x"></i>
+              </div>
+            </a>
+            <a href="/cart">
+              <div className="nav-link">
+                <i className="fa fa-shopping-cart fa-2x  "></i>
+              </div>
+            </a>
+
+            {/* </li> */}
+            {isAdmin ? (
+              <a href="/admin">
+                <div className="nav-link">
+                  <i className="fa a fa-user fa-2x  "></i>
+                </div>
+              </a>
+            ) : (
+              <a href="/settings">
+                <div className="nav-link">
+                  <i className="fa a fa-user fa-2x  "></i>
+                </div>
+              </a>
+            )}
+
             <li className="nav-item">
               <Link className="nav-link" to="#" onClick={handleClick}>
                 logout
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/settings">
-                Profile
-              </Link>
-            </li>
-            {isAdmin ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin">
-                  admin
-                </Link>
-              </li>
-            ) : null}
           </ul>
         ) : (
           <ul className="navbar-nav mr-auto">
+            <a href="/home">
+              <div className="nav-link">
+                <i className="fa fa-home  fa-2x"></i>
+              </div>
+            </a>
+            <a href="/cart">
+              <div className="nav-link">
+                <i className="fa fa-shopping-cart fa-2x  "></i>
+              </div>
+            </a>
             <li className="nav-item">
               <Link className="nav-link" to="/login">
                 login
@@ -69,11 +83,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
             <li className="nav-item">
               <Link className="nav-link" to="/signup">
                 sign up
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                cart
               </Link>
             </li>
           </ul>

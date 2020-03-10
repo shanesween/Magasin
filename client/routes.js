@@ -21,8 +21,9 @@ import { me } from './store';
 import UserProfile from './components/UserProfile';
 import UserSingleOrder from './components/UserSingleOrder';
 
-import { me } from './store';
 import AdminAddProduct from './components/AdminAddProduct';
+
+import ReviewsForm from './components/ReviewForm';
 
 /**
  * COMPONENT
@@ -74,6 +75,8 @@ class Routes extends Component {
 
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/profile" component={UserHome} />
+
+            <Route exact path="/review/:productId" component={ReviewsForm} />
           </Switch>
         )}
         <Route component={NotFound} />

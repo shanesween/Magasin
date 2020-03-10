@@ -1,13 +1,13 @@
-const router = require("express").Router();
-const { Product, Review } = require("../db/models");
-const { checkAdmin } = require("./middleware");
+const router = require('express').Router();
+const { Product, Review, User } = require('../db/models');
+const { checkAdmin } = require('./middleware');
 module.exports = router;
 
 //route for all products
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      order: [["id", "ASC"]]
+      order: [['id', 'ASC']],
     });
     res.json(products);
   } catch (err) {
@@ -16,10 +16,10 @@ router.get("/", async (req, res, next) => {
 });
 
 //route for single product
-router.get("/:productId", async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
-      include: [{ model: Review }]
+      include: [{ model: Review, User }],
     });
     res.json(product);
   } catch (err) {
@@ -28,7 +28,7 @@ router.get("/:productId", async (req, res, next) => {
 });
 
 //route for add product
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
     res.json(product);
@@ -37,13 +37,13 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/admin/:productId", function(req, res, next) {
+router.put('/admin/:productId', function(req, res, next) {
   console.log(req.body);
   let newProduct = req.body.productParams;
   Product.update(newProduct, {
     where: { id: req.params.productId },
     returning: true, // needed for affectedRows to be populated
-    plain: true // makes sure that the returned instances are just plain objects
+    plain: true, // makes sure that the returned instances are just plain objects
   })
     .then(function(rowsUpdated) {
       res.json(rowsUpdated);
@@ -51,11 +51,11 @@ router.put("/admin/:productId", function(req, res, next) {
     .catch(next);
 });
 
-router.delete("/admin/:productId", checkAdmin, async (req, res, next) => {
+router.delete('/admin/:productId', checkAdmin, async (req, res, next) => {
   Product.destroy({
     where: {
-      id: req.params.userId
-    }
+      id: req.params.userId,
+    },
   })
     .then(() => res.sendStatus(204))
     .catch(err => next(err));

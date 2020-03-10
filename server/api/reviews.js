@@ -8,6 +8,8 @@ router.put('/', async (req, res, next) => {
   try {
     console.log(req.body);
     const review = await Review.create(req.body.review);
+
+    review.save();
     res.sendStatus(200);
   } catch (err) {
     next(err);

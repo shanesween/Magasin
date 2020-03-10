@@ -144,10 +144,15 @@ const Review = props => {
     return <h4> Loading</h4>;
   } else {
     return (
-      <div className="container">
-        <h1> Be the First to Leave a Review!</h1>
-        <ReviewsForm product={props.product} />;
-      </div>
+      <>
+        <div className="d-flex">
+          <div className="containaer">
+            <div className="row">
+              <h4 style={{ color: 'white' }}>No Reviews</h4>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 };

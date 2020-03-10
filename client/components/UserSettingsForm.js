@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSingleUser } from '../store/singleUser';
+import { fetchUser, editUser } from '../store/singleUser';
 import axios from 'axios';
 
 import Fade from 'react-reveal/Fade';
@@ -11,7 +11,7 @@ const UserSettingsForm = props => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSingleUser());
+    dispatch(fetchUser());
   }, []);
 
   const [inputs, setInputs] = useState({});
@@ -19,7 +19,8 @@ const UserSettingsForm = props => {
   const handleSubmit = event => {
     event.preventDefault();
     if (event) {
-      console.log(event);
+      dispatch(editUser(inputs));
+      alert('changes saved');
     }
   };
 
@@ -29,6 +30,7 @@ const UserSettingsForm = props => {
       ...input,
       [event.target.name]: event.target.value,
     }));
+    console.log(inputs);
   };
 
   // const handleSubmit = () => {
@@ -36,7 +38,7 @@ const UserSettingsForm = props => {
   // };
   return (
     <>
-      <h4>Edit User</h4>
+      <h4>My Settings:</h4>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -47,6 +49,7 @@ const UserSettingsForm = props => {
               name="email"
               id="email"
               placeholder={user.email}
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group col-md-6">
@@ -54,9 +57,9 @@ const UserSettingsForm = props => {
             <input
               type="text"
               className="form-control"
-              name="password"
-              id="password"
-              placeholder={user.address}
+              name="address"
+              id="address"
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group col-md-6">
@@ -67,6 +70,7 @@ const UserSettingsForm = props => {
               name="password"
               id="password"
               placeholder={user.password}
+              onChange={handleInputChange}
             />
           </div>
         </div>

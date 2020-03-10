@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { fetchProducts } from '../store/products';
 import { createReview, fetchProduct } from '../store/singleProduct';
 import Product from './product';
 import Fade from 'react-reveal/Fade';
+import { fetchUser } from '../store/singleUser';
 
 const ReviewForm = props => {
-  const product = props.product;
-  const [inputs, setInputs] = useState({});
+  const product = useSelector(state => state.product);
+  const user = useSelector(state => state.singleUser);
+  const history = useHistory();
+
+  // console.log("PRODUCT==>", product);
   const dispatch = useDispatch();
+  const handleChange = quantity => {
+    setQuantity(quantity);
+  };
+
+  useEffect(() => {
+    dispatch(fetchProduct(props.match.params.productId));
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
+  const [inputs, setInputs] = useState({ userId: user.id });
 
   const handleInputChange = event => {
     event.persist();
@@ -25,7 +42,14 @@ const ReviewForm = props => {
     if (event) {
       dispatch(createReview(inputs));
       dispatch(fetchProduct(product.id));
+      alert('Review Submitted');
+      history.goBack();
     }
+  };
+  $('#modalRegisterForm').modal('show');
+
+  const back = () => {
+    history.goBack();
   };
 
   return (
@@ -33,7 +57,7 @@ const ReviewForm = props => {
       <div
         className="modal fade"
         id="modalRegisterForm"
-        tabIndex="-1"
+        tabIndex="0"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
@@ -47,6 +71,7 @@ const ReviewForm = props => {
                 className="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                onClick={back}
               >
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -91,23 +116,13 @@ const ReviewForm = props => {
                 type="button"
                 className="btn btn-deep-orange"
                 onClick={handleSubmit}
+                data-dismiss="modal"
               >
                 Submit
               </button>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="text-center">
-        <button
-          type="button"
-          className="btn btn-primary btn-lg mt-3"
-          data-toggle="modal"
-          data-target="#modalRegisterForm"
-        >
-          Leave A Review!
-        </button>
       </div>
     </>
   );
