@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductAddedModal = () => {
+const ProductAddedModal = props => {
+  const product = props.product;
+  console.log("props", props.product.title);
+
   return (
     <div className="modal-dialog modal-dialog-centered" role="dialog">
       <div className="modal-content">
