@@ -9,10 +9,10 @@ const setCart = cart => {
   };
 };
 
-export const fetchCart = userId => {
+export const fetchCart = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/cart/${userId}`);
+      const { data } = await axios.get(`/api/cart`);
       dispatch(setCart(data));
     } catch (err) {
       console.error("Error in fetchCart thunk", err);
@@ -20,10 +20,10 @@ export const fetchCart = userId => {
   };
 };
 
-export const addProduct = (userId, productId, quantity) => {
+export const addProduct = (productId, quantity) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(`/api/cart/addItem/${userId}`, {
+      const { data } = await axios.put(`/api/cart/addItem`, {
         productId,
         quantity
       });
@@ -34,10 +34,10 @@ export const addProduct = (userId, productId, quantity) => {
   };
 };
 
-export const updateProduct = (userId, productId, quantity) => {
+export const updateProduct = (productId, quantity) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(`/api/cart/addItem/${userId}`, {
+      const { data } = await axios.put(`/api/cart/addItem`, {
         productId,
         quantity
       });
@@ -48,11 +48,12 @@ export const updateProduct = (userId, productId, quantity) => {
   };
 };
 
-export const removeProduct = (userId, productId) => {
+export const removeProduct = orderItem => {
+  // console.log("orderItem in thunk", orderItem);
   return async dispatch => {
     try {
-      let { data } = await axios.put(`/api/cart/removeItem/${userId}`, {
-        productId
+      let { data } = await axios.put(`/api/cart/removeItem`, {
+        orderItem
       });
       dispatch(setCart(data));
     } catch (err) {

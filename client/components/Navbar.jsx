@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import CheckOut from './CheckOutButton';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-brand-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
       <Link
         className="navbar-brand"
         style={{ color: '#eeeeee', textDecoration: 'inherit' }}
@@ -51,6 +51,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 Profile
               </Link>
             </li>
+            {isAdmin ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  admin
+                </Link>
+              </li>
+            ) : null}
           </ul>
         ) : (
           <ul className="navbar-nav mr-auto">
@@ -62,6 +69,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             <li className="nav-item">
               <Link className="nav-link" to="/signup">
                 sign up
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                cart
               </Link>
             </li>
           </ul>
@@ -77,6 +89,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin,
   };
 };
 
@@ -96,4 +109,5 @@ export default connect(mapState, mapDispatch)(Navbar);
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };

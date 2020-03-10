@@ -4,11 +4,16 @@ import { fetchProducts } from "../store/products";
 // import Product from "./product";
 import Fade from "react-reveal/Fade";
 import { fetchUsers } from "../store/users";
+import { fetchOrders } from "../store/orders";
+
 import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
+import AdminOrders from "./AdminOrders";
+import AdminAddProduct from "./AdminAddProduct";
 
 const AdminHome = () => {
   const dispatch = useDispatch();
+  const orders = useSelector(state => state.orders);
   const users = useSelector(state => state.users);
   const products = useSelector(state => state.products);
 
@@ -20,8 +25,13 @@ const AdminHome = () => {
     dispatch(fetchUsers(users));
   };
 
-  let first25 = users.slice(0, 25);
+  const handleOrdersClick = () => {
+    dispatch(fetchOrders(orders));
+  };
+
+  let users25 = users.slice(0, 25);
   let products25 = products.slice(0, 25);
+  let orders25 = orders.slice(0, 25);
 
   return (
     <div>
@@ -71,6 +81,20 @@ const AdminHome = () => {
                 Products
               </a>
             </li>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                id="order-tab"
+                data-toggle="tab"
+                href="#orders"
+                role="tab"
+                aria-controls="orders"
+                aria-selected="true"
+                onClick={handleOrdersClick}
+              >
+                Orders
+              </a>
+            </li>
           </ul>
         </div>
         <div className="tab-content" id="tab-content">
@@ -80,7 +104,30 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <h1>ADMIN HOMEPAGE</h1>
+            <h1>Covfefe Admin Portal</h1>
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target="#addProductModal"
+            >
+              Add New Product
+            </button>
+            <div>
+              <div
+                className="modal fade zindex-modal"
+                id="addProductModal"
+                tabIndex="-1"
+                data-backdrop="false"
+                data-background="false"
+              >
+                <AdminAddProduct />
+              </div>
+            </div>
+            <h4>
+              To Do: -Make Categories, -Filter functionality for products and
+              orders, -edit order status, -delete user{" "}
+            </h4>
           </div>
           <div
             className="tab-pane fade show"
@@ -90,7 +137,7 @@ const AdminHome = () => {
           >
             <div className="card">
               <ul className="list-group list-group-flush">
-                {first25.map(user => (
+                {users25.map(user => (
                   <AdminUsers key={user.id} user={user} />
                 ))}
               </ul>
@@ -106,6 +153,20 @@ const AdminHome = () => {
               <ul className="list-group list-group-flush">
                 {products25.map(product => (
                   <AdminProducts key={product.id} product={product} />
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div
+            className="tab-pane fade show"
+            id="orders"
+            role="tabpanel"
+            aria-labelledby="user-tab"
+          >
+            <div className="card">
+              <ul className="list-group list-group-flush">
+                {orders25.map(order => (
+                  <AdminOrders key={order.id} order={order} />
                 ))}
               </ul>
             </div>

@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import ProductAddedModal from "./ProductAddedModal";
 
 const AddToCartButton = props => {
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   // console.log("quantity", props.quantity);
   const onClick = () => {
-    dispatch(addProduct(user.id, props.product.id, props.quantity));
+    dispatch(addProduct(props.product.id, props.quantity));
   };
 
   return props.stock ? (
@@ -23,17 +22,6 @@ const AddToCartButton = props => {
       >
         add to cart
       </button>
-      <div>
-        <div
-          className="modal fade zindex-modal"
-          id="cartModal"
-          tabIndex="-1"
-          data-backdrop="false"
-          data-background="false"
-        >
-          <ProductAddedModal />
-        </div>
-      </div>
     </div>
   ) : (
     <div>

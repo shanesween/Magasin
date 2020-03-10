@@ -9,7 +9,6 @@ router.get("/", async (req, res, next) => {
     const products = await Product.findAll({
       order: [["id", "ASC"]]
     });
-    // const test = [{title: "cheese", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 33}, {title:"bob", imageUrl: 'https://cdn4.vectorstock.com/i/1000x1000/26/83/coffee-bag-mock-up-black-half-side-view-vector-22532683.jpg', price: 55}]
     res.json(products);
   } catch (err) {
     next(err);
@@ -28,7 +27,17 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-router.put("/:productId", function(req, res, next) {
+//route for add product
+router.post("/", async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/admin/:productId", function(req, res, next) {
   console.log(req.body);
   let newProduct = req.body.productParams;
   Product.update(newProduct, {
@@ -42,7 +51,7 @@ router.put("/:productId", function(req, res, next) {
     .catch(next);
 });
 
-router.delete("/:productId", checkAdmin, async (req, res, next) => {
+router.delete("/admin/:productId", checkAdmin, async (req, res, next) => {
   Product.destroy({
     where: {
       id: req.params.userId

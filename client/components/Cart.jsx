@@ -10,7 +10,7 @@ const Cart = () => {
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   useEffect(() => {
-    user.id && dispatch(fetchCart(user.id));
+    dispatch(fetchCart());
   }, [user]);
 
   // console.log('CART==>', cart);
@@ -38,7 +38,7 @@ const Cart = () => {
       <Fade cascade>
         <div className="d-flex justify-content-between mt-2 mb-2 ml-4 mr-4">
           <cite>
-            <h3 className="mt-3">Shopping Cart</h3>
+            <h3 className="mt-3 text-light">Shopping Cart</h3>
           </cite>
         </div>
       </Fade>
@@ -50,32 +50,41 @@ const Cart = () => {
             })}
           </div>
         </div>
-        <div className="container-fluid checkout-pod border-top">
-          <div className="row">
+        {/* checkout-pod */}
+        <div className="container-fluid">
+          <div className="row px-2 pb-3">
             <div className="col-sm"></div>
             <div className="col-sm"></div>
-            <div className="col-sm">
+            <div className="checkout-pod col-md">
               <div className="summary-totals m-4">
                 <div className="border-top border-bottom">
                   <div className="row cartTotals">
-                    <div className="col-8 font-weight-bold">Subtotal</div>
-                    <div className="col-4 font-weight-bold text-right">
+                    <div className="col-6 font-weight-bold">Subtotal</div>
+                    <div className="col-6 font-weight-bold text-right">
                       ${subTotal}
                     </div>
-                    <div className="col-8">Shipping</div>
-                    <div className="col-4 text-right">FREE</div>
-                    <div className="col-8">Sales Tax</div>
-                    <div className="col-4 text-right">
+                    <div className="col-6">Shipping</div>
+                    <div className="col-6 text-right">FREE</div>
+                    <div className="col-6">Sales Tax</div>
+                    <div className="col-6 text-right">
                       ${taxAmount.toFixed(2)}
                     </div>
                   </div>
                 </div>
                 <div className="row total mt-2 mb-2">
-                  <div className="col-8">
-                    <h3 className="font-weight-bold">Total</h3>
-                  </div>
                   <div className="col-4">
-                    <h3 className="font-weight-bold text-right">
+                    <h3
+                      className="font-weight-bold"
+                      style={{ fontSize: "120% " }}
+                    >
+                      Total
+                    </h3>
+                  </div>
+                  <div className="col-8">
+                    <h3
+                      className="font-weight-bold text-right"
+                      style={{ fontSize: "120% " }}
+                    >
                       ${cartTotal.toFixed(2)}
                     </h3>
                   </div>

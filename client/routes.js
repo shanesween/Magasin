@@ -14,11 +14,15 @@ import {
   AdminHome,
   AdminSingleUser,
   AdminEditUser,
+  AdminEditProduct,
 } from './components';
 import { me } from './store';
-import AdminEditProduct from './components/AdminEditProduct';
+
 import UserProfile from './components/UserProfile';
 import UserSingleOrder from './components/UserSingleOrder';
+
+import { me } from './store';
+import AdminAddProduct from './components/AdminAddProduct';
 
 /**
  * COMPONENT
@@ -30,6 +34,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
+    const { isAdmin } = this.props;
 
     return (
       <Switch>
@@ -40,9 +45,26 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={AllProducts} />
-        <Route exact path="/test" component={AdminHome} />
-        <Route exact path="/testForm/:productId" component={AdminEditProduct} />
-
+        {isAdmin && (
+          <Switch>
+            <Route exact path="/admin" component={AdminHome} />
+            <Route
+              exact
+              path="/products/admin/:productId"
+              component={AdminEditProduct}
+            />
+            <Route
+              exact
+              path="/users/admin/:userId"
+              component={AdminEditUser}
+            />
+            <Route
+              exact
+              path="/products/admin"
+              component={AdminAddProduct}
+            ></Route>
+          </Switch>
+        )}
         {isLoggedIn && (
           <Switch>
             <Route path="/admin" component={AdminHome} />
@@ -51,6 +73,7 @@ class Routes extends Component {
             <Route exact path="/orders/:orderId" component={UserSingleOrder} />
 
             {/* Routes placed here are only available after logging in */}
+            <Route exact path="/profile" component={UserHome} />
           </Switch>
         )}
         <Route component={NotFound} />
@@ -67,6 +90,7 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin,
   };
 };
 
@@ -88,4 +112,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes));
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };

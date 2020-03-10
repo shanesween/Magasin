@@ -7,21 +7,18 @@ import { fetchUsers } from "../store/users";
 import { editedUser } from "../store/user";
 import { Link } from "react-router-dom";
 
-const AdminUsers = props => {
-  const user = props.user;
+const AdminOrders = props => {
+  const order = props.order;
 
   return (
     <Fade>
       <div className="card mb-3" style={{ maxWidth: 540 + "px" }}>
         <div className="row">
-          <div className="card-body">
-            <div className="col-md">
-              <Link to={`/users/admin/${user.id}`}>
-                <h5 className="card-title">{user.email}</h5>
-              </Link>
-              <div className="col-md">
-                <h5 className="card-text">{user.isAdmin ? "admin" : " "}</h5>
-              </div>
+          <div className="col-md">
+            <div className="card-body">
+              <h3 className="card-title">Order #: {order.id}</h3>
+              <h5 className="card-title">Created at: {order.createdAt}</h5>
+              <h6 className="card-text">Status: {order.status}</h6>
             </div>
           </div>
         </div>
@@ -30,4 +27,4 @@ const AdminUsers = props => {
   );
 };
 
-export default AdminUsers;
+export default AdminOrders;

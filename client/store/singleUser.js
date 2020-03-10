@@ -17,9 +17,7 @@ const updateUser = singleUser => ({ type: UPDATE_USER, singleUser });
 export const fetchSingleUser = id => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/users/singleUser`);
-      console.log(data);
-
+      const { data } = await axios.get(`/api/users/admin/${id}`);
       dispatch(showSingleUser(data));
     } catch (err) {
       console.error('Error in fetchSingleUser thunk', err);
@@ -30,7 +28,10 @@ export const fetchSingleUser = id => {
 export const editedUser = (id, singleUserParams) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put(`/api/users/${id}`, singleUserParams);
+      const { data } = await axios.put(
+        `/api/users/admin/${id}`,
+        singleUserParams
+      );
       dispatch(updateUser(data));
     } catch (err) {
       console.error('Error in editUser thunk', err);
