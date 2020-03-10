@@ -8,6 +8,9 @@ const deleteUser = id => ({ type: DELETE_USER, id });
 
 export const fetchUsers = () => async dispatch => {
   try {
+    // const { data } = await axios.get(`/api/users?page=${page}&limit=${limit}`);
+    // console.log("data result!", data);
+    // console.log("axios", await axios.get("/api/users/"));
     const { data } = await axios.get("/api/users/");
     dispatch(showUsers(data));
   } catch (err) {

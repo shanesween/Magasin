@@ -40,7 +40,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={SplashPage} />
         {isAdmin && (
           <Switch>
             <Route exact path="/admin" component={AdminHome} />
