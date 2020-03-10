@@ -66,6 +66,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 sign up
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                cart
+              </Link>
+            </li>
           </ul>
         )}
       </div>

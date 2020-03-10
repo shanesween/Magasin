@@ -9,7 +9,7 @@ router.use(cors());
 module.exports = router;
 
 router.post("/", async (req, res, next) => {
-  //   console.log("Request:", req.body.token.total);
+  // console.log("Request:", req.body.token.total);
   let error;
   let status;
   try {
