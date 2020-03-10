@@ -60,3 +60,15 @@ router.delete("/admin/:productId", checkAdmin, async (req, res, next) => {
     .then(() => res.sendStatus(204))
     .catch(err => next(err));
 });
+
+router.get("/filter/:filter", async (req, res, next) => {
+  try {
+    let products = await Product.findAll({
+      where: { category: req.params.filter },
+      order: [["id", "ASC"]]
+    });
+    res.json(products);
+  } catch (err) {
+    next(err);
+  }
+});

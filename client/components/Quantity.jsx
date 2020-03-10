@@ -2,7 +2,7 @@ import React from "react";
 
 const Quantity = ({ quantity, handleChange }) => (
   <div>
-    <form onChange={e => handleChange(e.target.value)}>
+    <form>
       <input
         name="Quantity"
         id="quantity"
@@ -13,6 +13,7 @@ const Quantity = ({ quantity, handleChange }) => (
         maxLength="4"
         // onBlur={/* if value !== quantity trigger handleSubmit*/}
         // onChange={e => setQuantity(+e.target.value)}
+        onChange={e => handleChange(e.target.value)}
         value={quantity}
         style={{ width: "4rem" }}
       />

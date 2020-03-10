@@ -13,15 +13,15 @@ router.get("/", async (req, res, next) => {
         req.session.cartId = userCart.id;
         await req.session.save();
       } else {
-        userCart = await Order.findByPk(req.session.cartId, {
-          where: { status: "pending" },
-          include: { model: Product }
+        userCart = await Order.findOne({
+          where: { status: "pending", id: req.session.cartId },
+          include: { model: Product, order: [["id", "ASC"]] }
         });
       }
     } else {
       userCart = await Order.findOne({
         where: { userId: req.user.id, status: "pending" },
-        include: { model: Product }
+        include: { model: Product, order: [["id", "ASC"]] }
       });
       if (!userCart) {
         userCart = await Order.create({
@@ -45,7 +45,7 @@ router.get("/", async (req, res, next) => {
       }
       userCart = await Order.findOne({
         where: { userId: req.user.id, status: "pending" },
-        include: { model: Product }
+        include: { model: Product, order: [["id", "ASC"]] }
       });
       req.session.cartId = null;
       await req.session.save();
@@ -62,9 +62,13 @@ router.put("/addItem", async (req, res, next) => {
     let cartId;
     if (req.user) {
       let cart = await Order.findOne({
-        where: { userId: req.user.id }
+        where: { userId: req.user.id, status: "pending" }
       });
-      cartId = cart.id;
+      if (cart) cartId = cart.id;
+      else {
+        let userCart = await Order.create();
+        cartId = userCart.id;
+      }
     } else if (req.session.cartId) {
       cartId = req.session.cartId;
     } else {
