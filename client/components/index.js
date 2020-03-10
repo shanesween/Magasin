@@ -15,6 +15,7 @@ export { default as AdminHome } from "./AdminHome";
 export { default as AdminUsers } from "./AdminUsers";
 export { default as AdminProducts } from "./AdminProducts";
 export { default as AdminOrders } from "./AdminOrders";
+export { default as SplashPage } from "./SplashPage";
 
 export { default as AdminEditUser } from "./AdminEditUser";
 export { default as AdminEditProduct } from "./AdminEditProduct";

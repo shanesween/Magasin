@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCart } from '../store/cart';
 
 const CheckOut = props => {
+  console.log("total in checkout", props.total);
   const history = useHistory();
   let cartId = props.cartId;
   let total = props.total;
@@ -19,7 +20,13 @@ const CheckOut = props => {
     console.log('DATA', data);
     if (data.status === 'success') {
       dispatch(fetchCart());
+<<<<<<< HEAD
       history.push('/home');
+=======
+      history.push("/home");
+    } else {
+      dispatch(fetchCart());
+>>>>>>> ead983f22bf84dc850d97a99fba5167884e40e56
     }
   }
 

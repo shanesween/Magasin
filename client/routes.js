@@ -15,15 +15,10 @@ import {
   AdminSingleUser,
   AdminEditUser,
   AdminEditProduct,
+  SplashPage,
 } from './components';
 import { me } from './store';
-
-import UserProfile from './components/UserProfile';
-import UserSingleOrder from './components/UserSingleOrder';
-
 import AdminAddProduct from './components/AdminAddProduct';
-
-import ReviewsForm from './components/ReviewForm';
 
 /**
  * COMPONENT
@@ -42,7 +37,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/home" component={AllProducts} />
+        <Route path="/home" component={SplashPage} />
+        <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={AllProducts} />
