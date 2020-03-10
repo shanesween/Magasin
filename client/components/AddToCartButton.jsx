@@ -22,17 +22,6 @@ const AddToCartButton = props => {
       >
         add to cart
       </button>
-      <div>
-        <div
-          className="modal fade zindex-modal"
-          id="cartModal"
-          tabIndex="-1"
-          data-backdrop="false"
-          data-background="false"
-        >
-          <ProductAddedModal />
-        </div>
-      </div>
     </div>
   ) : (
     <div>
