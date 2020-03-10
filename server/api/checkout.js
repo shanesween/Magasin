@@ -3,17 +3,18 @@ const { Product, Order, User, OrderItem } = require("../db/models");
 const stripe = require("stripe")("sk_test_rxtsARxWfn5RXhJGnCNLdzgB");
 const { uuid } = require("uuidv4");
 const cors = require("cors");
-// const { stockCheck } = require("./middleware");
+const { stockCheck } = require("./middleware");
 
 router.use(cors());
 module.exports = router;
 
-router.post("/", async (req, res, next) => {
+router.post("/", stockCheck, async (req, res, next) => {
   // console.log("Request:", req.body.token.total);
   let error;
   let status;
   try {
     const { token } = req.body;
+    const total = Number(token.total).toFixed(2);
     const customer = await stripe.customers.create({
       email: token.email,
       source: token.id
@@ -21,7 +22,7 @@ router.post("/", async (req, res, next) => {
     const idempotencyKey = uuid();
     const charge = await stripe.charges.create(
       {
-        amount: token.total * 100,
+        amount: total * 100,
         currency: "usd",
         customer: customer.id,
         receipt_email: token.email,
@@ -45,6 +46,8 @@ router.post("/", async (req, res, next) => {
     status = "success";
     req.cartId = token.cartId;
     req.total = token.total;
+    req.charge = charge;
+    console.log("req.charge in stripe", req.charge);
     next();
   } catch (error) {
     console.error("Error:", error);
@@ -55,6 +58,7 @@ router.post("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
+    console.log("req.charge in backend", req.charge);
     let items = await OrderItem.findAll({
       where: { orderId: req.cartId }
     });
@@ -72,8 +76,19 @@ router.post("/", async (req, res, next) => {
       order.total = req.total;
       order.status = "completed";
       let p3 = await order.save();
-      Promise.all([p1, p2, p3]);
+      let user = await User.findByPk(order.userId);
+      if (user) {
+        let { address } = req.charge.shipping;
+        user.address = `${address.line1} ${address.line2} ${address.city} ${address.country} ${address.postal_code} `;
+      } else {
+        delete req.session.cartId;
+        user = req.session;
+      }
+      let p4 = await user.save();
+      Promise.all([p1, p2, p3, p4]);
       let status = "success";
+      console.log({ status: status, charge: req.charge });
+
       res.json({ status });
     });
   } catch (err) {
