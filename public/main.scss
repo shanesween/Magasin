@@ -1,3 +1,13 @@
+$theme-colors: (
+  'primary': #74da31,
+  'secondary': #abb3a5,
+  'info': #9dda75,
+  'danger': #dd0058,
+  'dark' : #081400
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
 /* branding font */
 @font-face {
   font-family: 'covfefeBrand';
@@ -48,17 +58,11 @@ img {
 
 .navbar-brand {
   font-family: 'covfefeBrand';
-  color: #040a00;
+  color: #081400;
   font-size: 39px;
   margin: 0px 16px 12px 32px;
   padding: 0px;
 }
-
-/* .navbar .sticky-top {
-  position: fixed !important;
-  width: 100%;
-  top: 0 !important;
-} */
 
 .card {
   box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
@@ -97,5 +101,5 @@ img {
 }
 
 .opacity-95 {
-  opacity: .95 !important;
+  opacity: 0.95 !important;
 }

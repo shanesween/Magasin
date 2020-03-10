@@ -48,11 +48,12 @@ export const updateProduct = (productId, quantity) => {
   };
 };
 
-export const removeProduct = productId => {
+export const removeProduct = orderItem => {
+  // console.log("orderItem in thunk", orderItem);
   return async dispatch => {
     try {
-      let { data } = await axios.put(`/api/cart/removeItem/`, {
-        productId
+      let { data } = await axios.put(`/api/cart/removeItem`, {
+        orderItem
       });
       dispatch(setCart(data));
     } catch (err) {

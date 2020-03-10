@@ -25,51 +25,57 @@ const SingleProduct = props => {
 
   return (
     <div className="container-fluid mt-4">
-      <div className="row" style={{ height: "30rem" }}>
-        <div className="col-sm">
-          <img
-            src={product.imageUrl}
-            className="img-fluid float-right"
-            style={{ height: "30rem" }}
-          />
+      <div className="d-flex flex-wrap justify-content-center">
+        <div className="flex-fill align-self-center m-2">
+          <div className="row text-xs-center text-sm-center text-md-center float-lg-right float-xl-right">
+            <div className="col-sm">
+              <img
+                src={product.imageUrl}
+                className="img-fluid rounded opacity-95"
+                style={{ maxHeight: "29rem" }}
+              />
+            </div>
+          </div>
         </div>
-        <div className="col-sm">
-          <div className="row" style={{ height: "12rem" }}></div>
-          <div className="row">
-            <div className="container ml-2">
-              <div className="row">
-                <h2>{product.title}</h2>
-              </div>
-              <div className="row">
-                <h5>{product.origin} </h5>
-              </div>
-              <div className="row">
-                <p>{product.description}</p>
-              </div>
-              <div className="row">
+        {/* item details */}
+        <div className="flex-fill align-self-center m-2 text-light">
+          <div className="container">
+            <div className="row">
+              <h2>{product.title}</h2>
+            </div>
+            <div className="row">
+              <h5>{product.origin} </h5>
+            </div>
+            <div className="row">
+              <p>{product.description}</p>
+            </div>
+            <div className="row pb-2">
+              <span className="align-middle">
                 <Quantity
                   quantity={quantity}
                   setQuantity={setQuantity}
                   handleChange={handleChange}
                 />
-              </div>
-              <div className="row">
+              </span>
+              <span className="align-middle ml-2">
                 <h4>${product.price}</h4>
-              </div>
+              </span>
             </div>
-          </div>
-          <div className="row">
-            <AddToCartButton
-              key={product.id}
-              product={product}
-              stock={product.stock}
-              quantity={quantity}
-            />
+            <div className="row">
+              <span className="pt-2">
+                <AddToCartButton
+                  key={product.id}
+                  product={product}
+                  stock={product.stock}
+                  quantity={quantity}
+                />
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      <div className="row">
-        <div className="row">
+      <div className="d-flex">
+        <div className="flex-fill w-100">
           <Reviews product={product} />
         </div>
       </div>

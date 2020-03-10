@@ -9,7 +9,7 @@ const Quantity = ({ quantity, handleChange }) => (
         type="number"
         min="1"
         max="25"
-        className="form-control"
+        className="form-control text-center"
         maxLength="4"
         // onBlur={/* if value !== quantity trigger handleSubmit*/}
         // onChange={e => setQuantity(+e.target.value)}

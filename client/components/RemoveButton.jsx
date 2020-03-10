@@ -7,7 +7,7 @@ const RemoveButton = props => {
   const dispatch = useDispatch();
 
   const onClick = ev => {
-    dispatch(removeProduct(props.product.id));
+    dispatch(removeProduct(props.product.orderItem));
   };
 
   // console.log(props);
