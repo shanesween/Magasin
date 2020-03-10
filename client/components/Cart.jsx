@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import Fade from "react-reveal/Fade";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCart } from "../store/cart";
-import CartItem from "./CartItem";
-import CheckOut from "./CheckOutButton";
+import React, { useEffect } from 'react';
+import Fade from 'react-reveal/Fade';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../store/cart';
+import CartItem from './CartItem';
+import CheckOut from './CheckOutButton';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Cart = () => {
   const cartTotal = +subTotal + +taxAmount;
 
   return cart.products && cart.products.length ? (
-    <div className="container-fluid" style={{ width: "100%" }}>
+    <div className="container-fluid" style={{ width: '100%' }}>
       <Fade cascade>
         <div className="d-flex justify-content-between mt-2 mb-2 ml-4 mr-4">
           <cite>
@@ -82,7 +82,11 @@ const Cart = () => {
                 </div>
                 {/* checkout needs to be passed in total and cartId */}
                 {cart.products && (
-                  <CheckOut cartId={cart.id} total={cartTotal.toFixed(2)} />
+                  <CheckOut
+                    cart={cart}
+                    cartId={cart.id}
+                    total={cartTotal.toFixed(2)}
+                  />
                 )}
               </div>
             </div>

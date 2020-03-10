@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Login,
   Signup,
@@ -13,10 +13,12 @@ import {
   CheckOut,
   AdminHome,
   AdminSingleUser,
-  AdminEditUser
-} from "./components";
-import { me } from "./store";
-import AdminEditProduct from "./components/AdminEditProduct";
+  AdminEditUser,
+} from './components';
+import { me } from './store';
+import AdminEditProduct from './components/AdminEditProduct';
+import UserProfile from './components/UserProfile';
+import UserSingleOrder from './components/UserSingleOrder';
 
 /**
  * COMPONENT
@@ -45,6 +47,8 @@ class Routes extends Component {
           <Switch>
             <Route path="/admin" component={AdminHome} />
             <Route exact path="/users/:userId" component={AdminEditUser} />
+            <Route exact path="/settings" component={UserProfile} />
+            <Route exact path="/orders/:orderId" component={UserSingleOrder} />
 
             {/* Routes placed here are only available after logging in */}
           </Switch>
@@ -62,7 +66,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   };
 };
 
@@ -70,7 +74,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-    }
+    },
   };
 };
 
@@ -83,5 +87,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes));
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };

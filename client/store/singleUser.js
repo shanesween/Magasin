@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPES
 
-const SHOW_SINGLE_USER = "SHOW_SINGLE_USER";
-const UPDATE_USER = "UPATE_USER";
+const SHOW_SINGLE_USER = 'SHOW_SINGLE_USER';
+const UPDATE_USER = 'UPATE_USER';
 
 // ACTION CREATORS
 
@@ -17,12 +17,12 @@ const updateUser = singleUser => ({ type: UPDATE_USER, singleUser });
 export const fetchSingleUser = id => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/users/${id}`);
+      const { data } = await axios.get(`/api/users/singleUser`);
       console.log(data);
 
       dispatch(showSingleUser(data));
     } catch (err) {
-      console.error("Error in fetchSingleUser thunk", err);
+      console.error('Error in fetchSingleUser thunk', err);
     }
   };
 };
@@ -33,7 +33,7 @@ export const editedUser = (id, singleUserParams) => {
       const { data } = await axios.put(`/api/users/${id}`, singleUserParams);
       dispatch(updateUser(data));
     } catch (err) {
-      console.error("Error in editUser thunk", err);
+      console.error('Error in editUser thunk', err);
     }
   };
 };

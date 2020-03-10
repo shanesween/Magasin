@@ -1,16 +1,16 @@
-const router = require("express").Router();
-const { User } = require("../db/models");
-const { checkAdmin } = require("./middleware");
+const router = require('express').Router();
+const { User, OrderItem, Order, Product } = require('../db/models');
+const { checkAdmin } = require('./middleware');
 module.exports = router;
-
-router.get("/", checkAdmin, async (req, res, next) => {
+// checkAdmin,
+router.get('/', checkAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      order: [["id", "ASC"]],
-      attributes: ["id", "email", "isAdmin"]
+      order: [['id', 'ASC']],
+      attributes: ['id', 'email', 'isAdmin'],
     });
     res.json(users);
   } catch (err) {
@@ -18,16 +18,39 @@ router.get("/", checkAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:singleUserId", async (req, res, next) => {
+router.get('/singleUser', async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.singleUserId);
+    const singleUser = await User.findByPk(req.user.id);
     res.json(singleUser);
   } catch (err) {
     next(err);
   }
 });
 
-router.put("/:userId", async (req, res, next) => {
+router.get('/orders', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: { userId: req.user.id },
+      include: [{ model: Product }],
+    });
+    res.json(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/orders/:orderId', async (req, res, next) => {
+  try {
+    const orders = await OrderItem.findAll({
+      where: { orderId: req.params.orderId },
+    });
+    res.json(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:userId', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     const updatedUser = await user.update(req.body);
@@ -37,12 +60,12 @@ router.put("/:userId", async (req, res, next) => {
   }
 });
 
-router.delete("/:userId", async (req, res, next) => {
+router.delete('/:userId', async (req, res, next) => {
   try {
     await User.destroy({
       where: {
-        id: req.params.userId
-      }
+        id: req.params.userId,
+      },
     });
     res.sendStatus(204);
   } catch (err) {
