@@ -28,9 +28,6 @@ const AdminEditUser = props => {
     }));
   };
 
-  console.log(singleUser.reviews);
-  const reviews = singleUser.reviews;
-
   return (
     <div className="card">
       <div className="card-header">{singleUser.email}</div>
@@ -107,30 +104,3 @@ const AdminEditUser = props => {
 };
 
 export default AdminEditUser;
-
-// {reviews.map(review => ({
-//   review
-// }))}
-
-// const dispatch = useDispatch();
-// const users = useSelector(state => state.user);
-// useEffect(() => {
-//   dispatch(editedUser());
-// }, []);
-
-// const [showEdit, setShowEdit] = useState(false);
-
-// const onEditClick = () => {
-//   setShowEdit(!showEdit);
-// };
-
-// const editUser = async userProps => {
-//   await
-// }
-
-// const handleEdit = e => {
-//   e.preventDefault();
-//   return setShowEdit({
-//     showEdit: !showEdit
-//   });
-// };

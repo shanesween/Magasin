@@ -4,16 +4,20 @@ import { fetchProducts, filterProducts } from "../store/products";
 import Product from "./product";
 import Fade from "react-reveal/Fade";
 import ProductAddedModal from "./ProductAddedModal";
-
+import Pagination from "./Pagination";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const productFilter = useSelector(state => state.productFilter);
+
+  const page = 1;
+  const limit = 25;
+
   useEffect(() => {
-    dispatch(filterProducts(productFilter));
+    dispatch(filterProducts(productFilter, page, limit));
   }, []);
-  let first10 = products.slice(0, 10);
+  // let first10 = products.slice(0, 10);
 
   return (
     <>
@@ -22,7 +26,7 @@ const AllProducts = () => {
           <Fade>
             <div style={{ display: "inline-block" }}>
               <div className="row m-2">
-                {first10.map(product => {
+                {products.map(product => {
                   return <Product key={product.id} product={product} />;
                 })}
               </div>
@@ -43,6 +47,7 @@ const AllProducts = () => {
           })}
         </div>
       </div>
+      <Pagination />
     </>
   );
 };

@@ -2,27 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 import AddToCartButton from './AddToCartButton';
-import CheckOut from './CheckOutButton';
 import Reviews from './Reviews';
 import Quantity from './Quantity';
-import { updateProduct } from '../store/cart';
 import ProductAddedModal from './ProductAddedModal';
 
 const SingleProduct = props => {
   const [quantity, setQuantity] = useState(1);
   const product = useSelector(state => state.product);
-  // console.log("PRODUCT==>", product);
   const dispatch = useDispatch();
-  const handleChange = quantity => {
-    setQuantity(quantity);
+  const handleChange = qty => {
+    setQuantity(qty);
   };
 
   useEffect(() => {
     dispatch(fetchProduct(props.match.params.productId));
   }, []);
-
-  // const reviewArr = product.reviews;
-  // console.log(reviewArr);
 
   return (
     <>
@@ -31,11 +25,13 @@ const SingleProduct = props => {
           <div className="flex-fill align-self-center m-2">
             <div className="row text-xs-center text-sm-center text-md-center float-lg-right float-xl-right">
               <div className="col-sm">
-                <img
-                  src={product.imageUrl}
-                  className="img-fluid rounded opacity-95"
-                  style={{ maxHeight: '29rem' }}
-                />
+                <div style={{ maxWidth: '29rem', height: '29rem' }}>
+                  <img
+                    src={product.imageUrl}
+                    className="img-fluid rounded opacity-95 center-cropped"
+                    // style={{ maxHeight: '29rem' }}
+                  />
+                </div>
               </div>
             </div>
           </div>

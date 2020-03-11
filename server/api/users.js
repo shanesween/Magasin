@@ -6,9 +6,6 @@ module.exports = router;
 router.get('/', checkAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       order: [['id', 'ASC']],
       attributes: ['id', 'email', 'isAdmin', 'address'],
     });
@@ -28,7 +25,7 @@ router.get('/admin/:userId', checkAdmin, async (req, res, next) => {
   }
 });
 
-router.put('/admin/:userId', async (req, res, next) => {
+router.put('/admin/:userId', checkAdmin, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     const updatedUser = await user.update(req.body);
@@ -37,7 +34,8 @@ router.put('/admin/:userId', async (req, res, next) => {
     next(err);
   }
 });
-router.delete('/admin/:userId', async (req, res, next) => {
+
+router.delete('/admin/:userId', checkAdmin, async (req, res, next) => {
   try {
     await User.destroy({
       where: {

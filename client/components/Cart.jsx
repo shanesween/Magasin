@@ -13,14 +13,6 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [user]);
 
-  // console.log('CART==>', cart);
-  // console.log(
-  //   cart.products &&
-  //     cart.products
-  //       .reduce((acc, prod) => acc + +prod.price * prod.orderItem.quantity, 0)
-  //       .toFixed(2)
-  // );
-
   const subTotal =
     cart.products &&
     cart.products
@@ -32,6 +24,8 @@ const Cart = () => {
   const taxAmount = subTotal * taxRate;
 
   const cartTotal = +subTotal + +taxAmount;
+
+  let quantityValidationId = 0;
 
   return cart.products && cart.products.length ? (
     <div className="container-fluid" style={{ width: '100%' }}>
@@ -46,7 +40,14 @@ const Cart = () => {
         <div className="row">
           <div className="col align-content-center m-2 mr-2">
             {cart.products.map(cartItem => {
-              return <CartItem key={cartItem.id} cartItem={cartItem} />;
+              ++quantityValidationId;
+              return (
+                <CartItem
+                  key={cartItem.id}
+                  cartItem={cartItem}
+                  qtyId={quantityValidationId}
+                />
+              );
             })}
           </div>
         </div>
@@ -75,7 +76,7 @@ const Cart = () => {
                   <div className="col-4">
                     <h3
                       className="font-weight-bold"
-                      style={{ fontSize: "120% " }}
+                      style={{ fontSize: '120% ' }}
                     >
                       Total
                     </h3>
@@ -83,7 +84,7 @@ const Cart = () => {
                   <div className="col-8">
                     <h3
                       className="font-weight-bold text-right"
-                      style={{ fontSize: "120% " }}
+                      style={{ fontSize: '120% ' }}
                     >
                       ${cartTotal.toFixed(2)}
                     </h3>
@@ -105,9 +106,9 @@ const Cart = () => {
       </Fade>
     </div>
   ) : (
-    <div className="container-fluid text-center mb-mt-2">
+    <div className="container-fluid text-center mb-mt-5 pt-5 text-light">
       <Fade>
-        <p className="p-3">There are no items in your cart.</p>
+        <h3 className="p-5 shadow">There are no items in your cart.</h3>
       </Fade>
     </div>
   );

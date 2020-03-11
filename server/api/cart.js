@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const { Product, Order, User, OrderItem } = require("../db/models");
-const { loggedIn } = require("../api/middleware");
+const router = require('express').Router();
+const { Product, Order, User, OrderItem } = require('../db/models');
+const { loggedIn } = require('../api/middleware');
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   // console.log(req.session);
   try {
     let userCart;
@@ -14,38 +14,38 @@ router.get("/", async (req, res, next) => {
         await req.session.save();
       } else {
         userCart = await Order.findOne({
-          where: { status: "pending", id: req.session.cartId },
-          include: { model: Product, order: [["id", "ASC"]] }
+          where: { status: 'pending', id: req.session.cartId },
+          include: { model: Product, order: [['id', 'ASC']] },
         });
       }
     } else {
       userCart = await Order.findOne({
-        where: { userId: req.user.id, status: "pending" },
-        include: { model: Product, order: [["id", "ASC"]] }
+        where: { userId: req.user.id, status: 'pending' },
+        include: { model: Product, order: [['id', 'ASC']] },
       });
       if (!userCart) {
         userCart = await Order.create({
-          userId: req.user.id
+          userId: req.user.id,
         });
       }
       if (req.session.cartId) {
         let items = await OrderItem.findAll({
-          where: { orderId: req.session.cartId }
+          where: { orderId: req.session.cartId },
         });
         // console.log("items on logged out user", items);
         let newItems = items.map(item => {
           return {
             orderId: userCart.id,
             productId: item.dataValues.productId,
-            quantity: item.dataValues.quantity
+            quantity: item.dataValues.quantity,
           };
         });
         await OrderItem.bulkCreate(newItems);
         // console.log("usercart", userCart);
       }
       userCart = await Order.findOne({
-        where: { userId: req.user.id, status: "pending" },
-        include: { model: Product, order: [["id", "ASC"]] }
+        where: { userId: req.user.id, status: 'pending' },
+        include: { model: Product, order: [['id', 'ASC']] },
       });
       req.session.cartId = null;
       await req.session.save();
@@ -56,13 +56,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.put("/addItem", async (req, res, next) => {
+router.put('/addItem', async (req, res, next) => {
   try {
     //adding to cart now
     let cartId;
     if (req.user) {
       let cart = await Order.findOne({
-        where: { userId: req.user.id, status: "pending" }
+        where: { userId: req.user.id, status: 'pending' },
       });
       if (cart) cartId = cart.id;
       else {
@@ -72,7 +72,7 @@ router.put("/addItem", async (req, res, next) => {
     } else if (req.session.cartId) {
       cartId = req.session.cartId;
     } else {
-      let userCart = await Order.create();
+      let userCart = await Order.create({ userId: req.user.id });
       cartId = userCart.id;
       req.session.cartId = userCart.id;
       await req.session.save();
@@ -80,7 +80,7 @@ router.put("/addItem", async (req, res, next) => {
     // let cartId = req.cartId;
     const product = await Product.findByPk(req.body.productId);
     const orderItem = await OrderItem.findOne({
-      where: { productId: product.id, orderId: cartId }
+      where: { productId: product.id, orderId: cartId },
     });
     if (orderItem) {
       req.body.quantity
@@ -91,14 +91,14 @@ router.put("/addItem", async (req, res, next) => {
       await OrderItem.create({
         productId: product.id,
         orderId: cartId,
-        quantity: req.body.quantity ? req.body.quantity : 1
+        quantity: req.body.quantity ? req.body.quantity : 1,
       });
     }
     let updatedCart = await Order.findByPk(cartId, {
       include: {
         model: Product,
-        order: [["id", "ASC"]]
-      }
+        order: [['id', 'ASC']],
+      },
     });
     res.json(updatedCart);
   } catch (err) {
@@ -106,15 +106,15 @@ router.put("/addItem", async (req, res, next) => {
   }
 });
 
-router.put("/removeItem", async (req, res, next) => {
+router.put('/removeItem', async (req, res, next) => {
   try {
     const { orderItem } = req.body;
     const orderItemToDestroy = await OrderItem.findOne({
-      where: { orderId: orderItem.orderId, productId: orderItem.productId }
+      where: { orderId: orderItem.orderId, productId: orderItem.productId },
     });
     await orderItemToDestroy.destroy();
     let updatedCart = await Order.findByPk(orderItem.orderId, {
-      include: { model: Product, order: [["id", "ASC"]] }
+      include: { model: Product, order: [['id', 'ASC']] },
     });
 
     res.json(updatedCart);
