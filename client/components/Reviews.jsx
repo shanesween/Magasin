@@ -146,7 +146,10 @@ const Review = props => {
   } else {
     return (
       <div className="container">
-        <h1> Be the First to Leave a Review!</h1>
+        <h1 className="text-light text-center">
+          {" "}
+          Be the First to Leave a Review!
+        </h1>
         <ReviewsForm product={props.product} />;
       </div>
     );

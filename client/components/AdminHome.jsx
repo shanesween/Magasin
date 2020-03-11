@@ -15,7 +15,7 @@ import AdminAddProduct from "./AdminAddProduct";
 const AdminHome = () => {
   // const [limit, setLimit] = useState(25);
   // const page = window.location.href.split()
-  const page = queryString.parse(location.search);
+  // const page = queryString.parse(location.search);
 
   const dispatch = useDispatch();
   const orders = useSelector(state => state.orders);
@@ -109,7 +109,7 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <h1>Covfefe Admin Portal</h1>
+            <h1 className="text-light">Covfefe Admin Portal</h1>
             <button
               type="button"
               className="btn btn-primary"
@@ -129,10 +129,7 @@ const AdminHome = () => {
                 <AdminAddProduct />
               </div>
             </div>
-            <h4>
-              To Do: -Make Categories, -Filter functionality for products and
-              orders, -edit order status, -delete user{" "}
-            </h4>
+            <h4></h4>
           </div>
           <div
             className="tab-pane fade show"
@@ -140,9 +137,9 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="user-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
-                {users.map(user => (
+                {users25.map(user => (
                   <AdminUsers key={user.id} user={user} />
                 ))}
               </ul>
@@ -183,12 +180,41 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="product-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
                 {products25.map(product => (
                   <AdminProducts key={product.id} product={product} />
                 ))}
               </ul>
+              <nav aria-label="...">
+                <ul className="pagination">
+                  <li className="page-item disabled">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Previous
+                    </a>
+                  </li>
+                  <li className="page-item active">
+                    <a className="page-link" href="#">
+                      1 <span className="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li className="page-item ">
+                    <a className="page-link" href="#">
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#">
+                      3
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
           <div
@@ -197,12 +223,41 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="user-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
                 {orders25.map(order => (
                   <AdminOrders key={order.id} order={order} />
                 ))}
               </ul>
+              <nav aria-label="...">
+                <ul className="pagination">
+                  <li className="page-item disabled">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Previous
+                    </a>
+                  </li>
+                  <li className="page-item active">
+                    <a className="page-link" href="#">
+                      1 <span className="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li className="page-item ">
+                    <a className="page-link" href="#">
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#">
+                      3
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
