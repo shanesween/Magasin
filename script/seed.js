@@ -1,5 +1,4 @@
 'use strict';
-
 const db = require('../server/db');
 const {
   User,
@@ -9,11 +8,12 @@ const {
   Review
 } = require('../server/db/models');
 const faker = require('faker/index');
+const imageBank = require('./imageBank');
 
 //create products
 
-const categories = ['coffee', 'tea', 'other'],
-  randomCategory = () => categories[Math.floor(Math.random() * 3)];
+const categories = ['objet', 'sujet'],
+  randomCategory = () => categories[Math.floor(Math.random() * 2)];
 
 let prodCount = 333;
 const products = [];
@@ -21,14 +21,17 @@ while (prodCount) {
   products.push({
     title: faker.fake('{{commerce.productName}}'),
     description: faker.fake('{{lorem.sentence}}'),
-    price: faker.fake('{{commerce.price}}'),
-    stock: faker.fake('{{random.number}}'),
-    // imageUrl: undefined,
+    price: Math.floor(Math.random() * 444.44).toFixed(2),
+    stock: Math.floor(Math.random() * 2200),
+    imageUrl: imageBank[prodCount],
     category: randomCategory(),
     origin: faker.fake('{{address.country}}')
   });
+
   --prodCount;
 }
+
+// fetch('https://source.unsplash.com/random/?object').then(response=>response.url)
 
 // create users
 let userCount = 99;
@@ -69,7 +72,7 @@ while (populateOrders) {
     singleOrderItems.push({
       productId: orderItems.length + 1,
       quantity: Math.ceil(Math.random() * 9),
-      price: faker.fake('{{commerce.price}}')
+      price: Math.floor(Math.random() * 444.44).toFixed(2)
     });
 
     --orderItemCount;

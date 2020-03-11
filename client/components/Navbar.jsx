@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import CheckOut from "./CheckOutButton";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
@@ -55,7 +54,17 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
             ) : null}
           </ul>
         ) : (
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home">
+                home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                cart
+              </Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/login">
                 login
@@ -64,11 +73,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
             <li className="nav-item">
               <Link className="nav-link" to="/signup">
                 sign up
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                cart
               </Link>
             </li>
           </ul>

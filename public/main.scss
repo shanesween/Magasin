@@ -56,6 +56,15 @@ img {
   object-fit: cover;
 }
 
+.center-cropped {
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  // background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+
 .navbar-brand {
   font-family: 'covfefeBrand';
   color: #081400;
