@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import queryString from "query-string";
+// import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 // import Product from "./product";
@@ -15,7 +15,7 @@ import AdminAddProduct from "./AdminAddProduct";
 const AdminHome = () => {
   // const [limit, setLimit] = useState(25);
   // const page = window.location.href.split()
-  const page = queryString.parse(location.search);
+  // const page = queryString.parse(location.search);
 
   const dispatch = useDispatch();
   const orders = useSelector(state => state.orders);
