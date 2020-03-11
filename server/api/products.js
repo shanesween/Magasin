@@ -9,7 +9,26 @@ router.get("/", async (req, res, next) => {
     const products = await Product.findAll({
       order: [["id", "ASC"]]
     });
-    res.json(products);
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const results = {};
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit
+      };
+    }
+    if (endIndex < products.length) {
+      results.next = {
+        page: page + 1,
+        limit: limit
+      };
+    }
+    results.result = products.slice(startIndex, endIndex);
+    res.json(results.result);
+    // res.json(products);
   } catch (err) {
     next(err);
   }
@@ -28,7 +47,7 @@ router.get("/:productId", async (req, res, next) => {
 });
 
 //route for add product
-router.post("/", async (req, res, next) => {
+router.post("/admin", checkAdmin, async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
     res.json(product);
@@ -37,8 +56,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/admin/:productId", function(req, res, next) {
-  console.log(req.body);
+router.put("/admin/:productId", checkAdmin, async (req, res, next) => {
   let newProduct = req.body.productParams;
   Product.update(newProduct, {
     where: { id: req.params.productId },
@@ -52,7 +70,7 @@ router.put("/admin/:productId", function(req, res, next) {
 });
 
 router.delete("/admin/:productId", checkAdmin, async (req, res, next) => {
-  Product.destroy({
+  await Product.destroy({
     where: {
       id: req.params.userId
     }
