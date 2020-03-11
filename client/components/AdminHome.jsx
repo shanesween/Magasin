@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../store/products";
+import { fetchProducts, filterProducts } from "../store/products";
 // import Product from "./product";
 import Fade from "react-reveal/Fade";
 import { fetchUsers } from "../store/users";
@@ -11,6 +11,7 @@ import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
 import AdminOrders from "./AdminOrders";
 import AdminAddProduct from "./AdminAddProduct";
+import Pagination from "./Pagination";
 
 const AdminHome = () => {
   // const [limit, setLimit] = useState(25);
@@ -22,8 +23,11 @@ const AdminHome = () => {
   const users = useSelector(state => state.users);
   const products = useSelector(state => state.products);
 
+  const page = 1;
+  const limit = 25;
+
   const handleProductsClick = () => {
-    dispatch(fetchProducts(products));
+    dispatch(filterProducts(products, page, limit));
   };
 
   const handleUsersClick = () => {
@@ -31,7 +35,7 @@ const AdminHome = () => {
   };
 
   const handleOrdersClick = () => {
-    dispatch(fetchOrders(orders));
+    dispatch(fetchOrders());
   };
 
   let users25 = users.slice(0, 25);
@@ -109,7 +113,7 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <h1>Covfefe Admin Portal</h1>
+            <h1 className="text-light">Covfefe Admin Portal</h1>
             <button
               type="button"
               className="btn btn-primary"
@@ -129,10 +133,6 @@ const AdminHome = () => {
                 <AdminAddProduct />
               </div>
             </div>
-            <h4>
-              To Do: -Make Categories, -Filter functionality for products and
-              orders, -edit order status, -delete user{" "}
-            </h4>
           </div>
           <div
             className="tab-pane fade show"
@@ -140,41 +140,13 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="user-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
-                {users.map(user => (
+                {users25.map(user => (
                   <AdminUsers key={user.id} user={user} />
                 ))}
               </ul>
-              <nav aria-label="...">
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a className="page-link" href="#" tabIndex="-1">
-                      Previous
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
-                      1 <span className="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li className="page-item ">
-                    <a className="page-link" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#" tabIndex="-1">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <Pagination />
             </div>
           </div>
           <div
@@ -183,12 +155,13 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="product-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
                 {products25.map(product => (
                   <AdminProducts key={product.id} product={product} />
                 ))}
               </ul>
+              <Pagination />
             </div>
           </div>
           <div
@@ -197,12 +170,13 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="user-tab"
           >
-            <div className="card">
+            <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
                 {orders25.map(order => (
                   <AdminOrders key={order.id} order={order} />
                 ))}
               </ul>
+              <Pagination />
             </div>
           </div>
         </div>

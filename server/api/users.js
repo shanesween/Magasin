@@ -26,7 +26,7 @@ router.get("/admin/:userId", checkAdmin, async (req, res, next) => {
   }
 });
 
-router.put("/admin/:userId", async (req, res, next) => {
+router.put("/admin/:userId", checkAdmin, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     const updatedUser = await user.update(req.body);
@@ -36,7 +36,7 @@ router.put("/admin/:userId", async (req, res, next) => {
   }
 });
 
-router.delete("/admin/:userId", async (req, res, next) => {
+router.delete("/admin/:userId", checkAdmin, async (req, res, next) => {
   try {
     await User.destroy({
       where: {

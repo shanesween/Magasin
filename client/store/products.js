@@ -28,15 +28,19 @@ export const fetchProducts = () => {
   };
 };
 
-export const filterProducts = value => {
+export const filterProducts = (value, page, limit) => {
   return async dispatch => {
     try {
       let filteredProducts;
       if (value === "all") {
-        let { data } = await axios.get("/api/products");
+        let { data } = await axios.get(
+          `/api/products?page=${page}&limit=${limit}`
+        );
         filteredProducts = data;
       } else {
-        let { data } = await axios.get(`/api/products/filter/${value}`);
+        let { data } = await axios.get(
+          `/api/products?filter=${value}&page=${page}&limit=${limit}`
+        );
         filteredProducts = data;
       }
       dispatch(getProducts(filteredProducts));
@@ -47,7 +51,7 @@ export const filterProducts = value => {
 };
 
 export const addNewProduct = productParams => async dispatch => {
-  const { data } = await axios.post("/api/products", productParams);
+  const { data } = await axios.post("/api/products/admin", productParams);
   dispatch(addedNewProduct(data));
 };
 
