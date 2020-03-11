@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 // import Product from "./product";
@@ -12,6 +13,10 @@ import AdminOrders from "./AdminOrders";
 import AdminAddProduct from "./AdminAddProduct";
 
 const AdminHome = () => {
+  // const [limit, setLimit] = useState(25);
+  // const page = window.location.href.split()
+  // const page = queryString.parse(location.search);
+
   const dispatch = useDispatch();
   const orders = useSelector(state => state.orders);
   const users = useSelector(state => state.users);
@@ -22,7 +27,7 @@ const AdminHome = () => {
   };
 
   const handleUsersClick = () => {
-    dispatch(fetchUsers(users));
+    dispatch(fetchUsers());
   };
 
   const handleOrdersClick = () => {
@@ -137,10 +142,39 @@ const AdminHome = () => {
           >
             <div className="card">
               <ul className="list-group list-group-flush">
-                {users25.map(user => (
+                {users.map(user => (
                   <AdminUsers key={user.id} user={user} />
                 ))}
               </ul>
+              <nav aria-label="...">
+                <ul className="pagination">
+                  <li className="page-item disabled">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Previous
+                    </a>
+                  </li>
+                  <li className="page-item active">
+                    <a className="page-link" href="#">
+                      1 <span className="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li className="page-item ">
+                    <a className="page-link" href="#">
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#">
+                      3
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a className="page-link" href="#" tabIndex="-1">
+                      Next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
           <div

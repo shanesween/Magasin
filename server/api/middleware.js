@@ -28,25 +28,27 @@ const checkAdmin = async (req, res, next) => {
 //   }
 // };
 
-// const stockCheck = async (req, res, next) => {
-//   const { token } = req.body;
-//   let orderItems = await OrderItem.findAll({
-//     where: { orderId: token.cartId }
-//   });
+const stockCheck = async (req, res, next) => {
+  const { token } = req.body;
+  let orderItems = await OrderItem.findAll({
+    where: { orderId: token.cartId }
+  });
+  let productsArray = [];
+  orderItems.forEach(async orderItem => {
+    let productFound = await Product.findByPk(orderItem.productId);
+    // productFound
+    console.log("stock", productFound.stock, "quantity", orderItem.quantity);
+    if (Number(productFound.stock) < Number(orderItem.quantity)) {
+      productsArray.push(productFound.id);
+    }
+  });
+  // console.log(productsArray.length);
+  if (productsArray.length) {
+    let status = "failure";
+    res.json({ status });
+  } else {
+    next();
+  }
+};
 
-//   let productsArray = orderItems.filter(async orderItem => {
-//     let productFound = await Product.findByPk(orderItem.productId);
-//     // productFound
-//     if (Number(orderItem.quantity) > Number(productFound.stock)) {
-//       return productFound.id;
-//     }
-//   });
-//   console.log("productsArray", productsArray);
-//   if (productsArray.length) {
-//     res.sendStatus(400);
-//   } else {
-//     next();
-//   }
-// };
-
-module.exports = { checkAdmin };
+module.exports = { checkAdmin, stockCheck };

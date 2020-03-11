@@ -25,11 +25,13 @@ const SingleProduct = props => {
           <div className='flex-fill align-self-center m-2'>
             <div className='row text-xs-center text-sm-center text-md-center float-lg-right float-xl-right'>
               <div className='col-sm'>
-                <img
-                  src={product.imageUrl}
-                  className='img-fluid rounded opacity-95'
-                  style={{ maxHeight: '29rem' }}
-                />
+                <div style={{ maxWidth: '29rem', height: '29rem' }}>
+                  <img
+                    src={product.imageUrl}
+                    className='img-fluid rounded opacity-95 center-cropped'
+                    // style={{ maxHeight: '29rem' }}
+                  />
+                </div>
               </div>
             </div>
           </div>

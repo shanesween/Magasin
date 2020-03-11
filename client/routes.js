@@ -13,7 +13,8 @@ import {
   CheckOut,
   AdminHome,
   AdminEditUser,
-  AdminEditProduct
+  AdminEditProduct,
+  SplashPage
 } from "./components";
 import { me } from "./store";
 import AdminAddProduct from "./components/AdminAddProduct";
@@ -35,10 +36,11 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/home" component={AllProducts} />
+        <Route path="/home" component={SplashPage} />
+        <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={SplashPage} />
         {isAdmin && (
           <Switch>
             <Route exact path="/admin" component={AdminHome} />
