@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import SingleReview from "./SingleReview";
-import ReviewsForm from "./ReviewForm";
+import React, { useEffect } from 'react';
+import SingleReview from './SingleReview';
+import ReviewsForm from './ReviewForm';
 
 const Review = props => {
   const reviews = props.product.reviews;
@@ -20,7 +20,7 @@ const Review = props => {
   if (reviews && reviews.length !== 0) {
     let count = 0;
     let bad = 0;
-    console.log("reviews", reviews.length);
+    console.log('reviews', reviews.length);
 
     let good = 0;
     // count the number of bad reviews and good reviews
@@ -47,9 +47,9 @@ const Review = props => {
 
     let averageRating = Math.floor(count / reviews.length);
     // eslint-disable-next-line no-unused-vars
-    let stars = "";
+    let stars = '';
     while (averageRating !== 0) {
-      stars += "⭐️";
+      stars += '⭐️';
       averageRating--;
     }
 
@@ -133,7 +133,6 @@ const Review = props => {
                 {reviews.map((review, idx) => (
                   <SingleReview review={review} key={idx} />
                 ))}
-                <ReviewsForm product={props.product} />
               </div>
             </div>
           </div>
@@ -145,10 +144,15 @@ const Review = props => {
     return <h4> Loading</h4>;
   } else {
     return (
-      <div className="container text-light text-center mt-4">
-        <h5> be the first to review...</h5>
-        <ReviewsForm product={props.product} />;
-      </div>
+      <>
+        <div className="d-flex">
+          <div className="containaer">
+            <div className="row">
+              <h4 style={{ color: 'white' }}>No Reviews</h4>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 };

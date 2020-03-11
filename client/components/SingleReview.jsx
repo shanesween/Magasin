@@ -36,8 +36,21 @@ const SingleReview = props => {
           data-parent="#accordionExample"
         >
           <div className="card-body">
-            <p>{props.review.rating >= 3 ? 'GOOD ✅' : 'BAD ❌'}</p>
-            {review.text}
+            <p>
+              <cite title="Source Title">
+                {props.review.rating >= 3
+                  ? 'Overall: GOOD ✅'
+                  : 'Overall: BAD ❌'}
+              </cite>
+            </p>
+            <p>
+              {' '}
+              <cite title="Source Title">Comment:</cite>
+            </p>
+            <blockquote className="blockquote text-left">
+              <p>{review.text}</p>
+              <footer className="blockquote-footer">Anonymous Buyer</footer>
+            </blockquote>
           </div>
         </div>
       </div>

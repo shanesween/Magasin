@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Login,
   Signup,
@@ -12,12 +12,17 @@ import {
   NotFound,
   CheckOut,
   AdminHome,
+  AdminSingleUser,
   AdminEditUser,
   AdminEditProduct,
-  SplashPage
-} from "./components";
-import { me } from "./store";
-import AdminAddProduct from "./components/AdminAddProduct";
+  SplashPage,
+  UserSingleOrder,
+  ReviewForm,
+} from './components';
+import { me } from './store';
+import AdminAddProduct from './components/AdminAddProduct';
+import UserProfile from './components/UserProfile';
+import CheckoutConfirm from './components/CheckoutConfirm';
 
 /**
  * COMPONENT
@@ -40,6 +45,8 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/success" component={CheckoutConfirm} />
         <Route exact path="/" component={SplashPage} />
         {isAdmin && (
           <Switch>
@@ -63,7 +70,15 @@ class Routes extends Component {
         )}
         {isLoggedIn && (
           <Switch>
+            <Route path="/admin" component={AdminHome} />
+            <Route exact path="/users/:userId" component={AdminEditUser} />
+            <Route exact path="/settings" component={UserProfile} />
+            <Route exact path="/orders/:orderId" component={UserSingleOrder} />
+
+            {/* Routes placed here are only available after logging in */}
             <Route exact path="/profile" component={UserHome} />
+
+            <Route exact path="/review/:productId" component={ReviewForm} />
           </Switch>
         )}
         <Route component={NotFound} />
@@ -80,7 +95,7 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAdmin: !!state.user.isAdmin
+    isAdmin: !!state.user.isAdmin,
   };
 };
 
@@ -88,7 +103,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-    }
+    },
   };
 };
 
@@ -102,5 +117,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes));
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool.isRequired
+  isAdmin: PropTypes.bool.isRequired,
 };

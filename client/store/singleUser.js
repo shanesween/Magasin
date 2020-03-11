@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPES
 
-const SHOW_SINGLE_USER = "SHOW_SINGLE_USER";
-const UPDATE_USER = "UPATE_USER";
+const SHOW_SINGLE_USER = 'SHOW_SINGLE_USER';
+const UPDATE_USER = 'UPATE_USER';
 
 // ACTION CREATORS
 
@@ -20,7 +20,18 @@ export const fetchSingleUser = id => {
       const { data } = await axios.get(`/api/users/admin/${id}`);
       dispatch(showSingleUser(data));
     } catch (err) {
-      console.error("Error in fetchSingleUser thunk", err);
+      console.error('Error in fetchSingleUser thunk', err);
+    }
+  };
+};
+
+export const fetchUser = () => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`/api/users/profile`);
+      dispatch(showSingleUser(data));
+    } catch (err) {
+      console.error('Error in fetchUser thunk', err);
     }
   };
 };
@@ -34,7 +45,19 @@ export const editedUser = (id, singleUserParams) => {
       );
       dispatch(updateUser(data));
     } catch (err) {
-      console.error("Error in editUser thunk", err);
+      console.error('Error in editUser thunk', err);
+    }
+  };
+};
+export const editUser = singleUserParams => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.put(`/api/users/profile`, {
+        singleUserParams,
+      });
+      dispatch(updateUser(data));
+    } catch (err) {
+      console.error('Error in editUser thunk', err);
     }
   };
 };

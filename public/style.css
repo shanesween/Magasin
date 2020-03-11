@@ -1,13 +1,3 @@
-$theme-colors: (
-  'primary': #74da31,
-  'secondary': #abb3a5,
-  'info': #9dda75,
-  'danger': #dd0058,
-  'dark': #081400,
-);
-
-@import '../node_modules/bootstrap/scss/bootstrap';
-
 /* branding font */
 @font-face {
   font-family: 'covfefeBrand';
@@ -56,61 +46,19 @@ img {
   object-fit: cover;
 }
 
-.fx-container {
-  display: flex;
-  width: 100%;
-  padding: 4% 2%;
-  box-sizing: border-box;
-  height: 90vh;
-}
-
-.box {
-  flex: 1;
-  overflow: hidden;
-  transition: .5s;
-  margin: 0 2%;
-  box-shadow: 0 20px 30px rgba(0,0,0,.1);
-  line-height: 0;
-}
-
-.box > img {
-  width: 200%;
-  height: calc(100% - 10vh);
-  object-fit: cover;
-  transition: .5s;
-}
-
-.box > span {
-  font-size: 3.8vh;
-  display: block;
-  text-align: center;
-  height: 10vh;
-  line-height: 2.6;
-}
-
-.box:hover { flex: 1 1 50%; }
-.box:hover > img {
-  width: 100%;
-  height: 100%;
-}
-
-
-.center-cropped {
-  width: 100%;
-  height: 100%;
-  background-position: center center;
-  // background-repeat: no-repeat;
-  overflow: hidden;
-}
-
-
 .navbar-brand {
   font-family: 'covfefeBrand';
-  color: #081400;
+  color: #040a00;
   font-size: 39px;
   margin: 0px 16px 12px 32px;
   padding: 0px;
 }
+
+/* .navbar .sticky-top {
+  position: fixed !important;
+  width: 100%;
+  top: 0 !important;
+} */
 
 .card {
   box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
