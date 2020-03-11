@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrderItem } from '../store/orderItem';
 import { Link } from 'react-router-dom';
 
 import Fade from 'react-reveal/Fade';
 
 const UserOrders = props => {
   const order = props.order;
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.orderItem);
+
+  useEffect(() => {
+    dispatch(fetchOrderItem());
+  }, []);
 
   const handleClick = () => {
     console.log();
@@ -28,7 +36,7 @@ const UserOrders = props => {
                 <small className="text-muted">{`total: $${order.total}`}</small>
               </p>
               <p className="card-text">
-                <small className="text-muted">{`# of Items in Order: ${order.products.length}`}</small>
+                <small className="text-muted">{`# of Items in Order: ${items.length}`}</small>
               </p>
               <p className="card-text">
                 <small className="text-muted">{`Last Updated: ${order.updatedAt}`}</small>

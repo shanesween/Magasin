@@ -6,8 +6,8 @@ const SHOW_SINGLE_USER_ORDERS = 'SHOW_SINGLE_USER_ORDERS';
 
 // ACTION CREATORS
 
-const showSingleUserOrders = orders => {
-  return { type: SHOW_SINGLE_USER_ORDERS, orders };
+const showSingleUserOrders = ord => {
+  return { type: SHOW_SINGLE_USER_ORDERS, ord };
 };
 
 // THUNK CREATORS
@@ -30,7 +30,7 @@ export const fetchOrders = () => {
 export default function(orders = [], action) {
   switch (action.type) {
     case SHOW_SINGLE_USER_ORDERS:
-      return action.orders;
+      return action.ord;
 
     default:
       return orders;

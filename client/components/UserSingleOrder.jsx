@@ -7,6 +7,7 @@ import { fetchOrderItem } from '../store/orderItem';
 import SingleItem from './SingleOrder';
 
 const UserSingleOrder = props => {
+  const dispatch = useDispatch();
   const handleClick = () => {
     console.log();
     window.fetch('http://localhost:8080/testForm');
@@ -15,7 +16,6 @@ const UserSingleOrder = props => {
     dispatch(fetchOrderItem(props.match.params.orderId));
   }, []);
 
-  const dispatch = useDispatch();
   const orderItem = useSelector(state => state.orderItem);
 
   console.log(orderItem);

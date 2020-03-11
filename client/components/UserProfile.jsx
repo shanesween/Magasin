@@ -11,21 +11,22 @@ import UserSettingsForm from './UserSettingsForm';
 const UserProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.singleUser);
-  const orders = useSelector(state => state.orders);
+  const orders = user.orders;
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
 
-  const handleProductsClick = () => {
-    dispatch(fetchOrders());
-  };
+  // const handleProductsClick = () => {
+  //   dispatch(fetchOrders());
+  // };
 
   const handleUsersClick = () => {
     dispatch(fetchUser());
   };
   console.log('user', user);
   console.log('orders', orders);
-  if (orders !== undefined && user !== undefined) {
+  if (user !== undefined && orders !== undefined) {
+    console.log('these orders', orders);
     return (
       <div>
         <Fade>
@@ -69,7 +70,7 @@ const UserProfile = () => {
                   role="tab"
                   aria-controls="products"
                   aria-selected="true"
-                  onClick={handleProductsClick}
+                  // onClick={handleProductsClick}
                 >
                   Orders
                 </a>

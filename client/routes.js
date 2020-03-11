@@ -17,7 +17,7 @@ import {
   AdminEditProduct,
   SplashPage,
   UserSingleOrder,
-  ReviewsForm,
+  ReviewForm,
 } from './components';
 import { me } from './store';
 import AdminAddProduct from './components/AdminAddProduct';
@@ -75,7 +75,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/profile" component={UserHome} />
 
-            <Route exact path="/review/:productId" component={ReviewsForm} />
+            <Route exact path="/review/:productId" component={ReviewForm} />
           </Switch>
         )}
         <Route component={NotFound} />
