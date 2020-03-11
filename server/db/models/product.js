@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Product = db.define('product', {
   title: {
@@ -27,13 +27,13 @@ const Product = db.define('product', {
     }
   },
   category: {
-    type: Sequelize.ENUM('coffee', 'tea', 'other'),
+    type: Sequelize.ENUM('objet', 'sujet'),
     allowNull: false
   },
   origin: {
     type: Sequelize.STRING,
     allowNull: false
   }
-})
+});
 
-module.exports = Product
+module.exports = Product;

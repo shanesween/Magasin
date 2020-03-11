@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import queryString from "query-string";
+// import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, filterProducts } from "../store/products";
 // import Product from "./product";
