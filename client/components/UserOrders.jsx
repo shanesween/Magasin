@@ -21,11 +21,6 @@ const UserOrders = props => {
 
   return (
     <Fade>
-      <a href="#">
-        <div className="circle-tile-heading dark-blue">
-          <i className="fa fa-users fa-fw fa-3x"></i>
-        </div>
-      </a>
       <div className="card mb-3" style={{ maxWidth: 540 + 'px' }}>
         <div className="row no-gutters">
           <div className="col-md-8">
@@ -36,7 +31,7 @@ const UserOrders = props => {
                 <small className="text-muted">{`total: $${order.total}`}</small>
               </p>
               <p className="card-text">
-                <small className="text-muted">{`# of Items in Order: ${items.length}`}</small>
+                <small className="text-muted">{`# of Items in Order: ${order.products.length}`}</small>
               </p>
               <p className="card-text">
                 <small className="text-muted">{`Last Updated: ${order.updatedAt}`}</small>

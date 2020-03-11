@@ -2,12 +2,12 @@ import axios from 'axios';
 
 //ACTION TYPES
 
-const SHOW_SINGLE_USER_ORDERS = 'SHOW_SINGLE_USER_ORDERS';
+const SHOW_SINGLE_ORDERS = 'SHOW_SINGLE_ORDERS';
 
 // ACTION CREATORS
 
-const showSingleUserOrders = ord => {
-  return { type: SHOW_SINGLE_USER_ORDERS, ord };
+const showSingleUserOrders = order => {
+  return { type: SHOW_SINGLE_ORDERS, order };
 };
 
 // THUNK CREATORS
@@ -27,12 +27,12 @@ export const fetchOrders = () => {
 
 // REDUCER
 
-export default function(orders = [], action) {
+export default function(order = [], action) {
   switch (action.type) {
-    case SHOW_SINGLE_USER_ORDERS:
-      return action.ord;
+    case SHOW_SINGLE_ORDERS:
+      return action.order;
 
     default:
-      return orders;
+      return order;
   }
 }

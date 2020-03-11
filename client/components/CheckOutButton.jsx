@@ -20,9 +20,10 @@ const CheckOut = props => {
     console.log('DATA', data);
     if (data.status === 'success') {
       dispatch(fetchCart());
-      history.push('/home');
+      history.push('/success');
     } else {
       dispatch(fetchCart());
+      alert('Couldnt Process Payment/ Try other payment credentials');
     }
   }
 

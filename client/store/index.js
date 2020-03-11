@@ -12,6 +12,7 @@ import orders from './orders';
 import singleOrder from './singleOrder';
 import productFilter from './productFilter';
 import orderItem from './orderItem';
+import order from './order';
 
 const reducer = combineReducers({
   user,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   orders,
   orderItem,
   singleOrder,
+  order,
 
   productFilter,
 });
@@ -38,3 +40,5 @@ export * from './singleUser';
 export * from './orders';
 export * from './singleOrder';
 export * from './productFilter';
+
+export * from './order';

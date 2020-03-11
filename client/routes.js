@@ -22,6 +22,7 @@ import {
 import { me } from './store';
 import AdminAddProduct from './components/AdminAddProduct';
 import UserProfile from './components/UserProfile';
+import CheckoutConfirm from './components/CheckoutConfirm';
 
 /**
  * COMPONENT
@@ -45,6 +46,7 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={AllProducts} />
+        <Route exact path="/success" component={CheckoutConfirm} />
         {isAdmin && (
           <Switch>
             <Route exact path="/admin" component={AdminHome} />
