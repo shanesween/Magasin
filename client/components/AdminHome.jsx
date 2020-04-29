@@ -19,9 +19,9 @@ const AdminHome = () => {
   // const page = queryString.parse(location.search);
 
   const dispatch = useDispatch();
-  const orders = useSelector(state => state.orders);
-  const users = useSelector(state => state.users);
-  const products = useSelector(state => state.products);
+  const orders = useSelector((state) => state.orders);
+  const users = useSelector((state) => state.users);
+  const products = useSelector((state) => state.products);
 
   const page = 1;
   const limit = 25;
@@ -113,7 +113,7 @@ const AdminHome = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <h1 className="text-light">Covfefe Admin Portal</h1>
+            <h1 className="text-light">magasin Admin Portal</h1>
             <button
               type="button"
               className="btn btn-primary"
@@ -142,7 +142,7 @@ const AdminHome = () => {
           >
             <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
-                {users25.map(user => (
+                {users25.map((user) => (
                   <AdminUsers key={user.id} user={user} />
                 ))}
               </ul>
@@ -157,7 +157,7 @@ const AdminHome = () => {
           >
             <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
-                {products25.map(product => (
+                {products25.map((product) => (
                   <AdminProducts key={product.id} product={product} />
                 ))}
               </ul>
@@ -172,7 +172,7 @@ const AdminHome = () => {
           >
             <div className="card" style={{ background: "00000000" }}>
               <ul className="list-group list-group-flush">
-                {orders25.map(order => (
+                {orders25.map((order) => (
                   <AdminOrders key={order.id} order={order} />
                 ))}
               </ul>

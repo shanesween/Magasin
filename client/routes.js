@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   Login,
   Signup,
@@ -18,11 +18,11 @@ import {
   SplashPage,
   UserSingleOrder,
   ReviewForm,
-} from './components';
-import { me } from './store';
-import AdminAddProduct from './components/AdminAddProduct';
-import UserProfile from './components/UserProfile';
-import CheckoutConfirm from './components/CheckoutConfirm';
+} from "./components";
+import { me } from "./store";
+import AdminAddProduct from "./components/AdminAddProduct";
+import UserProfile from "./components/UserProfile";
+import CheckoutConfirm from "./components/CheckoutConfirm";
 
 /**
  * COMPONENT
@@ -45,7 +45,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={SplashPage} />
         <Route exact path="/success" component={CheckoutConfirm} />
         <Route exact path="/" component={SplashPage} />
         {isAdmin && (
@@ -90,7 +90,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
@@ -99,7 +99,7 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());

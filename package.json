@@ -1,5 +1,5 @@
 {
-  "name": "covfefe",
+  "name": "magasin",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -9,7 +9,7 @@
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
-    "postinstall": "touch secrets.js",
+    "postinstall": "grunt sass:production",
     "deploy": "script/deploy",
     "heroku-token": "script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
@@ -37,6 +37,7 @@
     "grunt-cli": "*",
     "grunt-contrib-sass": "*",
     "grunt-contrib-watch": "*",
+    "heroku-cli": "^7.0.9",
     "history": "^4.10.1",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",

@@ -7,6 +7,12 @@ module.exports = (grunt) => {
           "public/main.css": "public/main.scss",
         },
       },
+      production: {
+        options: {},
+        files: {
+          "public/main.css": "public/main.scss",
+        },
+      },
     },
     watch: {
       files: ["<%= sass.files %>"],

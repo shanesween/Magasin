@@ -1,11 +1,11 @@
 /* branding font */
 @font-face {
-  font-family: 'covfefeBrand';
-  src: url('fonts/cofefeBrand-bold.otf') format('opentype'),
-    /* Safari, Android, iOS */ url('fonts/covfefeBrand-bold-webfont.woff2')
-      format('woff2'),
-    /* Super Modern Browsers */ url('fonts/covfefeBrand-bold-webfont.woff')
-      format('woff');
+  font-family: "magasinBrand";
+  src: url("fonts/cofefeBrand-bold.otf") format("opentype"),
+    /* Safari, Android, iOS */ url("fonts/magasinBrand-bold-webfont.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */ url("fonts/magasinBrand-bold-webfont.woff")
+      format("woff");
   /* Modern Browsers */
 }
 
@@ -18,7 +18,7 @@ body {
   margin: 0;
   width: 100vw;
   overflow: visible;
-  background: url('https://platformla.com/wp-content/uploads/2019/06/yoal-desurmont-jqgsM3B9Fpo-unsplash.jpg');
+  background: url("https://platformla.com/wp-content/uploads/2019/06/yoal-desurmont-jqgsM3B9Fpo-unsplash.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -47,7 +47,7 @@ img {
 }
 
 .navbar-brand {
-  font-family: 'covfefeBrand';
+  font-family: "magasinBrand";
   color: #040a00;
   font-size: 39px;
   margin: 0px 16px 12px 32px;

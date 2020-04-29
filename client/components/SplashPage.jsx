@@ -1,54 +1,54 @@
-import React, { useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from '../store/productFilter';
-import Product from './product';
+import React, { useEffect } from "react";
+import Fade from "react-reveal/Fade";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../store/productFilter";
+import Product from "./product";
 
-const SplashPage = props => {
+const SplashPage = (props) => {
   let history = props.history;
   const dispatch = useDispatch();
   return (
     <div
-      className='fx-container text-light opacity-95'
-      style={{ fontFamily: 'covfefeBrand' }}
-      onClick={event => {
-        dispatch(setFilter(event.target.getAttribute('value')));
-        history.push('/products');
+      className="fx-container text-light opacity-95"
+      style={{ fontFamily: "magasinBrand" }}
+      onClick={(event) => {
+        dispatch(setFilter(event.target.getAttribute("value")));
+        history.push("/products");
       }}
     >
       <Fade bottom cascade>
         <div
-          className='box rounded border-dark shadow-lg opacity-95'
-          value='objet'
+          className="box rounded border-dark shadow-lg opacity-95"
+          value="objet"
         >
           <img
             // src='https://source.unsplash.com/1000x802/?object'
-            src='https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000'
-            value='objet'
+            src="https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000"
+            value="objet"
           />
           <span>objets</span>
         </div>
 
         <div
-          className='box rounded border-dark shadow-lg opacity-95'
-          value='sujet'
+          className="box rounded border-dark shadow-lg opacity-95"
+          value="sujet"
         >
           <img
             // src='https://source.unsplash.com/1000x802/?object'
-            src='https://images.unsplash.com/photo-1488109811119-98431feb6929?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=802&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000'
-            value='sujet'
+            src="https://images.unsplash.com/photo-1488109811119-98431feb6929?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=802&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000"
+            value="sujet"
           />
           <span>sujets</span>
         </div>
 
         <div
-          className='box rounded border-dark shadow-lg opacity-95'
-          value='all'
+          className="box rounded border-dark shadow-lg opacity-95"
+          value="all"
         >
           <img
-            src='https://images.unsplash.com/photo-1500630417200-63156e226754?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=804&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000'
+            src="https://images.unsplash.com/photo-1500630417200-63156e226754?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=804&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1000"
             // src='https://source.unsplash.com/1000x804/?object'
-            value='all'
+            value="all"
           />
           <span>all</span>
         </div>

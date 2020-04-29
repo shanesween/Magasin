@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../store';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
     <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
       <Link
         className="navbar-brand"
-        style={{ color: '#eeeeee', textDecoration: 'inherit' }}
+        style={{ color: "#eeeeee", textDecoration: "inherit" }}
         to="/home"
       >
-        covfefe
+        magasin
       </Link>
       <button
-        style={{ outline: 'none' }}
+        style={{ outline: "none" }}
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -94,14 +94,14 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout());
