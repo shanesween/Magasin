@@ -11,16 +11,16 @@ In order to fully install all packages & dependencies:
 
 ## Technologies Used
 
-*React 
-*Redux 
-*Bootstrap
-*Sequelize 
-*Node.js 
-*Express 
-*Heroku
+* React 
+* Redux 
+* Bootstrap
+* Sequelize 
+* Node.js 
+* Express 
+* Heroku
 
 ## Members
-*[Shane Sweeney](https://www.linkedin.com/in/shanesween/)
-*[Timothy Long](https://www.linkedin.com/in/timothyleelong/)
-*[Lizzy Alvarez](https://www.linkedin.com/in/elizabethalvarezdev/)
-*[Jovanni Morales](https://www.linkedin.com/in/jovanni-morales/)
+* [Shane Sweeney](https://www.linkedin.com/in/shanesween/)
+* [Timothy Long](https://www.linkedin.com/in/timothyleelong/)
+* [Lizzy Alvarez](https://www.linkedin.com/in/elizabethalvarezdev/)
+* [Jovanni Morales](https://www.linkedin.com/in/jovanni-morales/)
